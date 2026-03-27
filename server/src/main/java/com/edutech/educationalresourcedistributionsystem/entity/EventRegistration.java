@@ -13,8 +13,8 @@ public class EventRegistration {
    private String status;
    private Long studentId;
 
-   //
-   private String a;
+   
+   //private String a;
 
    @ManyToOne
    private Event event;
