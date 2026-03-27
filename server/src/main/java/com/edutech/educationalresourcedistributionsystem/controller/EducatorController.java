@@ -13,6 +13,9 @@ import java.util.List;
 
 public class EducatorController {
 
+        
+
+
 
    
         // gll all events and return with status code 200 OK

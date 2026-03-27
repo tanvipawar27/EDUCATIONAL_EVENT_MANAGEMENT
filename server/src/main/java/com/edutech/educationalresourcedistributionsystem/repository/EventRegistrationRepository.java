@@ -8,7 +8,8 @@ import com.edutech.educationalresourcedistributionsystem.entity.EventRegistratio
 
 import java.util.List;
 
-
-public interface EventRegistrationRepository  {
+@Repository
+public interface EventRegistrationRepository extends JpaRepository {
     // extend jpa repostiory and add custom method if needed
+    List<EventRegistration> findByStudentId(Long studentId);
 }

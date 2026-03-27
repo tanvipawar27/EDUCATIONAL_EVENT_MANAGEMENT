@@ -2,7 +2,7 @@ package com.edutech.educationalresourcedistributionsystem.entity;
 
 
 import javax.persistence.*;
-
+@Entity
 @Table(name = "registrations") // do not change table name
 public class EventRegistration {
 
@@ -11,9 +11,9 @@ public class EventRegistration {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
    private String status;
-   private Long studentId;
+   private Long studentId; 
 
-   
+
    //private String a;
 
    @ManyToOne

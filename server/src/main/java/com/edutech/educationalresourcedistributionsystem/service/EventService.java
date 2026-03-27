@@ -11,7 +11,7 @@ import com.edutech.educationalresourcedistributionsystem.repository.ResourceRepo
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
-
+@Service
 public class EventService {
 
     //Implement the required code here
