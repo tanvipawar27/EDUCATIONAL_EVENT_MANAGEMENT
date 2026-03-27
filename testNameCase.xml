@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+
+    <!-- ===================================================== -->
+    <!-- BACKEND : EducationalResourceDistributionSystemApplicationTests -->
+    <!-- ===================================================== -->
+
+    <property name="testRegisterUser"
+              value="EducationalResourceDistributionSystemApplicationTests should register a new user successfully"/>
+
+    <property name="testLoginUser"
+              value="EducationalResourceDistributionSystemApplicationTests should login user with valid credentials"/>
+
+    <property name="testLoginWithWrongUsernameOrPassword"
+              value="EducationalResourceDistributionSystemApplicationTests should reject login with invalid credentials"/>
+
+    <property name="testInstitutionShouldCreateEvent"
+              value="EducationalResourceDistributionSystemApplicationTests should allow institution to create an event"/>
+
+    <property name="testInstitutionShouldGetAllEvents"
+              value="EducationalResourceDistributionSystemApplicationTests should allow institution to fetch all events"/>
+
+    <property name="testInstitutionShouldCreateResource"
+              value="EducationalResourceDistributionSystemApplicationTests should allow institution to create a resource"/>
+
+    <property name="testInstitutionShouldGetAllResources"
+              value="EducationalResourceDistributionSystemApplicationTests should allow institution to fetch all resources"/>
+
+    <property name="testInstitutionShouldAllocateResource"
+              value="EducationalResourceDistributionSystemApplicationTests should allow institution to allocate resources to event"/>
+
+    <property name="testEducatorShouldGetAllEventsAgenda"
+              value="EducationalResourceDistributionSystemApplicationTests should allow educator to view events agenda"/>
+
+    <property name="testEducatorShouldUpdateEventMaterial"
+              value="EducationalResourceDistributionSystemApplicationTests should allow educator to update event materials"/>
+
+    <property name="testStudentShouldRegisterForEvent"
+              value="EducationalResourceDistributionSystemApplicationTests should allow student to register for an event"/>
+
+    <property name="testStudentShouldViewRegistrationStatus"
+              value="EducationalResourceDistributionSystemApplicationTests should allow student to view registration status"/>
+
+    <property name="testEducatorAndStudentShouldNotAccessInstitutionApi"
+              value="EducationalResourceDistributionSystemApplicationTests should restrict educator and student from institution APIs"/>
+
+    <property name="testInstitutionAndStudentShouldNotAccessEducatorApi"
+              value="EducationalResourceDistributionSystemApplicationTests should restrict institution and student from educator APIs"/>
+
+    <property name="testInstitutionAndEducatorShouldNotAccessStudentApi"
+              value="EducationalResourceDistributionSystemApplicationTests should restrict institution and educator from student APIs"/>
+
+    <!-- ===================================================== -->
+    <!-- FRONTEND : Angular Component Specs -->
+    <!-- ===================================================== -->
+
+    <!-- AddResourceComponent.spec.ts -->
+
+    <property name="AddResourceComponent_description_required"
+              value="AddResourceComponent should mark description field as required"/>
+
+    <property name="AddResourceComponent_resourceType_required"
+              value="AddResourceComponent should mark resourceType field as required"/>
+
+    <property name="AddResourceComponent_availability_required"
+              value="AddResourceComponent should mark availability field as required"/>
+
+    <!-- CreateEventComponent.spec.ts -->
+
+    <property name="CreateEventComponent_form_invalid_when_empty"
+              value="CreateEventComponent should mark form invalid when fields are empty"/>
+
+    <property name="CreateEventComponent_form_valid_when_filled"
+              value="CreateEventComponent should validate form when all fields are filled"/>
+
+    <!-- HttpService.spec.ts -->
+
+    <property name="HttpService_created"
+              value="HttpService should be created"/>
+
+    <property name="HttpService_getBookingDetails"
+              value="HttpService should fetch booking details for student"/>
+
+    <property name="HttpService_getAllEvents"
+              value="HttpService should fetch all events"/>
+
+    <property name="HttpService_getAllResources"
+              value="HttpService should fetch all resources"/>
+
+    <property name="HttpService_createEvent"
+              value="HttpService should create an event"/>
+
+    <property name="HttpService_updateEvent"
+              value="HttpService should update event materials"/>
+
+    <property name="HttpService_addResource"
+              value="HttpService should add a resource"/>
+
+    <property name="HttpService_allocateResources"
+              value="HttpService should allocate resources to an event"/>
+
+    <property name="HttpService_login"
+              value="HttpService should login user"/>
+
+    <property name="HttpService_registerUser"
+              value="HttpService should register a new user"/>
+
+    <!-- LoginComponent.spec.ts -->
+
+    <property name="LoginComponent_invalid_empty"
+              value="LoginComponent should mark form invalid when username and password are empty"/>
+
+    <property name="LoginComponent_invalid_partial"
+              value="LoginComponent should mark form invalid when either username or password is empty"/>
+
+    <property name="LoginComponent_valid"
+              value="LoginComponent should validate form when username and password are provided"/>
+
+    <!-- RegistrationComponent.spec.ts -->
+
+    <property name="RegistrationComponent_invalid_empty"
+              value="RegistrationComponent should mark form invalid when fields are empty"/>
+
+    <property name="RegistrationComponent_invalid_email"
+              value="RegistrationComponent should mark email invalid when format is incorrect"/>
+
+    <property name="RegistrationComponent_valid"
+              value="RegistrationComponent should validate form when all fields are filled correctly"/>
+
+    <!-- ResourceAllocateComponent.spec.ts -->
+
+    <property name="ResourceAllocateComponent_eventId_required"
+              value="ResourceAllocateComponent should mark form invalid when eventId is empty"/>
+
+    <property name="ResourceAllocateComponent_resourceId_required"
+              value="ResourceAllocateComponent should mark form invalid when resourceId is empty"/>
+
+    <!-- ViewEventsComponent.spec.ts -->
+
+    <property name="ViewEventsComponent_invalid_when_title_empty"
+              value="ViewEventsComponent should mark form invalid when title is empty"/>
+
+    <property name="ViewEventsComponent_invalid_when_description_empty"
+              value="ViewEventsComponent should mark form invalid when description is empty"/>
+
+</properties>
