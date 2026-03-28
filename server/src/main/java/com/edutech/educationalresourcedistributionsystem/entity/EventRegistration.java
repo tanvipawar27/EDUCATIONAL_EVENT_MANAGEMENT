@@ -7,51 +7,36 @@ import javax.persistence.*;
 public class EventRegistration {
 
    // implement entity
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long id;
-   private String status;
-   private Long studentId; 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    private String status;
 
-   //private String a;
+    private Long studentId;
 
-   @ManyToOne
-   private Event event;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "event_id")
+    private Event event;
 
-   public Long getId() {
-      return id;
-   }
+    public EventRegistration() {}
 
-   public void setId(Long id) {
-      this.id = id;
-   }
+    public EventRegistration(Long id, String status, Long studentId, Event event) {
+        this.id = id;
+        this.status = status;
+        this.studentId = studentId;
+        this.event = event;
+    }
 
-   public String getStatus() {
-      return status;
-   }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-   public void setStatus(String status) {
-      this.status = status;
-   }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-   public Long getStudentId() {
-      return studentId;
-   }
+    public Long getStudentId() { return studentId; }
+    public void setStudentId(Long studentId) { this.studentId = studentId; }
 
-   public void setStudentId(Long studentId) {
-      this.studentId = studentId;
-   }
-
-   public Event getEvent() {
-      return event;
-   }
-
-   public void setEvent(Event event) {
-      this.event = event;
-   }
-
-
-   
+    public Event getEvent() { return event; }
+    public void setEvent(Event event) { this.event = event; }
 }
-

@@ -27,32 +27,38 @@ import com.edutech.educationalresourcedistributionsystem.service.UserService;
 @RequestMapping("/api/user")
 @CrossOrigin(origins = "*")
 public class RegisterAndLoginController {
-   @Autowired
-   private UserService userService;
-   @Autowired
-   private AuthenticationManager authenticationManager;
-   @Autowired
-   private JwtUtil jwtUtil;
-   @PostMapping("/register")
-   @ResponseStatus(HttpStatus.CREATED)
-   public ResponseEntity<User> registerUser(@RequestBody User user) {
-       User saved = userService.registerUser(user);
-       return ResponseEntity.status(HttpStatus.CREATED).body(saved);
-   }
-   @PostMapping("/login")
-   public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequest loginRequest) {
-       try {
-           authenticationManager.authenticate(
-                   new UsernamePasswordAuthenticationToken(
-                           loginRequest.getUsername(),
-                           loginRequest.getPassword()
-                   )
-           );
-           User user = userService.getUserByUsername(loginRequest.getUsername());
-           String token = jwtUtil.generateToken(user.getUsername(), user.getRole());
-           return ResponseEntity.ok(new LoginResponse(token, user.getRole(), user.getId()));
-       } catch (AuthenticationException e) {
-           throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid username or password", e);
-       }
-   }
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @PostMapping("/register")
+    public ResponseEntity<User> registerUser(@RequestBody User user) {
+        User registeredUser = userService.registerUser(user);
+        return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> loginUser(@RequestBody LoginRequest loginRequest) {
+        try {
+            authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                    loginRequest.getUsername(),
+                    loginRequest.getPassword()
+                )
+            );
+            UserDetails userDetails = userService.loadUserByUsername(loginRequest.getUsername());
+            String token = jwtUtil.generateToken(userDetails);
+            User user = userService.getUserByUsername(loginRequest.getUsername());
+            LoginResponse response = new LoginResponse(token, user.getUsername(), user.getRole());
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (AuthenticationException e) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid username or password", e);
+        }
+    }
 }

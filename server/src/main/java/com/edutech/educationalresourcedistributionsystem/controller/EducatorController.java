@@ -14,15 +14,21 @@ import java.util.List;
 @RequestMapping("/api/educator")
 @CrossOrigin(origins = "*")
 public class EducatorController {
-   @Autowired
-   private EventService eventService;
-   @GetMapping("/agenda")
-   public ResponseEntity<List<Event>> viewEventsAgenda() {
-       return ResponseEntity.ok(eventService.getAllEvents());
-   }
-   @PutMapping("/update-material/{eventId}")
-   public ResponseEntity<Event> updateEventMaterial(@PathVariable Long eventId,
-                                                     @RequestBody Event updateEvent) {
-       return ResponseEntity.ok(eventService.updateEvent(eventId, updateEvent));
-   }
+
+    @Autowired
+    private EventService eventService;
+
+    @GetMapping("/agenda")
+    public ResponseEntity<List<Event>> viewEventsAgenda() {
+        List<Event> events = eventService.getAllEvents();
+        return new ResponseEntity<>(events, HttpStatus.OK);
+    }
+
+    @PutMapping("/update-material/{eventId}")
+    public ResponseEntity<Event> updateEventMaterial(
+            @PathVariable Long eventId,
+            @RequestBody Event updateEvent) {
+        Event updated = eventService.updateEvent(eventId, updateEvent);
+        return new ResponseEntity<>(updated, HttpStatus.OK);
+    }
 }

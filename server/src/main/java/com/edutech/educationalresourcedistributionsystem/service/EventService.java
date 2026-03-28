@@ -32,15 +32,22 @@ public class EventService {
        existing.setMaterials(updateEvent.getMaterials());
        return eventRepository.save(existing);
    }
-   public Event allocateResourceToEvent(Long eventId, Long resourceId) {
-       Event event = eventRepository.findById(eventId)
-               .orElseThrow(() -> new RuntimeException("Event not found"));
-       Resource resource = resourceRepository.findById(resourceId)
-               .orElseThrow(() -> new RuntimeException("Resource not found"));
-       resource.setEvent(event);
-       resourceRepository.save(resource);
-       return eventRepository.findById(eventId).get();
-   }
+
+public Event allocateResourceToEvent(Long eventId, Long resourceId) {
+    Event event = eventRepository.findById(eventId)
+            .orElseThrow(() -> new RuntimeException("Event not found"));
+    Resource resource = resourceRepository.findById(resourceId)
+            .orElseThrow(() -> new RuntimeException("Resource not found"));
+
+    // Set relationship both ways
+    resource.setEvent(event);
+    event.getResourceAllocations().add(resource);
+
+    // Save resource and event
+    resourceRepository.save(resource);
+    return eventRepository.save(event);
+}
+
 }
 
     
