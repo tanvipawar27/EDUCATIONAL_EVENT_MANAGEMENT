@@ -12,7 +12,16 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 
-public class ResourceService {
 
-   //Implement the required code here
+@Service
+public class ResourceService {
+   @Autowired
+   private ResourceRepository resourceRepository;
+   public Resource createResource(Resource resource) {
+       return resourceRepository.save(resource);
+   }
+   public List<Resource> getAllResources() {
+       return resourceRepository.findAll();
+   }
 }
+

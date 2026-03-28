@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.edutech.educationalresourcedistributionsystem.entity.Resource;
 
-
-public interface ResourceRepository {
+@Repository
+public interface ResourceRepository extends JpaRepository<Resource,Long>{
     // extend jpa repostiory and add custom method if needed
 }

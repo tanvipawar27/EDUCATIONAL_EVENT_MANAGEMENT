@@ -2,6 +2,7 @@ package com.edutech.educationalresourcedistributionsystem.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,9 +13,37 @@ import com.edutech.educationalresourcedistributionsystem.entity.User;
 import com.edutech.educationalresourcedistributionsystem.repository.UserRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 
+@Service
 public class UserService {
 
-   //Implement the required code here
+@Autowired
+private UserRepository userRepository;
+
+@Autowired
+private PasswordEncoder passwordEncoder;
+
+public User registerUser(User user) {
+user.setPassword(passwordEncoder.encode(user.getPassword()));
+return userRepository.save(user);
+}
+
+public User getUserByUsername(String username) {
+return userRepository.findByUsername(username);
+}
+
+
+public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+User user = userRepository.findByUsername(username);
+if (user == null) {
+throw new UsernameNotFoundException("User not found: " + username);
+}
+return new org.springframework.security.core.userdetails.User(
+user.getUsername(),
+user.getPassword(),
+Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
+);
+}
 }

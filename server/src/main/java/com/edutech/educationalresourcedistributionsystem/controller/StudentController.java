@@ -10,14 +10,22 @@ import com.edutech.educationalresourcedistributionsystem.service.RegistrationSer
 import java.util.List;
 
 
+@RestController
+@RequestMapping("/api/student")
+@CrossOrigin(origins = "*")
 public class StudentController {
-
-
-    
-        // register in an event and return the registration details with status code 201 (CREATED)
-    
-
-   
-        // return the list of events registered by the student with status code 200 (OK)
-    
+   @Autowired
+   private RegistrationService registrationService;
+   @PostMapping("/register/{eventId}")
+   public ResponseEntity<EventRegistration> registerForEvent(
+           @PathVariable Long eventId,
+           @RequestBody EventRegistration registration) {
+       return ResponseEntity.status(HttpStatus.CREATED)
+               .body(registrationService.registerForEvent(eventId, registration));
+   }
+   @GetMapping("/registration-status/{studentId}")
+   public ResponseEntity<List<EventRegistration>> viewRegistrationStatus(
+           @PathVariable Long studentId) {
+       return ResponseEntity.ok(registrationService.getRegistrationStatus(studentId));
+   }
 }
