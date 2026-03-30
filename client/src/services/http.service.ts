@@ -11,6 +11,100 @@ export class HttpService {
   public serverName=environment.apiUrl;
 //todo: Complete missing code..
  
-  
-  
+
+  constructor(private http: HttpClient, private authService: AuthService) {}
+
+  private getHeaders(): HttpHeaders {
+    const token = this.authService.getToken();
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+  }
+
+  getBookingDetails(studentid: any): Observable<any> {
+    return this.http.get(
+      `${this.serverName}/api/student/registration-status/${studentid}`,
+      { headers: this.getHeaders() }
+    );
+  }
+
+  registerForEvent(eventId: any, details: any): Observable<any> {
+    return this.http.post(
+      `${this.serverName}/api/student/register/${eventId}`,
+      details,
+      { headers: this.getHeaders() }
+    );
+  }
+
+  getAllEventAgenda(): Observable<any> {
+    return this.http.get(
+      `${this.serverName}/api/educator/agenda`,
+      { headers: this.getHeaders() }
+    );
+  }
+
+  GetAllevents(): Observable<any> {
+    return this.http.get(
+      `${this.serverName}/api/institution/events`,
+      { headers: this.getHeaders() }
+    );
+  }
+
+  GetAllResources(): Observable<any> {
+    return this.http.get(
+      `${this.serverName}/api/institution/resources`,
+      { headers: this.getHeaders() }
+    );
+  }
+
+  createEvent(details: any): Observable<any> {
+    return this.http.post(
+      `${this.serverName}/api/institution/event`,
+      details,
+      { headers: this.getHeaders() }
+    );
+  }
+
+  updateEvent(details: any, eventId: any): Observable<any> {
+    return this.http.put(
+      `${this.serverName}/api/educator/update-material/${eventId}`,
+      details,
+      { headers: this.getHeaders() }
+    );
+  }
+
+  addResource(details: any): Observable<any> {
+    return this.http.post(
+      `${this.serverName}/api/institution/resource`,
+      details,
+      { headers: this.getHeaders() }
+    );
+  }
+
+  allocateResources(eventId: any, resourceId: any, details: any): Observable<any> {
+    return this.http.put(
+      `${this.serverName}/api/institution/event/allocate-resources?eventId=${eventId}&resourceId=${resourceId}`,
+      details,
+      { headers: this.getHeaders() }
+    );
+  }
+
+  Login(details: any): Observable<any> {
+    return this.http.post(
+      `${this.serverName}/api/user/login`,
+      details
+    );
+  }
+
+  registerUser(details: any): Observable<any> {
+    return this.http.post(
+      `${this.serverName}/api/user/register`,
+      details
+    );
+  }
 }
+
+  
+  
+

@@ -1,1 +1,30 @@
-//todo: complete missing code
+<div class="page-container">
+  <div class="card">
+    <div class="card-header"><h3>My Booking Details</h3></div>
+    <div class="card-body">
+      <div class="form-group">
+        <label>Student ID</label>
+        <input type="number" [(ngModel)]="formModel.studentId" class="form-control" placeholder="Enter your student ID" />
+      </div>
+      <div class="alert alert-danger" *ngIf="showError">{{ errorMessage }}</div>
+      <div class="alert alert-info" *ngIf="showMessage">{{ responseMessage }}</div>
+      <button class="btn btn-primary" (click)="searchEvent()">Search</button>
+    </div>
+  </div>
+
+  <div class="card mt-4" *ngIf="eventList.length > 0">
+    <div class="card-header"><h4>Registration Status</h4></div>
+    <table class="table">
+      <thead>
+        <tr><th>#</th><th>Event</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reg of eventList; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ reg.event?.name }}</td>
+          <td><span class="badge badge-success">{{ reg.status }}</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

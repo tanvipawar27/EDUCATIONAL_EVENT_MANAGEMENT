@@ -1,1 +1,18 @@
-//todo complete missing code..
+<div class="app-wrapper">
+  <nav class="navbar" *ngIf="authService.getLoginStatus">
+    <div class="navbar-brand">🎓 EduTech Platform</div>
+    <div class="navbar-links">
+      <a routerLink="/dashboard">Dashboard</a>
+      <a routerLink="/create-event">Events</a>
+      <a routerLink="/add-resource">Resources</a>
+      <a routerLink="/resource-allocate">Allocate</a>
+      <a routerLink="/view-events">Agenda</a>
+      <a routerLink="/register-for-event">Register</a>
+      <a routerLink="/booking-details">My Bookings</a>
+      <button class="btn-logout" (click)="logout()">Logout</button>
+    </div>
+  </nav>
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

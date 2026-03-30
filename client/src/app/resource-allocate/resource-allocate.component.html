@@ -1,1 +1,34 @@
-//todo: complete missing code
+<div class="page-container">
+  <div class="card">
+    <div class="card-header"><h3>Allocate Resource to Event</h3></div>
+    <div class="card-body">
+      <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>Select Event</label>
+          <select formControlName="eventId" class="form-control"
+            [class.is-invalid]="itemForm.get('eventId')?.invalid && itemForm.get('eventId')?.touched">
+            <option value="">-- Select Event --</option>
+            <option *ngFor="let event of eventList" [value]="event.id">{{ event.name }}</option>
+          </select>
+          <div class="invalid-feedback" *ngIf="itemForm.get('eventId')?.invalid && itemForm.get('eventId')?.touched">
+            Event is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Select Resource</label>
+          <select formControlName="resourceId" class="form-control"
+            [class.is-invalid]="itemForm.get('resourceId')?.invalid && itemForm.get('resourceId')?.touched">
+            <option value="">-- Select Resource --</option>
+            <option *ngFor="let res of resourceList" [value]="res.id">{{ res.resourceType }}</option>
+          </select>
+          <div class="invalid-feedback" *ngIf="itemForm.get('resourceId')?.invalid && itemForm.get('resourceId')?.touched">
+            Resource is required.
+          </div>
+        </div>
+        <div class="alert alert-danger" *ngIf="showError">{{ errorMessage }}</div>
+        <div class="alert alert-success" *ngIf="showMessage">{{ responseMessage }}</div>
+        <button type="submit" class="btn btn-primary">Allocate Resource</button>
+      </form>
+    </div>
+  </div>
+</div>
