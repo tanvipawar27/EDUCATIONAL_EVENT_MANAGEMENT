@@ -4,7 +4,8 @@ import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-resource-allocate',
-  templateUrl: './resource-allocate.component.html'
+  templateUrl: './resource-allocate.component.html',
+  styleUrls:['./resource-allocate.component.scss']
 })
 export class ResourceAllocateComponent implements OnInit {
 

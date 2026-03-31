@@ -3,7 +3,8 @@ import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-register-for-event',
-  templateUrl: './register-for-event.component.html'
+  templateUrl: './register-for-event.component.html',
+  styleUrls:['./register-for-event.component.scss']
 })
 export class RegisterForEventComponent implements OnInit {
 

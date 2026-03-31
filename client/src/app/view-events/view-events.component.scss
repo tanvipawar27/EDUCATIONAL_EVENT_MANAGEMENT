@@ -69,21 +69,37 @@ body {
 
 /* Buttons */
 .btn-success {
-  background: var(--primary-color);
+  background: #2a9d8f;
+  color:#fffffff1 ;
   border: none;
   border-radius: 6px;
-  padding: 10px 18px;
+  margin-right: 10px;
+  margin-top: 10px;
+  padding: 10px 18px 10px 10px;
   font-weight: 600;
 }
+// .btn btn-success {
+//   background: var(--primary-color);
+//   background-color:#e63946 ;
+//   border: none;
+//   border-radius: 6px;
+//   padding: 10px 18px;
+//   font-weight: 600;
+// }
 
 .btn-success:hover {
   background: var(--accent-color);
+  
+  color:#f30505f1 ;
 }
+
 
 .btn-secondary {
   border-radius: 6px;
   padding: 10px 18px;
   font-weight: 600;
+   margin-right: 10px;
+  margin-top: 10px;
 }
 
 /* Table Styling */

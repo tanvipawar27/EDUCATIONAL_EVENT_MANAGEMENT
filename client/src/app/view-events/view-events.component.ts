@@ -4,7 +4,8 @@ import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-view-events',
-  templateUrl: './view-events.component.html'
+  templateUrl: './view-events.component.html',
+  styleUrls:['./view-events.component.scss']
 })
 export class ViewEventsComponent implements OnInit {
 
@@ -33,7 +34,8 @@ export class ViewEventsComponent implements OnInit {
 
   loadEvents() {
     this.httpService.getAllEventAgenda().subscribe({
-      next: (res: any) => { this.eventList = res; },
+      
+      next: (res: any) => { this.eventList = res; console.log(res) },
       error: (err: any) => { console.error(err); }
     });
   }
