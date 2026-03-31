@@ -1,0 +1,59 @@
+/* Global Theme */
+:root {
+  --primary-color: #2a9d8f;   /* teal */
+  --secondary-color: #e9c46a; /* warm yellow */
+  --accent-color: #f4a261;    /* orange */
+  --bg-color: #f5f5f5;
+  --card-bg: #ffffff;
+  --text-color: #333;
+  --font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: var(--bg-color);
+  font-family: var(--font-family);
+  color: var(--text-color);
+}
+
+/* Heading */
+h2 {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Form Labels */
+.form-label {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* Form Controls */
+.form-control {
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(42,157,143,0.25);
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--primary-color);
+  border: none;
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background: var(--accent-color);
+}
+
+/* Alerts */
+.alert {
+  border-radius: 6px;
+  margin-top: 1rem;
+}

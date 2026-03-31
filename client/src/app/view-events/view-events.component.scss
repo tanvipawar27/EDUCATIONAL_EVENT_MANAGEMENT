@@ -1,0 +1,102 @@
+/* Global Theme */
+:root {
+  --primary-color: #2a9d8f;   /* teal */
+  --secondary-color: #e9c46a; /* warm yellow */
+  --accent-color: #f4a261;    /* orange */
+  --bg-color: #f5f5f5;
+  --card-bg: #ffffff;
+  --text-color: #333;
+  --font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: var(--bg-color);
+  font-family: var(--font-family);
+  color: var(--text-color);
+}
+
+/* Page Container */
+.page-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* Card Styling */
+.card {
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.card-header {
+  background: var(--primary-color);
+  color: white;
+  border-radius: 12px 12px 0 0;
+  padding: 1rem;
+}
+
+.card-header h3, .card-header h4 {
+  margin: 0;
+}
+
+/* Form Controls */
+.form-control {
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(42,157,143,0.25);
+}
+
+/* Invalid Feedback */
+.is-invalid {
+  border-color: #e63946;
+}
+
+.invalid-feedback {
+  color: #e63946;
+  font-size: 0.85rem;
+}
+
+/* Alerts */
+.alert {
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+
+/* Buttons */
+.btn-success {
+  background: var(--primary-color);
+  border: none;
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-weight: 600;
+}
+
+.btn-success:hover {
+  background: var(--accent-color);
+}
+
+.btn-secondary {
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-weight: 600;
+}
+
+/* Table Styling */
+.table thead {
+  background: var(--secondary-color);
+  color: #333;
+}
+
+.table tbody tr:hover {
+  background: rgba(42,157,143,0.1);
+}
+
+.btn-warning {
+  border-radius: 6px;
+  font-weight: 600;
+}
