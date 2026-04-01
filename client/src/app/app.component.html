@@ -1,15 +1,16 @@
 <div class="app-wrapper">
   <nav class="navbar" *ngIf="authService.getLoginStatus">
-    <div class="navbar-brand">🎓 EduTech Platform</div>
+    <div class="navbar-brand">🎓 EduTech Platform     <b>({{roleName}})</b></div>
     <div class="navbar-links">
-      <a routerLink="/dashboard">Dashboard</a>
-      <a routerLink="/create-event">Events</a>
-      <a routerLink="/add-resource">Resources</a>
-      <a routerLink="/resource-allocate">Allocate</a>
-      <a routerLink="/view-events">Agenda</a>
-      <a routerLink="/register-for-event">Register</a>
-      <a routerLink="/booking-details">My Bookings</a>
-      <button class="btn-logout" (click)="logout()">Logout</button>
+      <a routerLink="/dashboard" >Dashboard</a>
+      <a routerLink="/create-event" *ngIf="roleName==='INSTITUTION'  ">Events</a>
+      <a routerLink="/add-resource" *ngIf="roleName==='INSTITUTION' || roleName==='EDUCATOR'">Resources</a>
+      <a routerLink="/resource-allocate" *ngIf="roleName==='INSTITUTION'">Allocate</a>
+      <a routerLink="/view-events" *ngIf="roleName==='INSTITUTION' || roleName==='EDUCATOR'">Agenda</a>
+      <a routerLink="/register-for-event" *ngIf="roleName==='INSTITUTION' || roleName==='STUDENT'">Register</a>
+      <a routerLink="/booking-details" *ngIf="roleName==='INSTITUTION' || roleName==='STUDENT'">My Bookings</a>
+      
+      <button class="btn-logout" (click)="logout()">Logout </button>
     </div>
   </nav>
   <main class="main-content">
