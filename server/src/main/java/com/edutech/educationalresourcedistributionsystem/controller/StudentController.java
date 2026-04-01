@@ -25,7 +25,7 @@ public class StudentController {
         EventRegistration saved = registrationService.registerForEvent(eventId, registration);
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
-
+    
     @GetMapping("/registration-status/{studentId}")
     public ResponseEntity<List<EventRegistration>> viewRegistrationStatus(
             @PathVariable Long studentId) {

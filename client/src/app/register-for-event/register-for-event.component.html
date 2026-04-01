@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-between mt-4">
+<!-- <div class="d-flex justify-content-between mt-4">
   <h2 class="mb-0">Registration for Event</h2>
 </div>
 
@@ -43,6 +43,66 @@
   </div>
 </form>
 
+<div *ngIf="showMessage" class="alert alert-success mt-4" role="alert">
+  {{ responseMessage }}
+</div>
+<div *ngIf="showError" class="alert alert-danger mt-4" role="alert">
+  {{ errorMessage }}
+</div> -->
+
+<div class="d-flex justify-content-between mt-4">
+  <h2 class="mb-0">Registration for Event</h2>
+</div>
+
+<form (ngSubmit)="Submit()" class="row mt-4">
+  <!-- Event Dropdown -->
+  <div class="col-md-5">
+    <div class="mb-3">
+      <label for="eventId" class="form-label">Event</label>
+      <select
+        id="eventId"
+        class="form-control"
+        [(ngModel)]="formModel.eventId"
+        name="eventId"
+        required
+      >
+        <option value="">-- Select Event --</option>
+        <option *ngFor="let event of events" [value]="event.id">
+          {{ event.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Student Dropdown -->
+  <div class="col-md-5">
+    <div class="mb-3">
+      <label for="studentId" class="form-label">Student</label>
+      <select
+        id="studentId"
+        class="form-control"
+        [(ngModel)]="formModel.studentId"
+        name="studentId"
+        required
+      >
+        <option value="">-- Select Student --</option>
+        <option *ngFor="let student of students" [value]="student.id">
+          {{ student.fullName }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Submit Button -->
+  <div class="col-md-2">
+    <br />
+    <button type="submit" class="btn btn-primary mt-1 w-100">
+      Submit
+    </button>
+  </div>
+</form>
+
+<!-- Success/Error Messages -->
 <div *ngIf="showMessage" class="alert alert-success mt-4" role="alert">
   {{ responseMessage }}
 </div>

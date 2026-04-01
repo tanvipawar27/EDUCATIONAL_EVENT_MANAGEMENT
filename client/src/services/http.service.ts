@@ -165,6 +165,13 @@ export class HttpService {
       { headers: this.getHeaders() }
     );
   }
+  getAllStudents(): Observable<any> {
+  return this.http.get(
+    `${this.serverName}/api/student/all`,
+    { headers: this.getHeaders() }
+  );
+}
+
 
   createEvent(details: any): Observable<any> {
     return this.http.post(
