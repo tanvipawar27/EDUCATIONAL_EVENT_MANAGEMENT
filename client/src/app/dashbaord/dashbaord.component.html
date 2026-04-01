@@ -9,7 +9,7 @@
       <h4>Create Event</h4>
       <p>Schedule new educational events</p>
     </div>
-    <div class="dash-card" routerLink="/add-resource"  *ngIf="roles==='EDUCATOR'">
+    <div class="dash-card" routerLink="/add-resource"  *ngIf="roles==='EDUCATOR' || roles==='INSTITUTION'">
       <div class="dash-icon">📦</div>
       <h4>Add Resource</h4>
       <p>Manage teaching resources</p>
@@ -19,17 +19,17 @@
       <h4>Allocate Resources</h4>
       <p>Assign resources to events</p>
     </div>
-    <div class="dash-card" routerLink="/view-events" *ngIf="roles==='EDUCATOR'">
+    <div class="dash-card" routerLink="/view-events" *ngIf="roles==='EDUCATOR' || roles==='INSTITUTION'">
       <div class="dash-icon">📋</div>
       <h4>View Events</h4>
       <p>Browse and update event agenda</p>
     </div>
-    <div class="dash-card" routerLink="/register-for-event" *ngIf="roles==='STUDENT'">
+    <div class="dash-card" routerLink="/register-for-event" *ngIf="roles==='STUDENT' || roles==='INSTITUTION'">
       <div class="dash-icon">✍️</div>
       <h4>Register for Event</h4>
       <p>Enroll in upcoming events</p>
     </div>
-    <div class="dash-card" routerLink="/booking-details" *ngIf="roles==='STUDENT'">
+    <div class="dash-card" routerLink="/booking-details" *ngIf="roles==='STUDENT' || roles==='INSTITUTION'">
       <div class="dash-icon">🎟️</div>
       <h4>My Bookings</h4>
       <p>View your registration status</p>

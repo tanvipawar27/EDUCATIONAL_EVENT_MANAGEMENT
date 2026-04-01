@@ -13,6 +13,7 @@ import { ResourceAllocateComponent } from './resource-allocate/resource-allocate
 import { ViewEventsComponent } from './view-events/view-events.component';
 import { BookingDetailsComponent } from './booking-details/booking-details.component';
 import { RegisterForEventComponent } from './register-for-event/register-for-event.component';
+import { AuthService } from '../services/auth.service';
 
 
 const routes: Routes = [
@@ -34,4 +35,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {constructor(private auth:AuthService){}
+}

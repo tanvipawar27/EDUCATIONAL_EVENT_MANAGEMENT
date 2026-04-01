@@ -1,9 +1,5 @@
 package com.edutech.educationalresourcedistributionsystem.dto;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-
 public class LoginResponse {
     private String token;
     private String username;
@@ -26,3 +22,5 @@ public class LoginResponse {
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
 }
+
+//hellomynameisVasu

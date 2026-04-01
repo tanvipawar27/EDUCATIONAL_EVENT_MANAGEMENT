@@ -83,36 +83,54 @@ label {
 
 /* Button */
 .btn-primary {
-  background: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
   border: none;
   padding: 12px;
   border-radius: 6px;
-  color: white;
+  color: #2a9d8f;
   font-weight: 600;
   width: 100%;
-  transition: background 0.3s;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(42, 157, 143, 0.3);
 }
+
 
 .btn-primary:hover {
-  background: var(--accent-color);
+  background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
-/* Register Link */
-.register-link {
+/* login Link */
+.login-link {
   margin-top: 1rem;
   font-size: 0.9rem;
 }
 
-.register-link a {
-  color: var(--primary-color);
+.login-link a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 10px 16px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+  color: #2a9d8f;
   font-weight: 600;
   text-decoration: none;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(244, 162, 97, 0.3);
 }
 
-.register-link a:hover {
-  text-decoration: underline;
+.login-link a:hover {
+  background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
+.login-link a:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
 /* Alerts */
 .alert {
   border-radius: 6px;

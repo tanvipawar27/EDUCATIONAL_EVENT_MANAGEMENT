@@ -18,5 +18,8 @@ export class DashbaordComponent implements OnInit{
   getRoles(){
    this.roles= this.auth.getRole();
   }
+  getName(){
+    
+  }
   
 }
