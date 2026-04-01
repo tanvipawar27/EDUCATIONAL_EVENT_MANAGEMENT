@@ -1,47 +1,56 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
-
+ 
 @Component({
   selector: 'app-booking-details',
   templateUrl: './booking-details.component.html'
 })
 export class BookingDetailsComponent implements OnInit {
-
-  formModel: any = {};
-  showError: boolean = false;
-  errorMessage: any = '';
-  eventObj: any = null;
-  assignModel: any = {};
-  showMessage: any = false;
-  responseMessage: any = '';
-  isUpdate: any = false;
-  eventList: any = [];
-
-  constructor(private httpService: HttpService) {}
-
+ 
+  bookingForm!: FormGroup;
+  showError = false;
+  errorMessage = '';
+  showMessage = false;
+  responseMessage = '';
+  eventList: any[] = [];
+ 
+  constructor(
+    private fb: FormBuilder,
+    private httpService: HttpService
+  ) {}
+ 
   ngOnInit(): void {
-    this.formModel = { studentId: '' };
+    this.bookingForm = this.fb.group({
+      studentId: ['', Validators.required]
+    });
   }
-
-  searchEvent() {
-    if (!this.formModel.studentId) {
+ 
+  searchEvent(): void {
+    if (this.bookingForm.invalid) {
       this.showError = true;
       this.errorMessage = 'Please enter a student ID.';
       return;
     }
-    this.httpService.getBookingDetails(this.formModel.studentId).subscribe({
+ 
+    const studentId = this.bookingForm.value.studentId;
+ 
+    this.httpService.getBookingDetails(studentId).subscribe({
       next: (res: any) => {
         this.eventList = res;
         this.showError = false;
-        if (res.length === 0) {
+ 
+        if (!res || res.length === 0) {
           this.showMessage = true;
           this.responseMessage = 'No registrations found for this student.';
+        } else {
+          this.showMessage = false;
         }
       },
-      error: (err: any) => {
+      error: () => {
         this.showError = true;
         this.errorMessage = 'Failed to fetch booking details.';
       }
     });
   }
-}
+}  

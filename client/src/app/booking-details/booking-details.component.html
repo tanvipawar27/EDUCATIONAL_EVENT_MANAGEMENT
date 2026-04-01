@@ -1,30 +1,74 @@
 <div class="page-container">
+ 
+  <!-- Search Card -->
   <div class="card">
-    <div class="card-header"><h3>My Booking Details</h3></div>
+ 
+    <div class="card-header">
+      <h3>Booking Details</h3>
+    </div>
+ 
     <div class="card-body">
-      <div class="form-group">
-        <label>Student ID</label>
-        <input type="number" [(ngModel)]="formModel.studentId" class="form-control" placeholder="Enter your student ID" />
+ 
+      <!-- Reactive Form -->
+      <form [formGroup]="bookingForm" (ngSubmit)="searchEvent()">
+ 
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter Student ID"
+          formControlName="studentId"
+        />
+ 
+        <button
+          type="submit"
+          class="btn-primary"
+          [disabled]="bookingForm.invalid"
+        >
+          Search
+        </button>
+ 
+      </form>
+ 
+      <!-- Error Message -->
+      <div class="error" *ngIf="showError">
+        {{ errorMessage }}
       </div>
-      <div class="alert alert-danger" *ngIf="showError">{{ errorMessage }}</div>
-      <div class="alert alert-info" *ngIf="showMessage">{{ responseMessage }}</div>
-      <button class="btn btn-primary" (click)="searchEvent()">Search</button>
+ 
+      <!-- No Data Message -->
+      <div class="success" *ngIf="showMessage">
+        {{ responseMessage }}
+      </div>
+ 
     </div>
   </div>
-
-  <div class="card mt-4" *ngIf="eventList.length > 0">
-    <div class="card-header"><h4>Registration Status</h4></div>
-    <table class="table">
-      <thead>
-        <tr><th>ID</th><th>Event</th><th>Status</th></tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let reg of eventList; let i = index">
-          <td>{{ i + 1 }}</td>
-          <td>{{ reg.event?.name }}</td>
-          <td><span class="badge badge-success">{{ reg.status }}</span></td>
-        </tr>
-      </tbody>
-    </table>
+ 
+  <!-- Booking Result Card -->
+  <div
+    class="card mt-3"
+    *ngIf="eventList && eventList.length > 0"
+  >
+    <div class="card-header">
+      <h4>Registered Events</h4>
+    </div>
+ 
+    <div class="card-body">
+ 
+      <div
+        class="event-item"
+        *ngFor="let booking of eventList"
+      >
+        <p><strong>Booking ID:</strong> {{ booking.id }}</p>
+        <p><strong>Status:</strong> {{ booking.status }}</p>
+        <p><strong>Student ID:</strong> {{ booking.studentId }}</p>
+ 
+        <hr />
+ 
+        <p><strong>Event Name:</strong> {{ booking.event?.name }}</p>
+        <p><strong>Description:</strong> {{ booking.event?.description }}</p>
+        <p><strong>Materials:</strong> {{ booking.event?.materials }}</p>
+      </div>
+ 
+    </div>
   </div>
+ 
 </div>
