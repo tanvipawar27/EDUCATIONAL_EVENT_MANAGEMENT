@@ -1,59 +1,177 @@
-/* Global Theme */
+// /* Global Theme */
+// :root {
+//   --primary-color: #2a9d8f;   /* teal */
+//   --secondary-color: #e9c46a; /* warm yellow */
+//   --accent-color: #f4a261;    /* orange */
+//   --bg-color: #f5f5f5;
+//   --card-bg: #ffffff;
+//   --text-color: #333;
+//   --font-family: 'Inter', sans-serif;
+// }
+
+// body {
+//   background: var(--bg-color);
+//   font-family: var(--font-family);
+//   color: var(--text-color);
+// }
+
+// /* Heading */
+// h2 {
+//   color: var(--primary-color);
+//   font-weight: 600;
+// }
+
+// /* Form Labels */
+// .form-label {
+//   font-weight: 600;
+//   color: var(--text-color);
+// }
+
+// /* Form Controls */
+// .form-control {
+//   border-radius: 6px;
+//   border: 1px solid #ddd;
+//   transition: border-color 0.3s;
+// }
+
+// .form-control:focus {
+//   border-color: var(--primary-color);
+//   box-shadow: 0 0 0 0.2rem rgba(42,157,143,0.25);
+// }
+
+// /* Buttons */
+// .btn-primary {
+//   background: var(--primary-color);
+//   border: none;
+//   border-radius: 6px;
+//   padding: 10px 18px;
+//   font-weight: 600;
+// }
+
+// .btn-primary:hover {
+//   background: var(--accent-color);
+// }
+
+// /* Alerts */
+// .alert {
+//   border-radius: 6px;
+//   margin-top: 1rem;
+// }
+
+
+/* =====================================
+   Theme Variables (Reusable)
+===================================== */
 :root {
-  --primary-color: #2a9d8f;   /* teal */
-  --secondary-color: #e9c46a; /* warm yellow */
-  --accent-color: #f4a261;    /* orange */
+  --primary-color: #2a9d8f;     /* teal */
+  --secondary-color: #e9c46a;   /* warm yellow */
+  --accent-color: #f4a261;      /* orange */
   --bg-color: #f5f5f5;
   --card-bg: #ffffff;
   --text-color: #333;
+  --error-color: #e63946;
+  --success-color: #2a9d8f;
   --font-family: 'Inter', sans-serif;
 }
 
-body {
-  background: var(--bg-color);
+/* =====================================
+   Page Container
+===================================== */
+.page-container {
+  max-width: 640px;
+  margin: 3rem auto;
+  padding: 1rem;
   font-family: var(--font-family);
-  color: var(--text-color);
 }
 
-/* Heading */
-h2 {
-  color: var(--primary-color);
-  font-weight: 600;
+/* =====================================
+   Card Layout
+===================================== */
+.card {
+  background: var(--card-bg);
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
 }
 
-/* Form Labels */
-.form-label {
-  font-weight: 600;
-  color: var(--text-color);
+.card-header {
+  background: var(--primary-color);
+  color: #fff;
+  padding: 1.25rem 1.5rem;
+
+  h3 {
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+  }
 }
 
-/* Form Controls */
+.card-body {
+  padding: 1.75rem;
+}
+
+/* =====================================
+   Form Styling
+===================================== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .form-control {
-  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  border-radius: 8px;
   border: 1px solid #ddd;
-  transition: border-color 0.3s;
+  transition: all 0.25s ease;
 }
 
 .form-control:focus {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 0.2rem rgba(42,157,143,0.25);
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(42, 157, 143, 0.25);
 }
 
-/* Buttons */
+/* Input invalid state (Reactive Forms) */
+.form-control.ng-touched.ng-invalid {
+  border-color: var(--error-color);
+}
+
+/* =====================================
+   Buttons
+===================================== */
 .btn-primary {
+  margin-top: 0.75rem;
+  align-self: flex-start;
   background: var(--primary-color);
+  color: #fff;
   border: none;
-  border-radius: 6px;
-  padding: 10px 18px;
+  border-radius: 8px;
+  padding: 11px 22px;
   font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
 .btn-primary:hover {
   background: var(--accent-color);
+  transform: translateY(-1px);
 }
 
-/* Alerts */
-.alert {
-  border-radius: 6px;
+.btn-primary:disabled {
+  background: #b2dfdb;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* =====================================
+   Alerts & Messages
+===================================== */
+.error {
   margin-top: 1rem;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: rgba(230, 57, 70, 0.1);
+  color: var(--error-color);
 }
