@@ -1,5 +1,5 @@
 <div class="app-wrapper">
-  <nav class="navbar" *ngIf="authService.getLoginStatus">
+  <nav class="navbar" *ngIf="authService.getLoginStatus && !IsLoggin">
     <div class="navbar-brand">🎓 EduTech Platform     <b>({{roleName}})</b></div>
     <div class="navbar-links">
       <a routerLink="/dashboard" >Dashboard</a>
