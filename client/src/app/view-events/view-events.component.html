@@ -34,7 +34,7 @@
     <div class="card-header"><h4>Events Agenda</h4></div>
     <table class="table">
       <thead>
-        <tr><th>ID</th><th>Name</th><th>Description</th><th>Materials</th><th>Action</th></tr>
+        <tr><th>ID</th><th>Name</th><th>Description</th><th>Materials</th><th>Date</th><th>Action</th></tr>
       </thead>
       <tbody>
         <tr *ngFor="let event of eventList; let i = index">
@@ -42,6 +42,7 @@
           <td>{{ event.name }}</td>
           <td>{{ event.description }}</td>
           <td>{{ event.materials }}</td>
+           <td>{{ event.date | date:'mediumDate' }}</td>
           <td><button class="btn btn-sm btn-warning" (click)="edit(event)">Edit</button></td>
         </tr>
       </tbody>

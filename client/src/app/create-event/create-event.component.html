@@ -38,7 +38,7 @@
     <div class="card-header"><h4>All Events</h4></div>
     <table class="table">
       <thead>
-        <tr><th>ID</th><th>Name</th><th>Description</th><th>Materials</th></tr>
+        <tr><th>ID</th><th>Name</th><th>Description</th><th>Materials</th><th>Date</th></tr>
       </thead>
       <tbody>
         <tr *ngFor="let event of eventList; let i = index">
@@ -46,6 +46,7 @@
           <td>{{ event.name }}</td>
           <td>{{ event.description }}</td>
           <td>{{ event.materials }}</td>
+           <td>{{ event.date | date:'mediumDate' }}</td>
         </tr>
       </tbody>
     </table>

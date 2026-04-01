@@ -1,17 +1,18 @@
 package com.edutech.educationalresourcedistributionsystem.entity;
 
-
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 @Entity
 @Table(name = "events") // do not change table name
 public class Event {
     // implement entity
-   @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -21,31 +22,68 @@ public class Event {
 
     private String materials;
 
+    private Date date;
+
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
-    private List<Resource> resourceAllocations=new ArrayList<>();
+    private List<Resource> resourceAllocations = new ArrayList<>();
 
-    public Event() {}
+    public Event() {
+    }
 
-    public Event(Long id, String name, String description, String materials) {
+    public Event(Long id, String name, String description, String materials, Date date) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.materials = materials;
+        this.date = date;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Date getDate() {
+        return date;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getMaterials() { return materials; }
-    public void setMaterials(String materials) { this.materials = materials; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public List<Resource> getResourceAllocations() { return resourceAllocations; }
-    public void setResourceAllocations(List<Resource> resourceAllocations) { this.resourceAllocations = resourceAllocations; }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getMaterials() {
+        return materials;
+    }
+
+    public void setMaterials(String materials) {
+        this.materials = materials;
+    }
+
+    public List<Resource> getResourceAllocations() {
+        return resourceAllocations;
+    }
+
+    public void setResourceAllocations(List<Resource> resourceAllocations) {
+        this.resourceAllocations = resourceAllocations;
+    }
 }

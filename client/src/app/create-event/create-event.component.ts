@@ -23,7 +23,8 @@ export class CreateEventComponent implements OnInit {
     this.itemForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      materials: ['', Validators.required]
+      materials: ['', Validators.required],
+      date:['',[Validators.required]]
     });
     this.getEvent();
   }
