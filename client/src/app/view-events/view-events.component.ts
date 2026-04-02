@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-view-events',
@@ -20,8 +21,8 @@ export class ViewEventsComponent implements OnInit {
   isUpdate: any = false;
   eventList: any = [];
 
-  constructor(private fb: FormBuilder, private httpService: HttpService) {}
-
+  constructor(private fb: FormBuilder, private httpService: HttpService,private authService:AuthService) {}
+  role:string|null=null;
   ngOnInit(): void {
     this.itemForm = this.fb.group({
       id: [''],
@@ -30,6 +31,7 @@ export class ViewEventsComponent implements OnInit {
       materials: ['']
     });
     this.loadEvents();
+    this.role=this.authService.getRole()
   }
 
   loadEvents() {

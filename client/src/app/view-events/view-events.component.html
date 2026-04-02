@@ -1,22 +1,27 @@
 <div class="page-container">
   <div class="card" *ngIf="isUpdate">
-     <h3>Update: </h3>
-    <div class="card-header"><h3>Update Event Material</h3></div>
+    <!-- <h3>Update: </h3> -->
+    <div class="card-header">
+      <h3>Update Event Material</h3>
+    </div>
     <div class="card-body">
-     
+
       <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
         <input type="hidden" formControlName="id" />
         <div class="form-group">
           <label>Event Name</label>
           <input type="text" formControlName="name" class="form-control"
             [class.is-invalid]="itemForm.get('name')?.invalid && itemForm.get('name')?.touched" />
-          <div class="invalid-feedback" *ngIf="itemForm.get('name')?.invalid && itemForm.get('name')?.touched">Name is required.</div>
+          <div class="invalid-feedback" *ngIf="itemForm.get('name')?.invalid && itemForm.get('name')?.touched">Name is
+            required.</div>
         </div>
         <div class="form-group">
           <label>Description</label>
           <textarea formControlName="description" class="form-control" rows="3"
             [class.is-invalid]="itemForm.get('description')?.invalid && itemForm.get('description')?.touched"></textarea>
-          <div class="invalid-feedback" *ngIf="itemForm.get('description')?.invalid && itemForm.get('description')?.touched">Description is required.</div>
+          <div class="invalid-feedback"
+            *ngIf="itemForm.get('description')?.invalid && itemForm.get('description')?.touched">Description is
+            required.</div>
         </div>
         <div class="form-group">
           <label>Materials</label>
@@ -30,21 +35,21 @@
     </div>
   </div>
 
-<div class="agenda-container">
-  <h4 class="agenda-title">Events Agenda</h4>
-  <div class="agenda-grid">
-    <div class="agenda-card" *ngFor="let event of eventList; let i = index">
-      <div class="agenda-card-header">
-        <h5>{{ event.name }}</h5>
-        <span class="agenda-date">{{ event.date | date:'mediumDate' }}</span>
-      </div>
-      <div class="agenda-card-body">
-        <p><strong>Description:</strong> {{ event.description }}</p>
-        <p><strong>Materials:</strong> {{ event.materials }}</p>
-      </div>
-      <div class="agenda-card-footer">
-        <button class="btn btn-sm btn-warning" (click)="edit(event)">Edit</button>
+  <div class="agenda-container" *ngIf="!isUpdate">
+    <h4 class="agenda-title">Events Agenda</h4>
+    <div class="agenda-grid">
+      <div class="agenda-card" *ngFor="let event of eventList; let i = index">
+        <div class="agenda-card-header">
+          <h5>{{ event.name }}</h5>
+          <span class="agenda-date">{{ event.date | date:'mediumDate' }}</span>
+        </div>
+        <div class="agenda-card-body">
+          <p><strong>Description:</strong> {{ event.description }}</p>
+          <p><strong>Materials:</strong> {{ event.materials }}</p>
+        </div>
+        <div class="agenda-card-footer">
+          <button class="btn btn-sm btn-warning" (click)="edit(event)" >Edit</button>
+        </div>
       </div>
     </div>
   </div>
-</div>

@@ -72,6 +72,9 @@ public class SecurityConfig {
                 .antMatchers("/api/institution/**").hasAuthority("INSTITUTION")
                 // Educator endpoints
                 .antMatchers("/api/educator/**").hasAnyAuthority("EDUCATOR","INSTITUTION")
+                
+
+                
                 // Student endpoints
                 .antMatchers("/api/student/**").hasAnyAuthority("STUDENT","INSTITUTION")
                 // Any other request requires authentication

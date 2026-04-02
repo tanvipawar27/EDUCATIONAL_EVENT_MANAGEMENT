@@ -1,0 +1,18 @@
+<div class="page-container">
+  <div class="card-header text-center mb-4">
+    <h3>All Resources</h3>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let res of resourceList; let i = index">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-primary">Resource {{ i + 1 }}</h5>
+          <p><strong>Type:</strong> {{ res.resourceType }}</p>
+          <p><strong>Description:</strong> {{ res.description }}</p>
+          <p><strong>Availability:</strong> {{ res.availability }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

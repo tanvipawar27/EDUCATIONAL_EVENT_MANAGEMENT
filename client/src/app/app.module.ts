@@ -15,10 +15,14 @@ import { ResourceAllocateComponent } from './resource-allocate/resource-allocate
 import { ViewEventsComponent } from './view-events/view-events.component';
 import { BookingDetailsComponent } from './booking-details/booking-details.component';
 import { RegisterForEventComponent } from './register-for-event/register-for-event.component';
+import { ViewResourceComponent } from './view-resources/view-resources.component';
+import { LandingComponent } from './home/home.component';
+import { ViewAllocationComponent } from './view-allocation/view-allocation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LandingComponent,
     LoginComponent,
       RegistrationComponent,
       DashbaordComponent,    
@@ -27,8 +31,9 @@ import { RegisterForEventComponent } from './register-for-event/register-for-eve
       ResourceAllocateComponent,
       ViewEventsComponent,
       BookingDetailsComponent,
-   
-      RegisterForEventComponent
+      ViewResourceComponent,
+      RegisterForEventComponent,
+      ViewAllocationComponent
   ],
   imports: [
     BrowserModule,

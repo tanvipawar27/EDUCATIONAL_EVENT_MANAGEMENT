@@ -26,15 +26,15 @@ export class AddResourceComponent implements OnInit {
       description: ['', Validators.required],
       availability: ['', Validators.required]
     });
-    this.getResources();
+    // this.getResources();
   }
 
-  getResources() {
-    this.httpService.GetAllResources().subscribe({
-      next: (res: any) => { this.resourceList = res; },
-      error: (err: any) => { console.error(err); }
-    });
-  }
+  // getResources() {
+  //   this.httpService.GetAllResources().subscribe({
+  //     next: (res: any) => { this.resourceList = res; },
+  //     error: (err: any) => { console.error(err); }
+  //   });
+  // }
 
   onSubmit() {
     if (this.itemForm.invalid) {
@@ -48,7 +48,7 @@ export class AddResourceComponent implements OnInit {
         this.showMessage = true;
         this.responseMessage = 'Resource added successfully!';
         this.itemForm.reset();
-        this.getResources();
+        // this.getResources();
       },
       error: (err: any) => {
         this.showError = true;

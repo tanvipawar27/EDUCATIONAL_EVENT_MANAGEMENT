@@ -1,0 +1,12 @@
+.page-container {
+  padding: 2rem;
+}
+
+.card {
+  border-radius: 15px;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}

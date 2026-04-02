@@ -1,0 +1,21 @@
+<div class="page-container">
+  <div class="card-header text-center mb-4">
+    <h3>Resource Allocations</h3>
+  </div>
+
+  <div class="alert alert-danger" *ngIf="showError">{{ errorMessage }}</div>
+
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let alloc of allocations; let i = index">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-primary">Allocation {{ i + 1 }}</h5>
+          <p><strong>Event:</strong> {{ alloc.event?.event_id}}</p>
+          <p><strong>Resource:</strong> {{ alloc.resourceType }}</p>
+          <p><strong>Description:</strong> {{ alloc.description }}</p>
+          <!-- <p><strong>Availability:</strong> {{ alloc.availability }}</p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

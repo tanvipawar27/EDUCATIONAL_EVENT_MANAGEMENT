@@ -14,21 +14,27 @@ import { ViewEventsComponent } from './view-events/view-events.component';
 import { BookingDetailsComponent } from './booking-details/booking-details.component';
 import { RegisterForEventComponent } from './register-for-event/register-for-event.component';
 import { AuthService } from '../services/auth.service';
+import { ViewResourceComponent } from './view-resources/view-resources.component';
+import { LandingComponent } from './home/home.component';
+import { ViewAllocationComponent } from './view-allocation/view-allocation.component';
 
 
 const routes: Routes = [
+  {path:'app-landing' ,component:LandingComponent},
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'dashboard', component: DashbaordComponent },
   { path: 'create-event', component: CreateEventComponent },  
   { path: 'add-resource', component: AddResourceComponent }, 
-  { path: 'resource-allocate', component: ResourceAllocateComponent },  
+  { path: 'view-resource', component: ViewResourceComponent },
+  { path: 'resource-allocate', component: ResourceAllocateComponent },
+  {path:'view-allocations' , component:ViewAllocationComponent},  
   { path: 'view-events', component: ViewEventsComponent },  
   { path: 'booking-details', component: BookingDetailsComponent }, 
   { path: 'register-for-event', component: RegisterForEventComponent },   
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/app-landing', pathMatch: 'full' },
 
-  { path: '**', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/app-landing', pathMatch: 'full' },
 ];
 
 @NgModule({
