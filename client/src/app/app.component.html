@@ -1,28 +1,7 @@
-<!-- <div class="app-wrapper">
-  <nav class="navbar" *ngIf="authService.getLoginStatus && IsLoggin">
-    <div class="navbar-brand">🎓 EduTech Platform     <b>({{roleName}})</b></div>
-    <div class="navbar-links">
-      <a routerLink="/dashboard" >Dashboard</a>
-      <a routerLink="/create-event" *ngIf="roleName==='INSTITUTION'  ">Events</a>
-      <a routerLink="/add-resource" *ngIf="roleName==='INSTITUTION' || roleName==='EDUCATOR'">Resources</a>
-      <a routerLink="/resource-allocate" *ngIf="roleName==='INSTITUTION'">Allocate</a>
-      <a routerLink="/view-events" *ngIf="roleName==='INSTITUTION' || roleName==='EDUCATOR'">Agenda</a>
-      <a routerLink="/register-for-event" *ngIf="roleName==='INSTITUTION' || roleName==='STUDENT'">Register</a>
-      <a routerLink="/booking-details" *ngIf="roleName==='INSTITUTION' || roleName==='STUDENT'">My Bookings</a>
-      
-      <button class="btn-logout" (click)="logout()">Logout </button>
-    </div>
-  </nav>
-  <main class="main-content">
-    <router-outlet></router-outlet>
-  </main>
-</div> -->
-
+<!-- 
 <div class="app-wrapper">
-  <!-- Sidebar -->
   <nav class="sidebar" *ngIf="authService.getLoginStatus && IsLoggin">
     <div class="sidebar-brand">
-      <!-- <img src="https://cdn.dribbble.com/userupload/11093176/file/original-9b08b191e167beb304ede4e9ed3acc09.png?resize=2048x1536&vertical=center" width="150px" height="50px" alt=""> -->
       <b>EduSphere</b> 
       <br>
       <b>({{roleName}})</b>
@@ -41,8 +20,34 @@
     <button class="btn btn-danger w-100 mt-auto" (click)="logout()">Logout</button>
   </nav>
 
-  <!-- Main Content -->
   <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div> -->
+
+<div class="app-wrapper">
+  <!-- Sidebar only if logged in -->
+  <nav class="sidebar" *ngIf="authService.getLoginStatus && IsLoggin">
+    <div class="sidebar-brand">
+      <b>EduSphere</b><br>
+      <b>({{roleName}})</b>
+    </div>
+
+    <ul class="nav flex-column">
+      <li><a routerLink="/dashboard" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+      <li><a routerLink="/create-event" class="nav-link" *ngIf="roleName==='INSTITUTION'"><i class="fas fa-calendar-plus"></i> Add Event</a></li>
+      <li><a routerLink="/add-resource" class="nav-link" *ngIf="roleName==='INSTITUTION' || roleName==='EDUCATOR'"><i class="fas fa-book"></i> Add Resource</a></li>
+      <li><a routerLink="/resource-allocate" class="nav-link" *ngIf="roleName==='INSTITUTION'"><i class="fas fa-tasks"></i> Allocate Resource</a></li>
+      <li><a routerLink="/view-events" class="nav-link" *ngIf="roleName==='INSTITUTION' || roleName==='EDUCATOR'"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
+      <li><a routerLink="/register-for-event" class="nav-link" *ngIf="roleName==='INSTITUTION' || roleName==='STUDENT'"><i class="fas fa-user-check"></i> Register Event</a></li>
+      <li><a routerLink="/booking-details" class="nav-link" *ngIf="roleName==='INSTITUTION' || roleName==='STUDENT'"><i class="fas fa-ticket-alt"></i> My Bookings</a></li>
+    </ul>
+
+    <button class="btn btn-danger w-100 mt-auto" (click)="logout()">Logout</button>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content" [class.full-width]="!IsLoggin">
     <router-outlet></router-outlet>
   </main>
 </div>

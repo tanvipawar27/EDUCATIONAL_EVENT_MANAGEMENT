@@ -5,7 +5,7 @@ import { HttpService } from '../../services/http.service';
 @Component({
   selector: 'app-add-resource',
   templateUrl: './add-resource.component.html',
-  styles:['./add-resource.add-resource-component.scss']
+  styleUrls:['./add-resource.component.scss']
 })
 export class AddResourceComponent implements OnInit {
 

@@ -1,14 +1,7 @@
-:root {
-  --primary-color: #2a9d8f;   /* teal */
-  --accent-color: #f4a261;    /* orange */
-  --font-family: 'Poppins', sans-serif;
-}
 
-/* Full-page background */
 :host {
   display: block;
   min-height: 100vh;
-  background-image: url('assets/event-bg.jpg'); /* replace with your image */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -27,29 +20,30 @@
 /* Glass-style form card */
 .form-card {
   background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
   border-radius: 25px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.25);
   max-width: 500px;
   width: 100%;
   padding: 2rem;
-  animation: fadeInUp 1s ease forwards;
+  animation: fadeInUp 0.8s ease forwards;
 }
 
 /* Header */
 .card-header {
-  background: var(--primary-color);
-  color: #fff;
+  background-color: #fff;
   border-radius: 20px;
   padding: 1rem;
   margin-bottom: 1.5rem;
   text-align: center;
+  font-weight: bold;
 }
 
 .card-header h3 {
   margin: 0;
   font-weight: 700;
   letter-spacing: 1px;
+  color: #2a9d8f !important;   /* ensure heading visible */
 }
 
 /* Bold labels */
@@ -76,7 +70,11 @@
 
 /* Rounded button */
 .btn-primary {
-  background: var(--primary-color);
+  margin-top: 30px !important;
+  // background-color: var(--primary-color);
+  background-color: #2a9d8f;
+  color: #fff !important;   /* force white text */
+
   border: none;
   border-radius: 30px;
   padding: 12px 20px;
@@ -86,11 +84,31 @@
 }
 
 .btn-primary:hover {
-  background: var(--accent-color);
+  // background: var(--accent-color);
+  background-color: #2a9d8f;
   transform: scale(1.05);
 }
 
-/* Animation */
+/* Error & Success messages */
+.error {
+  margin-top: 1rem;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: rgba(230, 57, 70, 0.1);
+  color: #e63946;
+  font-weight: 600;
+}
+
+.success {
+  margin-top: 1rem;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: rgba(42, 157, 143, 0.12);
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;

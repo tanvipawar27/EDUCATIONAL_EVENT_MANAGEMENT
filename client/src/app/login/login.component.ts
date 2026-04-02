@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
     this.httpService.Login(this.itemForm.value).subscribe({
       next: (res: any) => {
         this.authService.saveToken(res.token);
-        this.authService.SetRole(res.role);
+        this.authService.setRole(res.role);
         localStorage.setItem('username', res.username);
         this.router.navigate(['/dashboard']);
       },
