@@ -1,5 +1,5 @@
 <div class="page-container">
-  <div class="card">
+  <div class="form-card">
     <div class="card-header">
       <h3>Create New Event</h3>
     </div>
@@ -13,24 +13,25 @@
             Event name is required.
           </div>
         </div>
+
         <div class="form-group">
           <label>Description</label>
           <textarea formControlName="description" class="form-control" rows="3" placeholder="Enter description"
             [class.is-invalid]="itemForm.get('description')?.invalid && itemForm.get('description')?.touched"></textarea>
-          <div class="invalid-feedback"
-            *ngIf="itemForm.get('description')?.invalid && itemForm.get('description')?.touched">
+          <div class="invalid-feedback" *ngIf="itemForm.get('description')?.invalid && itemForm.get('description')?.touched">
             Description is required.
           </div>
         </div>
+
         <div class="form-group">
           <label>Materials</label>
           <input type="text" formControlName="materials" class="form-control" placeholder="Enter materials"
             [class.is-invalid]="itemForm.get('materials')?.invalid && itemForm.get('materials')?.touched" />
-          <div class="invalid-feedback"
-            *ngIf="itemForm.get('materials')?.invalid && itemForm.get('materials')?.touched">
-            Materials is required.
+          <div class="invalid-feedback" *ngIf="itemForm.get('materials')?.invalid && itemForm.get('materials')?.touched">
+            Materials are required.
           </div>
         </div>
+
         <div class="form-group">
           <label>Event Date</label>
           <input type="date" formControlName="date" class="form-control"
@@ -39,36 +40,12 @@
             Event date is required.
           </div>
         </div>
+
         <div class="alert alert-danger" *ngIf="showError">{{ errorMessage }}</div>
         <div class="alert alert-success" *ngIf="showMessage">{{ responseMessage }}</div>
+
         <button type="submit" class="btn btn-primary">Create Event</button>
       </form>
     </div>
-  </div>
-
-  <div class="card mt-4" *ngIf="eventList.length > 0">
-    <div class="card-header">
-      <h4>All Events</h4>
-    </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Materials</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let event of eventList; let i = index">
-          <td>{{ i + 1 }}</td>
-          <td>{{ event.name }}</td>
-          <td>{{ event.description }}</td>
-          <td>{{ event.materials }}</td>
-          <td>{{ event.date | date:'mediumDate' }}</td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </div>

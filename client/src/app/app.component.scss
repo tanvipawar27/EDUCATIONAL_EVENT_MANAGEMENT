@@ -1,59 +1,107 @@
-/* Wrapper */
+
 .app-wrapper {
   display: flex;
+  flex-direction: row;   /* sidebar + main content side by side */
+  min-height: 100vh;     /* full viewport height */
+}
+.sidebar{
+  animation: slideInRight 1s ease forwards;
+  opacity: 0; /* start hidden */
+}
+
+/* Keyframes for left-to-right animation */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;         /* full height */
+  width: 240px;
+  background: linear-gradient(180deg, #264653, #2a9d8f);
+  color: #fff;
+  display: flex;
   flex-direction: column;
-  min-height: 100vh;
-}
-
-/* Navbar */
-.navbar {
-  background: #2a9d8f; /* teal */
-  color: #fff;
-  padding: 0.75rem 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.navbar-brand {
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
-.navbar-links {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.navbar-links a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.navbar-links a:hover {
-  text-decoration: underline;
-}
-
-/* Logout Button */
-.btn-logout {
-  background: #f4a261; /* orange */
-  border: none;
-  border-radius: 4px;
-  padding: 6px 12px;
-  font-weight: 600;
-  color: #fff;
-  cursor: pointer;
-}
-
-.btn-logout:hover {
-  background: #e76f51;
+  padding: 1rem;
 }
 
 /* Main Content */
 .main-content {
-  flex: 1;
-  padding: 1.5rem;
+  flex: 1;               /* take remaining width */
+  margin-left: 240px;    /* push content beside sidebar */
+  padding: 2rem;
   background: #f5f5f5;
+  min-height: 100vh;     /* stretch full height */
+}
+
+
+.sidebar-brand {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: #ffffff;
+  // display: flex;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
+}
+
+/* Logout Button */
+.btn-logout,
+.btn.btn-danger {
+  background: #dc3545; /* Bootstrap red */
+  border: none;
+  border-radius: 25px; /* round corners */
+  padding: 10px 20px; /* broader */
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-logout:hover,
+.btn.btn-danger:hover {
+  background: #ff0000; /* vibrant red */
+  transform: scale(1.05); /* subtle grow animation */
+  box-shadow: 0 0 12px rgba(255, 0, 0, 0.6); /* glowing effect */
+}
+
+.nav-link {
+  color: #ffffff; /* clean white text */
+  font-family: 'Poppins', sans-serif; /* modern, readable font */
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  border-radius: 25px; /* rounded corners */
+  display: flex;
+  align-items: center;
+  gap: 10px; /* space between icon and text */
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.15); /* subtle highlight */
+  color: #ffeb3b; /* vibrant yellow accent on hover */
+  transform: translateX(8px);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+
+.main-content {
+  margin-left: 240px;
+  padding: 2rem;
+  background: #f5f5f5;
+  min-height: 100vh;
 }

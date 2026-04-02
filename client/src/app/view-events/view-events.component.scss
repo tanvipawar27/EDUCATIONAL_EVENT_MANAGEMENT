@@ -1,118 +1,130 @@
-/* Global Theme */
-:root {
-  --primary-color: #2a9d8f;   /* teal */
-  --secondary-color: #e9c46a; /* warm yellow */
-  --accent-color: #f4a261;    /* orange */
-  --bg-color: #f5f5f5;
-  --card-bg: #ffffff;
-  --text-color: #333;
-  --font-family: 'Inter', sans-serif;
+/* Agenda Container */
+.agenda-container {
+  margin-top: 2rem;
+  font-family: 'Poppins', sans-serif;
 }
 
-body {
-  background: var(--bg-color);
-  font-family: var(--font-family);
-  color: var(--text-color);
+.agenda-title {
+  font-weight: 700;
+  color: #264653;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
-/* Page Container */
-.page-container {
-  max-width: 1000px;
-  margin: 2rem auto;
-  padding: 1rem;
+/* Grid Layout */
+.agenda-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
 }
 
-/* Card Styling */
-.card {
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+/* Agenda Card */
+.agenda-card {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
-.card-header {
-  background: var(--primary-color);
-  color: white;
-  border-radius: 12px 12px 0 0;
-  padding: 1rem;
+.agenda-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
-.card-header h3, .card-header h4 {
+.agenda-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.agenda-card-header h5 {
+  font-weight: 700;
+  color: #2a9d8f; /* teal for headings */
   margin: 0;
 }
 
-/* Form Controls */
-.form-control {
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  transition: border-color 0.3s;
-}
-
-.form-control:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 0.2rem rgba(42,157,143,0.25);
-}
-
-/* Invalid Feedback */
-.is-invalid {
-  border-color: #e63946;
-}
-
-.invalid-feedback {
-  color: #e63946;
+.agenda-date {
   font-size: 0.85rem;
+  color: #555;
 }
 
-/* Alerts */
-.alert {
-  border-radius: 6px;
+/* Card Body */
+.agenda-card-body p {
+  font-size: 0.9rem;
+  color: #444;
+  margin: 0.3rem 0;
+}
+
+/* Card Footer */
+.agenda-card-footer {
   margin-top: 1rem;
+  text-align: right;
 }
 
 /* Buttons */
-.btn-success {
-  background: #2a9d8f;
-  color:#fffffff1 ;
-  border: none;
-  border-radius: 6px;
-  margin-right: 10px;
-  margin-top: 10px;
-  padding: 10px 18px 10px 10px;
-  font-weight: 600;
-}
-// .btn btn-success {
-//   background: var(--primary-color);
-//   background-color:#e63946 ;
-//   border: none;
-//   border-radius: 6px;
-//   padding: 10px 18px;
-//   font-weight: 600;
-// }
-
-.btn-success:hover {
-  background: var(--accent-color);
-  
-  color:#f30505f1 ;
-}
-
-
-.btn-secondary {
-  border-radius: 6px;
-  padding: 10px 18px;
-  font-weight: 600;
-   margin-right: 10px;
-  margin-top: 10px;
-}
-
-/* Table Styling */
-.table thead {
-  background: var(--secondary-color);
-  color: #333;
-}
-
-.table tbody tr:hover {
-  background: rgba(42,157,143,0.1);
-}
-
 .btn-warning {
-  border-radius: 6px;
+  border-radius: 20px;
   font-weight: 600;
+  padding: 6px 12px;
+  background-color: #e9c46a; /* warm yellow */
+  color: #000; /* black text for contrast */
+  border: none;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-warning:hover {
+  background-color: #f4a261; /* orange */
+  color: #fff; /* white text on hover */
+  transform: scale(1.05);
+}
+
+/* Popup Backdrop */
+.popup-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Popup Card */
+.popup-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  animation: fadeInScale 0.4s ease forwards;
+}
+
+.popup-card h3 {
+  margin-top: 0;
+  color: #2a9d8f;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.popup-card p {
+  margin: 0.5rem 0;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+.popup-card .btn {
+  margin-top: 1rem;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-weight: 600;
+}
+
+/* Popup Animation */
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
 }

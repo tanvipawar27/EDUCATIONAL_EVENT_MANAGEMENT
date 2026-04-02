@@ -12,14 +12,16 @@ export class DashbaordComponent implements OnInit{
   
   ngOnInit(): void {
     this.getRoles();
+    this.getName();
   };
   roles:string | null=null;
+  userName:string | null=null;
 
   getRoles(){
    this.roles= this.auth.getRole();
   }
   getName(){
-    
+    this.userName=this.auth.getName();
   }
   
 }

@@ -1,38 +1,52 @@
 <div class="dashboard-container">
   <div class="welcome-banner">
-    <h2>Welcome to EduTech Platform</h2>
+    <h2>Welcome, {{userName}} 👋</h2>
     <p>Manage educational events, resources, and registrations from one place.</p>
   </div>
-  <div class="dashboard-cards">
-    <div class="dash-card" routerLink="/create-event"  *ngIf="roles==='INSTITUTION'">
-      <div class="dash-icon">📅</div>
-      <h4>Create Event</h4>
-      <p>Schedule new educational events</p>
+
+  <div class="row">
+    <!-- Create Event -->
+    <div class="col-md-4" *ngIf="roles==='INSTITUTION'">
+      <div class="circle-card" routerLink="/create-event" style="background-image: url('assets/create-event.jpg');">
+        <h5>Create Event</h5>
+      </div>
     </div>
-    <div class="dash-card" routerLink="/add-resource"  *ngIf="roles==='EDUCATOR' || roles==='INSTITUTION'">
-      <div class="dash-icon">📦</div>
-      <h4>Add Resource</h4>
-      <p>Manage teaching resources</p>
+
+    <!-- Add Resource -->
+    <div class="col-md-4" *ngIf="roles==='EDUCATOR' || roles==='INSTITUTION'">
+      <div class="circle-card" routerLink="/add-resource" style="background-image: url('assets/add-resource.jpg');">
+        <h5>Add Resource</h5>
+      </div>
     </div>
-    <div class="dash-card" routerLink="/resource-allocate" *ngIf="roles==='INSTITUTION'">
-      <div class="dash-icon">🔗</div>
-      <h4>Allocate Resources</h4>
-      <p>Assign resources to events</p>
+
+    <!-- Allocate Resources -->
+    <div class="col-md-4" *ngIf="roles==='INSTITUTION'">
+      <div class="circle-card" routerLink="/resource-allocate" style="background-image: url('assets/allocate-bg.jpg');">
+        <h5>Allocate Resources</h5>
+      </div>
     </div>
-    <div class="dash-card" routerLink="/view-events" *ngIf="roles==='EDUCATOR' || roles==='INSTITUTION'">
-      <div class="dash-icon">📋</div>
-      <h4>View Events</h4>
-      <p>Browse and update event agenda</p>
+  </div>
+
+  <div class="row">
+    <!-- View Events -->
+    <div class="col-md-4" *ngIf="roles==='EDUCATOR' || roles==='INSTITUTION'">
+      <div class="circle-card" routerLink="/view-events" style="background-image: url('assets/view-events.jpg');">
+        <h5>View Events</h5>
+      </div>
     </div>
-    <div class="dash-card" routerLink="/register-for-event" *ngIf="roles==='STUDENT' || roles==='INSTITUTION'">
-      <div class="dash-icon">✍️</div>
-      <h4>Register for Event</h4>
-      <p>Enroll in upcoming events</p>
+
+    <!-- Register for Event -->
+    <div class="col-md-4" *ngIf="roles==='STUDENT' || roles==='INSTITUTION'">
+      <div class="circle-card" routerLink="/register-for-event" style="background-image: url('assets/register-bg.jpg');">
+        <h5>Register</h5>
+      </div>
     </div>
-    <div class="dash-card" routerLink="/booking-details" *ngIf="roles==='STUDENT' || roles==='INSTITUTION'">
-      <div class="dash-icon">🎟️</div>
-      <h4>My Bookings</h4>
-      <p>View your registration status</p>
+
+    <!-- My Bookings -->
+    <div class="col-md-4" *ngIf="roles==='STUDENT' || roles==='INSTITUTION'">
+      <div class="circle-card" routerLink="/booking-details" style="background-image: url('assets/bookings-bg.jpg');">
+        <h5>My Bookings</h5>
+      </div>
     </div>
   </div>
 </div>

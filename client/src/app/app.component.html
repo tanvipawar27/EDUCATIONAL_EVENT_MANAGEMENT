@@ -1,4 +1,4 @@
-<div class="app-wrapper">
+<!-- <div class="app-wrapper">
   <nav class="navbar" *ngIf="authService.getLoginStatus && IsLoggin">
     <div class="navbar-brand">🎓 EduTech Platform     <b>({{roleName}})</b></div>
     <div class="navbar-links">
@@ -13,6 +13,35 @@
       <button class="btn-logout" (click)="logout()">Logout </button>
     </div>
   </nav>
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div> -->
+
+<div class="app-wrapper">
+  <!-- Sidebar -->
+  <nav class="sidebar" *ngIf="authService.getLoginStatus && IsLoggin">
+    <div class="sidebar-brand">
+      <!-- <img src="https://cdn.dribbble.com/userupload/11093176/file/original-9b08b191e167beb304ede4e9ed3acc09.png?resize=2048x1536&vertical=center" width="150px" height="50px" alt=""> -->
+      <b>EduSphere</b> 
+      <br>
+      <b>({{roleName}})</b>
+    </div>
+    
+    <ul class="nav flex-column">
+  <li><a routerLink="/dashboard" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
+  <li><a routerLink="/create-event" class="nav-link" *ngIf="roleName==='INSTITUTION'"><i class="fas fa-calendar-plus"></i> Events</a></li>
+  <li><a routerLink="/add-resource" class="nav-link" *ngIf="roleName==='INSTITUTION' || roleName==='EDUCATOR'"><i class="fas fa-book"></i> Resources</a></li>
+  <li><a routerLink="/resource-allocate" class="nav-link" *ngIf="roleName==='INSTITUTION'"><i class="fas fa-tasks"></i> Allocate</a></li>
+  <li><a routerLink="/view-events" class="nav-link" *ngIf="roleName==='INSTITUTION' || roleName==='EDUCATOR'"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
+  <li><a routerLink="/register-for-event" class="nav-link" *ngIf="roleName==='INSTITUTION' || roleName==='STUDENT'"><i class="fas fa-user-check"></i> Register</a></li>
+  <li><a routerLink="/booking-details" class="nav-link" *ngIf="roleName==='INSTITUTION' || roleName==='STUDENT'"><i class="fas fa-ticket-alt"></i> My Bookings</a></li>
+</ul>
+
+    <button class="btn btn-danger w-100 mt-auto" (click)="logout()">Logout</button>
+  </nav>
+
+  <!-- Main Content -->
   <main class="main-content">
     <router-outlet></router-outlet>
   </main>
