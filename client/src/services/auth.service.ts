@@ -1,57 +1,3 @@
-// import { Injectable } from '@angular/core';
-// import { Router } from '@angular/router';
-
-
-
-
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class AuthService {
-
-//   token: string = '';
-//   isLoggedIn: boolean = false;
-//   id: string = '';
-
-//   constructor(private router: Router) {}
-
-//   saveToken(token: string): void {
-//     this.token = token;
-//     this.isLoggedIn = true;
-//     localStorage.setItem('token', token);
-//   }
-
-//   SetRole(role: any): void {
-//     localStorage.setItem('role', role);
-//   }
-
-//   getRole(): string | null  {
-//     return localStorage.getItem('role');
-//   }
-//   getName(): string | null {
-//     return localStorage.getItem('username');
-//   }
-
-//   get getLoginStatus(): boolean {
-//     return this.isLoggedIn || !!localStorage.getItem('token');
-//   }
-
-//   getToken(): string | null {
-//     return this.token || localStorage.getItem('token');
-//   }
-
-//   logout(): void {
-//     this.token = '';
-//     this.isLoggedIn = false;
-//     this.id = '';
-//     localStorage.removeItem('token');
-//     localStorage.removeItem('role');
-//     this.router.navigate(['/login']);
-//   }
-
-// }
-
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -71,6 +17,7 @@ export class AuthService {
     const storedToken = localStorage.getItem('token');
     const storedRole = localStorage.getItem('role');
     const storedUser = localStorage.getItem('username');
+    const storedId = localStorage.getItem('studentId');
 
     if (storedToken) {
       this.token = storedToken;
@@ -82,24 +29,37 @@ export class AuthService {
     if (storedUser) {
       this.username = storedUser;
     }
+    if (storedId) {
+      this.id = storedId;
+    }
   }
 
+  // ✅ Save token
   saveToken(token: string): void {
     this.token = token;
     this.isLoggedIn = true;
     localStorage.setItem('token', token);
   }
 
+  // ✅ Save role
   setRole(role: string): void {
     this.roleName = role;
     localStorage.setItem('role', role);
   }
 
+  // ✅ Save username
   setUsername(name: string): void {
     this.username = name;
     localStorage.setItem('username', name);
   }
 
+  // ✅ Save student/user ID
+  setId(id: string): void {
+    this.id = id;
+    localStorage.setItem('studentId', id);
+  }
+
+  // ✅ Getters
   getRole(): string | null {
     return this.roleName || localStorage.getItem('role');
   }
@@ -108,8 +68,11 @@ export class AuthService {
     return this.username || localStorage.getItem('username');
   }
 
+  getId(): string | null {
+    return this.id || localStorage.getItem('studentId');
+  }
+
   get getLoginStatus(): boolean {
-    // true if logged in in memory OR token exists in localStorage
     return this.isLoggedIn || !!localStorage.getItem('token');
   }
 
@@ -117,15 +80,19 @@ export class AuthService {
     return this.token || localStorage.getItem('token');
   }
 
+  // ✅ Logout clears everything
   logout(): void {
     this.token = '';
     this.isLoggedIn = false;
     this.id = '';
     this.roleName = '';
     this.username = '';
+
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     localStorage.removeItem('username');
+    localStorage.removeItem('studentId');
+
     this.router.navigate(['/login']);
   }
 }

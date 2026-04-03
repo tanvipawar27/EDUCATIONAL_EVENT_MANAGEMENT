@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register-for-event',
@@ -18,13 +19,14 @@ export class RegisterForEventComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       eventId: ['', Validators.required],
-      studentId: ['', Validators.required],
+      studentId: [this.authService.getId(), Validators.required], // ✅ auto-filled from login
       status: ['REGISTERED']
     });
   }
@@ -32,23 +34,23 @@ export class RegisterForEventComponent implements OnInit {
   submit(): void {
     if (this.registerForm.invalid) {
       this.showError = true;
-      this.errorMessage = 'Please fill in all required fields.';
+      this.errorMessage = 'Please select an event.';
       return;
     }
 
     const { eventId, studentId, status } = this.registerForm.value;
-
-    const registration = {
-      studentId,
-      status
-    };
+    const registration = { studentId, status };
 
     this.httpService.registerForEvent(eventId, registration).subscribe({
       next: () => {
         this.showMessage = true;
         this.responseMessage = 'Successfully registered for the event!';
         this.showError = false;
-        this.registerForm.reset({ status: 'REGISTERED' });
+        this.registerForm.reset({
+          eventId: '',
+          studentId: this.authService.getId(), // ✅ keep studentId filled
+          status: 'REGISTERED'
+        });
       },
       error: () => {
         this.showError = true;

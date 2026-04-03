@@ -23,6 +23,7 @@ public class EventService {
     @Autowired
     private ResourceRepository resourceRepository;
 
+    // ✅ Create Event
     public Event createEvent(Event event) {
         logger.info("Creating new event: {}", event.getName());
         Event saved = eventRepository.save(event);
@@ -30,6 +31,7 @@ public class EventService {
         return saved;
     }
 
+    // ✅ Get All Events
     public List<Event> getAllEvents() {
         logger.info("Fetching all events...");
         List<Event> events = eventRepository.findAll();
@@ -37,6 +39,17 @@ public class EventService {
         return events;
     }
 
+    // ✅ Get Event by ID
+    public Event getEventById(Long eventId) {
+        logger.info("Fetching event with ID: {}", eventId);
+        return eventRepository.findById(eventId)
+                .orElseThrow(() -> {
+                    logger.error("Event with ID {} not found", eventId);
+                    return new RuntimeException("Event not found");
+                });
+    }
+
+    // ✅ Update Event
     public Event updateEvent(Long eventId, Event updateEvent) {
         logger.info("Updating event with ID: {}", eventId);
         Event existing = eventRepository.findById(eventId)
@@ -54,6 +67,18 @@ public class EventService {
         return updated;
     }
 
+    // ✅ Delete Event
+    public void deleteEvent(Long eventId) {
+        logger.info("Attempting to delete event with ID: {}", eventId);
+        if (!eventRepository.existsById(eventId)) {
+            logger.error("Event with ID {} not found", eventId);
+            throw new RuntimeException("Event not found");
+        }
+        eventRepository.deleteById(eventId);
+        logger.info("Event with ID {} deleted successfully", eventId);
+    }
+
+    // ✅ Allocate Resource to Event
     public Event allocateResourceToEvent(Long eventId, Long resourceId) {
         logger.info("Allocating resource {} to event {}", resourceId, eventId);
 
@@ -78,58 +103,28 @@ public class EventService {
         logger.info("Resource {} allocated successfully to event {}", resourceId, eventId);
         return updatedEvent;
     }
+
+    // ✅ Search Events by Name
+    public List<Event> searchEventsByName(String keyword) {
+        logger.info("Searching events with keyword: {}", keyword);
+        List<Event> results = eventRepository.findByNameContainingIgnoreCase(keyword);
+        logger.debug("Number of events found: {}", results.size());
+        return results;
+    }
+
+    // ✅ Get All Events with Allocated Resources
+    public List<Event> getAllEventsWithResources() {
+        logger.info("Fetching all events with their allocated resources...");
+        List<Event> events = eventRepository.findAll();
+
+        // Force initialization of resources if using LAZY fetch
+        for (Event event : events) {
+            if (event.getResourceAllocations() != null) {
+                event.getResourceAllocations().size();
+            }
+        }
+
+        logger.debug("Number of events with resources fetched: {}", events.size());
+        return events;
+    }
 }
-
-// package com.edutech.educationalresourcedistributionsystem.service;
-
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Service;
-
-// import com.edutech.educationalresourcedistributionsystem.entity.Event;
-// import com.edutech.educationalresourcedistributionsystem.entity.Resource;
-// import com.edutech.educationalresourcedistributionsystem.repository.EventRepository;
-// import com.edutech.educationalresourcedistributionsystem.repository.ResourceRepository;
-
-// import javax.persistence.EntityNotFoundException;
-// import java.util.List;
-
-
-// @Service
-// public class EventService {
-//    @Autowired
-//    private EventRepository eventRepository;
-//    @Autowired
-//    private ResourceRepository resourceRepository;
-//    public Event createEvent(Event event) {
-//        return eventRepository.save(event);
-//    }
-//    public List<Event> getAllEvents() {
-//        return eventRepository.findAll();
-//    }
-//    public Event updateEvent(Long eventId, Event updateEvent) {
-//        Event existing = eventRepository.findById(eventId)
-//                .orElseThrow(() -> new RuntimeException("Event not found"));
-//        existing.setName(updateEvent.getName());
-//        existing.setDescription(updateEvent.getDescription());
-//        existing.setMaterials(updateEvent.getMaterials());
-//        return eventRepository.save(existing);
-//    }
-
-// public Event allocateResourceToEvent(Long eventId, Long resourceId) {
-//     Event event = eventRepository.findById(eventId)
-//             .orElseThrow(() -> new RuntimeException("Event not found"));
-//     Resource resource = resourceRepository.findById(resourceId)
-//             .orElseThrow(() -> new RuntimeException("Resource not found"));
-
-//     // Set relationship both ways
-//     resource.setEvent(event);
-//     event.getResourceAllocations().add(resource);
-
-//     // Save resource and event
-//     resourceRepository.save(resource);
-//     return eventRepository.save(event);
-// }
-
-// }
-
-    

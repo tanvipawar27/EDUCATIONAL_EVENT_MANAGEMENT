@@ -1,4 +1,4 @@
- import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment.development';
@@ -20,6 +20,7 @@ export class HttpService {
     });
   }
 
+  // ---------------- STUDENT ----------------
   getBookingDetails(studentId: any): Observable<any> {
     return this.http.get(
       `${this.serverName}/api/student/registration-status/${studentId}`,
@@ -35,15 +36,33 @@ export class HttpService {
     );
   }
 
+  // ✅ NEWLY ADDED: Get all students
+  getAllStudents(): Observable<any> {
+    return this.http.get(
+      `${this.serverName}/api/student/all`,
+      { headers: this.getHeaders() }
+    );
+  }
+
+  // ---------------- EDUCATOR ----------------
   getAllEventAgenda(): Observable<any> {
-    
     return this.http.get(
       `${this.serverName}/api/educator/agenda`,
       { headers: this.getHeaders() }
     );
   }
 
+  updateEvent(details: any, eventId: any): Observable<any> {
+    return this.http.put(
+      `${this.serverName}/api/educator/update-material/${eventId}`,
+      details,
+      { headers: this.getHeaders() }
+    );
+  }
+
+  // ---------------- INSTITUTION ----------------
   GetAllevents(): Observable<any> {
+    
     return this.http.get(
       `${this.serverName}/api/institution/events`,
       { headers: this.getHeaders() }
@@ -56,13 +75,6 @@ export class HttpService {
       { headers: this.getHeaders() }
     );
   }
-  getAllStudents(): Observable<any> {
-  return this.http.get(
-    `${this.serverName}/api/student/all`,
-    { headers: this.getHeaders() }
-  );
-}
-
 
   createEvent(details: any): Observable<any> {
     return this.http.post(
@@ -72,10 +84,10 @@ export class HttpService {
     );
   }
 
-  updateEvent(details: any, eventId: any): Observable<any> {
-    return this.http.put(
-      `${this.serverName}/api/educator/update-material/${eventId}`,
-      details,
+  // ✅ NEWLY ADDED: Delete event
+  deleteEvent(eventId: any): Observable<any> {
+    return this.http.delete(
+      `${this.serverName}/api/institution/event/${eventId}`,
       { headers: this.getHeaders() }
     );
   }
@@ -96,17 +108,13 @@ export class HttpService {
     );
   }
 
+  // ---------------- USER (AUTH) ----------------
   Login(details: any): Observable<any> {
-    // return this.http.post(
-    //   `${this.serverName}/api/user/login`,
-    //   details,
-    //   { headers: this.getHeaders() }
-    // );/
-    return this.http.post(`${this.serverName}/api/user/login`,details,{
+    return this.http.post(`${this.serverName}/api/user/login`, details, {
       headers: new HttpHeaders({
-        'Content-Type':'application/json'
+        'Content-Type': 'application/json'
       })
-    })
+    });
   }
 
   registerUser(details: any): Observable<any> {
@@ -116,5 +124,12 @@ export class HttpService {
       { headers: this.getHeaders() }
     );
   }
+  // ✅ Get all allocations (events with resources)
+getAllAllocations(): Observable<any> {
+  return this.http.get(
+    `${this.serverName}/api/institution/allocations`,
+    { headers: this.getHeaders() }
+  );
 }
 
+}

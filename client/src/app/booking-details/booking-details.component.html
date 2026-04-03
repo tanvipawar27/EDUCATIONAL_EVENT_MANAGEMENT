@@ -1,74 +1,43 @@
 <div class="page-container">
- 
-  <!-- Search Card -->
-  <div class="card">
- 
-    <div class="card-header">
-      <h3>Booking Details</h3>
-    </div>
- 
-    <div class="card-body">
- 
-      <!-- Reactive Form -->
-      <form [formGroup]="bookingForm" (ngSubmit)="searchEvent()">
- 
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Enter Student ID"
-          formControlName="studentId"
-        />
- 
-        <button
-          type="submit"
-          class="btn-primary"
-          [disabled]="bookingForm.invalid"
-        >
-          Search
-        </button>
- 
-      </form>
- 
-      <!-- Error Message -->
-      <div class="error" *ngIf="showError">
-        {{ errorMessage }}
-      </div>
- 
-      <!-- No Data Message -->
-      <div class="success" *ngIf="showMessage">
-        {{ responseMessage }}
-      </div>
- 
-    </div>
-  </div>
- 
+
   <!-- Booking Result Card -->
-  <div
-    class="card mt-3"
-    *ngIf="eventList && eventList.length > 0"
-  >
+  <div class="card mt-3" *ngIf="eventList && eventList.length > 0">
     <div class="card-header">
-      <h4>Registered Events</h4>
+      <h3>Booking Information</h3>
     </div>
- 
+
     <div class="card-body">
- 
-      <div
-        class="event-item"
-        *ngFor="let booking of eventList"
-      >
-        <p><strong>Booking ID:</strong> {{ booking.id }}</p>
-        <p><strong>Status:</strong> {{ booking.status }}</p>
-        <p><strong>Student ID:</strong> {{ booking.studentId }}</p>
- 
-        <hr />
- 
-        <p><strong>Event Name:</strong> {{ booking.event?.name }}</p>
-        <p><strong>Description:</strong> {{ booking.event?.description }}</p>
-        <p><strong>Materials:</strong> {{ booking.event?.materials }}</p>
-      </div>
- 
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Sr#</th>
+            <th scope="col">Status</th>
+            <th scope="col">Event</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let booking of eventList; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ booking.status }}</td>
+            <td>
+              <div><strong>Name:</strong> {{ booking.event?.name }}</div>
+              <div><strong>Description:</strong> {{ booking.event?.description }}</div>
+              <div><strong>Materials:</strong> {{ booking.event?.materials }}</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
- 
+
+  <!-- No Data Message -->
+  <div class="alert alert-info mt-3" *ngIf="showMessage && !showError">
+    {{ responseMessage }}
+  </div>
+
+  <!-- Error Message -->
+  <div class="alert alert-danger mt-3" *ngIf="showError">
+    {{ errorMessage }}
+  </div>
+
 </div>

@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -8,14 +7,13 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls:['./login.component.scss']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 
   itemForm!: FormGroup;
-  formModel: any = {};
-  showError: boolean = false;
-  errorMessage: any = '';
+  showError = false;
+  errorMessage = '';
 
   constructor(
     private fb: FormBuilder,
@@ -31,24 +29,28 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  registration() {
+  registration(): void {
     this.router.navigate(['/registration']);
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.itemForm.invalid) {
       this.showError = true;
       this.errorMessage = 'Please fill in all required fields.';
       return;
     }
+
     this.httpService.Login(this.itemForm.value).subscribe({
       next: (res: any) => {
+        // ✅ Save login info via AuthService
         this.authService.saveToken(res.token);
         this.authService.setRole(res.role);
-        localStorage.setItem('username', res.username);
+        this.authService.setUsername(res.username);
+        this.authService.setId(res.id);
+
         this.router.navigate(['/dashboard']);
       },
-      error: (err: any) => {
+      error: () => {
         this.showError = true;
         this.errorMessage = 'Invalid username or password.';
       }

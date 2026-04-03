@@ -1,15 +1,12 @@
-
 <div class="page-container">
   <div class="card">
-
     <div class="card-header">
       <h3>Register for Event</h3>
     </div>
-
     <div class="card-body">
-
       <form [formGroup]="registerForm" (ngSubmit)="submit()">
 
+        <!-- Event ID (or dropdown) -->
         <input
           type="text"
           class="form-control"
@@ -17,34 +14,24 @@
           formControlName="eventId"
         />
 
-        <input
-          type="text"
-          class="form-control mt-2"
-          placeholder="Student ID"
-          formControlName="studentId"
-        />
+        <!-- Student ID removed (auto-filled from login) -->
 
         <button
           type="submit"
-          class="btn-primary mt-3"
+          class="btn btn-primary mt-3 w-100"
           [disabled]="registerForm.invalid"
         >
           Register
         </button>
-
       </form>
 
-      <div class="error" *ngIf="showError">
+      <div class="alert alert-danger mt-3" *ngIf="showError">
         {{ errorMessage }}
       </div>
 
-      <div class="success" *ngIf="showMessage">
+      <div class="alert alert-success mt-3" *ngIf="showMessage">
         {{ responseMessage }}
       </div>
-
     </div>
   </div>
 </div>
-
-
-

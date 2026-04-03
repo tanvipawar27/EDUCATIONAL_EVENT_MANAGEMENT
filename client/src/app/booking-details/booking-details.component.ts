@@ -1,56 +1,62 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
- 
+import { AuthService } from '../../services/auth.service';
+
 @Component({
   selector: 'app-booking-details',
-  templateUrl: './booking-details.component.html'
+  templateUrl: './booking-details.component.html',
+  styleUrls: ['./booking-details.component.scss']
 })
 export class BookingDetailsComponent implements OnInit {
- 
-  bookingForm!: FormGroup;
+
   showError = false;
   errorMessage = '';
   showMessage = false;
   responseMessage = '';
   eventList: any[] = [];
- 
+
   constructor(
-    private fb: FormBuilder,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private authService: AuthService
   ) {}
- 
+
   ngOnInit(): void {
-    this.bookingForm = this.fb.group({
-      studentId: ['', Validators.required]
-    });
+    // ✅ Keep init clean
+    this.loadBookingDetails();
+    console.log(this.eventList)
   }
- 
-  searchEvent(): void {
-    if (this.bookingForm.invalid) {
+
+  // 🔹 New method for fetching bookings
+  private loadBookingDetails(): void {
+    const studentId = this.authService.getId();
+
+    if (!studentId) {
       this.showError = true;
-      this.errorMessage = 'Please enter a student ID.';
+      this.errorMessage = 'No student ID found in session. Please log in again.';
       return;
     }
- 
-    const studentId = this.bookingForm.value.studentId;
- 
-    this.httpService.getBookingDetails(studentId).subscribe({
+
+    const numericId = Number(studentId); // ensure numeric
+
+    this.httpService.getBookingDetails(numericId).subscribe({
       next: (res: any) => {
-        this.eventList = res;
+        this.eventList = res || [];
         this.showError = false;
- 
+
         if (!res || res.length === 0) {
           this.showMessage = true;
-          this.responseMessage = 'No registrations found for this student.';
+          this.responseMessage = 'No bookings right now.';
         } else {
           this.showMessage = false;
         }
       },
-      error: () => {
+      error: (err) => {
+        console.log(err)
+        console.error('API error:', err);
+        this.eventList = []; // clear stale data
         this.showError = true;
         this.errorMessage = 'Failed to fetch booking details.';
       }
     });
   }
-}  
+}

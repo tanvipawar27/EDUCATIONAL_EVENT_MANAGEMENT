@@ -5,27 +5,26 @@ import { HttpService } from '../../services/http.service';
 @Component({
   selector: 'app-resource-allocate',
   templateUrl: './resource-allocate.component.html',
-  styleUrls:['./resource-allocate.component.scss']
+  styleUrls: ['./resource-allocate.component.scss']
 })
 export class ResourceAllocateComponent implements OnInit {
 
   itemForm!: FormGroup;
-  formModel: any = {};
   showError: boolean = false;
-  errorMessage: any = '';
-  resourceList: any = [];
-  assignModel: any = {};
-  showMessage: any = false;
-  responseMessage: any = '';
-  eventList: any = [];
+  errorMessage: string = '';
+  showMessage: boolean = false;
+  responseMessage: string = '';
+  eventList: any[] = [];
+  resourceList: any[] = [];
 
   constructor(private fb: FormBuilder, private httpService: HttpService) {}
 
   ngOnInit(): void {
     this.itemForm = this.fb.group({
-      eventId: ['', Validators.required],
-      resourceId: ['', Validators.required]
+      eventId: ['', [Validators.required]],   // ✅ Added array form for clarity
+      resourceId: ['', [Validators.required]] // ✅ Same here
     });
+
     this.getEvent();
     this.getResources();
   }
@@ -45,23 +44,32 @@ export class ResourceAllocateComponent implements OnInit {
   }
 
   onSubmit() {
+    this.showError = false;   // ✅ Reset error state before validation
+    this.showMessage = false; // ✅ Reset success state before validation
+
     if (this.itemForm.invalid) {
       this.itemForm.markAllAsTouched();
       this.showError = true;
-      this.errorMessage = 'Please select event and resource.';
+      this.errorMessage = 'Please select both event and resource.'; // ✅ More descriptive message
       return;
     }
+
     const { eventId, resourceId } = this.itemForm.value;
     this.httpService.allocateResources(eventId, resourceId, {}).subscribe({
       next: (res: any) => {
         this.showMessage = true;
-        this.responseMessage = 'Resource allocated successfully!';
+        this.responseMessage = '✅ Resource allocated successfully!'; // ✅ Success feedback
         this.itemForm.reset();
       },
       error: (err: any) => {
         this.showError = true;
-        this.errorMessage = 'Failed to allocate resource.';
+        this.errorMessage = '❌ Failed to allocate resource. Please try again later.'; // ✅ Clearer error
+        console.error(err);
       }
     });
   }
+
+  // ✅ Helper getters for cleaner template validation
+  get eventId() { return this.itemForm.get('eventId'); }
+  get resourceId() { return this.itemForm.get('resourceId'); }
 }

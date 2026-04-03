@@ -5,46 +5,53 @@
     </div>
     <div class="card-body">
       <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
+        
+        <!-- Event Name -->
+        <div class="form-group mb-3">
           <label>Event Name</label>
           <input type="text" formControlName="name" class="form-control" placeholder="Enter event name"
-            [class.is-invalid]="itemForm.get('name')?.invalid && itemForm.get('name')?.touched" />
-          <div class="invalid-feedback" *ngIf="itemForm.get('name')?.invalid && itemForm.get('name')?.touched">
-            Event name is required.
+            [class.is-invalid]="name?.invalid && name?.touched" />
+          <div class="invalid-feedback" *ngIf="name?.invalid && name?.touched">
+            Event name is required (min 3 characters).
           </div>
         </div>
 
-        <div class="form-group">
+        <!-- Description -->
+        <div class="form-group mb-3">
           <label>Description</label>
           <textarea formControlName="description" class="form-control" rows="3" placeholder="Enter description"
-            [class.is-invalid]="itemForm.get('description')?.invalid && itemForm.get('description')?.touched"></textarea>
-          <div class="invalid-feedback" *ngIf="itemForm.get('description')?.invalid && itemForm.get('description')?.touched">
-            Description is required.
+            [class.is-invalid]="description?.invalid && description?.touched"></textarea>
+          <div class="invalid-feedback" *ngIf="description?.invalid && description?.touched">
+            Description is required (min 10 characters).
           </div>
         </div>
 
-        <div class="form-group">
+        <!-- Materials -->
+        <div class="form-group mb-3">
           <label>Materials</label>
           <input type="text" formControlName="materials" class="form-control" placeholder="Enter materials"
-            [class.is-invalid]="itemForm.get('materials')?.invalid && itemForm.get('materials')?.touched" />
-          <div class="invalid-feedback" *ngIf="itemForm.get('materials')?.invalid && itemForm.get('materials')?.touched">
-            Materials are required.
+            [class.is-invalid]="materials?.invalid && materials?.touched" />
+          <div class="invalid-feedback" *ngIf="materials?.invalid && materials?.touched">
+            Materials are required (min 3 characters).
           </div>
         </div>
 
-        <div class="form-group">
+        <!-- Event Date -->
+        <div class="form-group mb-3">
           <label>Event Date</label>
           <input type="date" formControlName="date" class="form-control"
-            [class.is-invalid]="itemForm.get('date')?.invalid && itemForm.get('date')?.touched" />
-          <div class="invalid-feedback" *ngIf="itemForm.get('date')?.invalid && itemForm.get('date')?.touched">
+            [class.is-invalid]="date?.invalid && date?.touched" />
+          <div class="invalid-feedback" *ngIf="date?.invalid && date?.touched">
             Event date is required.
           </div>
         </div>
 
+        <!-- Feedback Messages -->
         <div class="alert alert-danger" *ngIf="showError">{{ errorMessage }}</div>
         <div class="alert alert-success" *ngIf="showMessage">{{ responseMessage }}</div>
 
-        <button type="submit" class="btn btn-primary">Create Event</button>
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100">Create Event</button>
       </form>
     </div>
   </div>
