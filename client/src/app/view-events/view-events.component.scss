@@ -113,8 +113,17 @@
   border: none;
   color: #fff;
   transition: background 0.3s, transform 0.2s;
+  margin-right: 20px;
 }
-
+.agenda-card-footer .btn-danger {
+  border-radius: 20px;
+  font-weight: 600;
+  background-color: #ee2031;
+  border: none;
+  color: #fff;
+  transition: background 0.3s, transform 0.2s;
+  margin-right: 20px;
+}
 .agenda-card-footer .btn-warning:hover {
   background-color: #e76f51;
   transform: scale(1.05);

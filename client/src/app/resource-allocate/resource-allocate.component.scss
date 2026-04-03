@@ -1,7 +1,6 @@
 :host {
   display: block;
   min-height: 100vh;
-  background-image: url('/assets/resource-bg.jpg'); /* replace with your image */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -31,7 +30,7 @@
 
 /* Card Header */
 .card-header {
-  background-color: #fff;
+  background-color: #fff !important;
   border-radius: 20px;
   padding: 1rem;
   margin-bottom: 1.5rem;
