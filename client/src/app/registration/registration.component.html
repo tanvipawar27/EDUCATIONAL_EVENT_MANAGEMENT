@@ -16,38 +16,49 @@
 
     <!-- Registration Form -->
     <form [formGroup]="itemForm" (ngSubmit)="onRegister()" class="register-form">
+
+      <!-- Username -->
       <div class="form-group">
         <label for="username">Username</label>
         <input id="username" type="text" formControlName="username" placeholder="Choose a username" />
-        <div *ngIf="itemForm.get('username')?.hasError('invalidUsername') && itemForm.get('username')?.touched" class="error-message">
+        <div *ngIf="itemForm.get('username')?.hasError('invalidUsername') && itemForm.get('username')?.touched"
+             class="error-message">
           Username must be alphanumeric and not only numbers.
         </div>
       </div>
 
+      <!-- Email -->
       <div class="form-group">
         <label for="email">Email</label>
         <input id="email" type="email" formControlName="email" placeholder="Enter your email" />
-        <div *ngIf="itemForm.get('email')?.invalid && itemForm.get('email')?.touched" class="error-message">
+        <div *ngIf="itemForm.get('email')?.invalid && itemForm.get('email')?.touched"
+             class="error-message">
           Please enter a valid email address.
         </div>
       </div>
 
+      <!-- Password -->
       <div class="form-group">
         <label for="password">Password</label>
         <input id="password" type="password" formControlName="password" placeholder="Enter a strong password" />
-        <div *ngIf="itemForm.get('password')?.hasError('invalidPassword') && itemForm.get('password')?.touched" class="error-message">
+        <div *ngIf="itemForm.get('password')?.hasError('invalidPassword') && itemForm.get('password')?.touched"
+             class="error-message">
           Password must be at least 8 characters, with uppercase, lowercase, number, and special character.
         </div>
       </div>
 
+      <!-- Confirm Password -->
       <div class="form-group">
         <label for="confirmPassword">Confirm Password</label>
-        <input id="confirmPassword" type="password" formControlName="confirmPassword" placeholder="Re-enter your password" />
-        <div *ngIf="itemForm.hasError('passwordMismatch') && itemForm.get('confirmPassword')?.touched" class="error-message">
+        <input id="confirmPassword" type="password" formControlName="confirmPassword"
+               placeholder="Re-enter your password" />
+        <div *ngIf="itemForm.hasError('passwordMismatch') && itemForm.get('confirmPassword')?.touched"
+             class="error-message">
           Passwords do not match.
         </div>
       </div>
 
+      <!-- Role -->
       <div class="form-group">
         <label for="role">Role</label>
         <select id="role" formControlName="role">
@@ -58,13 +69,36 @@
         </select>
       </div>
 
+      <!-- ✅ CAPTCHA (NEW – minimal, matches UI) -->
+      <div class="form-group">
+        <label>
+          Captcha:
+          <span class="accent" style="font-weight:600">
+            {{ captchaText }}
+          </span>
+        </label>
+
+        <input
+          type="number"
+          formControlName="captcha"
+          placeholder="Solve captcha"
+        />
+
+        <small
+          class="accent"
+          style="cursor:pointer; font-size:12px"
+          (click)="generateCaptcha()">
+          Refresh Captcha 🔄
+        </small>
+      </div>
+
+      <!-- Actions -->
       <div class="actions">
         <button class="button" type="submit">
           <span class="blob1"></span>
           <span class="inner">Register</span>
         </button>
 
-        <!-- ✅ Use a method instead of router directly -->
         <button class="button button--secondary" type="button" (click)="goToLogin()">
           <span class="blob1"></span>
           <span class="inner">Back to Login</span>

@@ -1,3 +1,4 @@
+
 <div class="landing">
   <div class="content">
     <!-- Pill -->
@@ -16,6 +17,8 @@
 
     <!-- Login Form -->
     <form [formGroup]="itemForm" (ngSubmit)="onSubmit()" class="login-form">
+
+      <!-- Username -->
       <div class="form-group">
         <label for="username">Username</label>
         <input
@@ -26,6 +29,7 @@
         />
       </div>
 
+      <!-- Password -->
       <div class="form-group">
         <label for="password">Password</label>
         <input
@@ -36,17 +40,45 @@
         />
       </div>
 
+      <!-- ✅ CAPTCHA (NEW – minimal & clean) -->
+      <div class="form-group">
+        <label>
+          Captcha:
+          <span class="accent" style="font-weight:600">
+            {{ captchaText }}
+          </span>
+        </label>
+
+        <input
+          type="number"
+          formControlName="captcha"
+          placeholder="Solve captcha"
+        />
+
+        <small
+          class="accent"
+          style="cursor:pointer; font-size:12px"
+          (click)="generateCaptcha()">
+          Refresh Captcha 🔄
+        </small>
+      </div>
+
+      <!-- Error -->
       <div *ngIf="showError" class="error-message">
         {{ errorMessage }}
       </div>
 
+      <!-- Actions -->
       <div class="actions">
         <button class="button" type="submit">
           <span class="blob1"></span>
           <span class="inner">Login</span>
         </button>
 
-        <button class="button button--secondary" type="button" (click)="registration()">
+        <button
+          class="button button--secondary"
+          type="button"
+          (click)="registration()">
           <span class="blob1"></span>
           <span class="inner">Register</span>
         </button>
@@ -59,3 +91,4 @@
     </footer>
   </div>
 </div>
+
