@@ -13,7 +13,6 @@
         <input type="text" formControlName="username" placeholder="Enter username" class="form-control"
           [class.is-invalid]="itemForm.get('username')?.invalid && itemForm.get('username')?.touched" />
 
-        <!-- Specific error messages -->
         <div class="invalid-feedback" *ngIf="itemForm.get('username')?.touched && itemForm.get('username')?.invalid">
           <div *ngIf="itemForm.get('username')?.errors?.['required']">
             Username is required.
@@ -33,7 +32,6 @@
         <input type="email" formControlName="email" placeholder="Enter email" class="form-control"
           [class.is-invalid]="itemForm.get('email')?.invalid && itemForm.get('email')?.touched" />
 
-        <!-- Specific error messages -->
         <div class="invalid-feedback" *ngIf="itemForm.get('email')?.touched && itemForm.get('email')?.invalid">
           <div *ngIf="itemForm.get('email')?.errors?.['required']">
             Email is required.
@@ -50,7 +48,6 @@
         <input type="password" formControlName="password" placeholder="Enter password" class="form-control"
           [class.is-invalid]="itemForm.get('password')?.invalid && itemForm.get('password')?.touched" />
 
-        <!-- Specific error messages -->
         <div class="invalid-feedback" *ngIf="itemForm.get('password')?.touched && itemForm.get('password')?.invalid">
           <div *ngIf="itemForm.get('password')?.errors?.['required']">
             Password is required.
@@ -74,7 +71,6 @@
         <input type="password" formControlName="confirmPassword" placeholder="Re-enter password" class="form-control"
           [class.is-invalid]="itemForm.hasError('passwordMismatch') && itemForm.get('confirmPassword')?.touched" />
 
-        <!-- Specific error messages -->
         <div class="invalid-feedback" *ngIf="itemForm.get('confirmPassword')?.touched && itemForm.hasError('passwordMismatch')">
           Passwords do not match.
         </div>
@@ -91,34 +87,8 @@
           <option value="STUDENT">Student</option>
         </select>
 
-        <!-- Specific error messages -->
         <div class="invalid-feedback" *ngIf="itemForm.get('role')?.touched && itemForm.get('role')?.invalid">
           Role is required.
-        </div>
-      </div>
-
-      <!-- Captcha -->
-      <div class="form-group">
-        <label>Captcha</label>
-        <div style="display:flex; align-items:center; margin-bottom:8px;">
-          <div style="display:flex; background:#eee; padding:8px 14px; user-select:none;">
-            <span *ngFor="let c of captchaChars"
-              [style.transform]="'rotate(' + c.rotate + 'deg)'"
-              [style.fontSize.px]="c.size"
-              [style.marginTop.px]="c.top"
-              style="font-weight:bold; margin-right:4px;">
-              {{ c.char }}
-            </span>
-          </div>
-          <button type="button" style="margin-left:10px; border:none; background:transparent; cursor:pointer;"
-            (click)="generateCaptcha()">↻</button>
-        </div>
-        <input type="text" formControlName="captcha" placeholder="Enter captcha" class="form-control"
-          [class.is-invalid]="itemForm.get('captcha')?.invalid && itemForm.get('captcha')?.touched" />
-
-        <!-- Specific error messages -->
-        <div class="invalid-feedback" *ngIf="itemForm.get('captcha')?.touched && itemForm.get('captcha')?.invalid">
-          Captcha is required.
         </div>
       </div>
 

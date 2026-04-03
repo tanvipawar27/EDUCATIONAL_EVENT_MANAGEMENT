@@ -14,9 +14,6 @@ export class RegistrationComponent implements OnInit {
   showMessage: boolean = false;
   responseMessage: any = '';
 
-  captchaText: string = '';
-  captchaChars: any[] = [];
-
   constructor(
     private fb: FormBuilder,
     private httpService: HttpService,
@@ -24,15 +21,12 @@ export class RegistrationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.generateCaptcha();
-
     this.itemForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(2), this.usernameValidator]],
       email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],
       password: ['', [Validators.required, this.passwordValidator]],
       confirmPassword: ['', Validators.required],
-      role: ['', Validators.required],
-      captcha: ['', Validators.required]
+      role: ['', Validators.required]
     }, { validators: this.passwordsMatchValidator });
   }
 
@@ -63,42 +57,14 @@ export class RegistrationComponent implements OnInit {
     return password === confirmPassword ? null : { passwordMismatch: true };
   }
 
-  generateCaptcha() {
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789asdfghjkmnb';
-    this.captchaText = '';
-    this.captchaChars = [];
-
-    for (let i = 0; i < 5; i++) {
-      const char = chars.charAt(Math.floor(Math.random() * chars.length));
-      this.captchaText += char;
-
-      this.captchaChars.push({
-        char,
-        rotate: Math.floor(Math.random() * 40) - 20, // -20° to +20°
-        size: Math.floor(Math.random() * 10) + 18,   // 18px–28px
-        top: Math.floor(Math.random() * 10) - 5      // vertical shift
-      });
-    }
-  }
-
   onRegister() {
     if (this.itemForm.invalid) {
       this.itemForm.markAllAsTouched();
       return;
     }
 
-    // ✅ Captcha validation
-    if (this.itemForm.value.captcha.toUpperCase() !== this.captchaText) {
-      this.showMessage = true;
-      this.responseMessage = 'Invalid captcha. Please try again.';
-      this.generateCaptcha();
-      this.itemForm.get('captcha')?.reset();
-      return;
-    }
-
     const payload = { ...this.itemForm.value };
     delete payload.confirmPassword;
-    delete payload.captcha;
 
     this.httpService.registerUser(payload).subscribe({
       next: () => {
@@ -109,7 +75,6 @@ export class RegistrationComponent implements OnInit {
       error: () => {
         this.showMessage = true;
         this.responseMessage = 'Registration failed. Please try again.';
-        this.generateCaptcha();
       }
     });
   }
