@@ -22,7 +22,7 @@ export class ViewEducatorsComponent implements OnInit {
     this.httpService.getAllUsers().subscribe({
       next: (res: any[]) => {
         // ✅ filter only STUDENT role
-        this.students = res.filter(u => u.role === 'EDUCATOR');
+        this.students = res.filter(u => u.role === 'EDUCATOR' || u.role==='educator');
         this.loading = false;
       },
       error: (err) => {

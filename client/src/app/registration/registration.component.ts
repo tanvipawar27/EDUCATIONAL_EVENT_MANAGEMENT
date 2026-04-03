@@ -9,7 +9,7 @@ import { HttpService } from '../../services/http.service';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
-
+currentYear: number = new Date().getFullYear();
   itemForm!: FormGroup;
   showMessage: boolean = false;
   responseMessage: any = '';
@@ -77,5 +77,8 @@ export class RegistrationComponent implements OnInit {
         this.responseMessage = 'Registration failed. Please try again.';
       }
     });
+  }
+  goToLogin(): void {
+    this.router.navigate(['/login']);
   }
 }

@@ -21,7 +21,7 @@ export class ViewStudentsComponent implements OnInit {
     this.httpService.getAllUsers().subscribe({
       next: (res: any[]) => {
         // ✅ filter only STUDENT role
-        this.students = res.filter(u => u.role === 'STUDENT');
+        this.students = res.filter(u => u.role === 'STUDENT' || u.role==='student');
         this.loading = false;
       },
       error: (err) => {

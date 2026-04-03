@@ -5,50 +5,114 @@
   </div>
 
     <!-- View Events -->
-  <div class="col-md-4">
-    <div class="circle-card" routerLink="/view-events" style="background-image: url('assets/view-events.jpg');">
+  <div class="col-md-4" *ngIf="roles!=='EDUCATOR'">
+    <div class="circle-card" routerLink="/view-events" style="background-image: url('https://images.unsplash.com/photo-1604147495798-57beb5d6af73?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGRhcmslMjB0aGVtZXxlbnwwfHwwfHx8MA%3D%3D');">
       <h5>View Events</h5>
     </div>
   </div>
 
  <!-- view resources -->
   <div class="col-md-4" *ngIf="roles==='INSTITUTION'">
-    <div class="circle-card" routerLink="/view-resource" style="background-image: url('assets/add-resource.jpg');">
+    <div class="circle-card" routerLink="/view-resource" style="background-image: url('https://images.unsplash.com/photo-1604147495798-57beb5d6af73?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGRhcmslMjB0aGVtZXxlbnwwfHwwfHx8MA%3D%3D');">
       <h5>View Resource</h5>
     </div>
   </div>
 
   <!-- Allocate Resources -->
   <div class="col-md-4" *ngIf="roles==='INSTITUTION'">
-    <div class="circle-card" routerLink="/view-students" style="background-image: url('assets/allocate-bg.jpg');">
+    <div class="circle-card" routerLink="/view-students" style="background-image: url('https://images.unsplash.com/photo-1604147495798-57beb5d6af73?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGRhcmslMjB0aGVtZXxlbnwwfHwwfHx8MA%3D%3D');">
       <h5>View Students</h5>
     </div>
   </div>
   <!-- Allocate Resources -->
   <div class="col-md-4" *ngIf="roles==='INSTITUTION'">
-    <div class="circle-card" routerLink="/view-educators" style="background-image: url('assets/allocate-bg.jpg');">
+    <div class="circle-card" routerLink="/view-educators" style="background-image: url('https://images.unsplash.com/photo-1604147495798-57beb5d6af73?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGRhcmslMjB0aGVtZXxlbnwwfHwwfHx8MA%3D%3D');">
       <h5>View Educators</h5>
     </div>
   </div>
 
-  <!-- Register for Event -->
-  <!-- <div class="col-md-4" *ngIf="roles==='STUDENT'">
-    <div class="circle-card" routerLink="/register-for-event" style="background-image: url('assets/register-bg.jpg');">
-      <h5>Register</h5>
-    </div>
-  </div>-->
-
   <!-- My Bookings -->
   <div class="col-md-4" *ngIf="roles==='STUDENT'">
-    <div class="circle-card" routerLink="/booking-details" style="background-image: url('assets/bookings-bg.jpg');">
+    <div class="circle-card" routerLink="/booking-details" style="background-image: url('https://images.unsplash.com/photo-1604147495798-57beb5d6af73?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGRhcmslMjB0aGVtZXxlbnwwfHwwfHx8MA%3D%3D');">
       <h5>My Bookings</h5>
     </div>
   </div> 
 
   <!-- View Allocation -->
   <div class="col-md-4" *ngIf="roles==='INSTITUTION'">
-    <div class="circle-card" routerLink="/view-allocations" style="background-image: url('assets/bookings-bg.jpg');">
+    <div class="circle-card" routerLink="/view-allocations" style="background-image: url('https://images.unsplash.com/photo-1604147495798-57beb5d6af73?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGRhcmslMjB0aGVtZXxlbnwwfHwwfHx8MA%3D%3D');">
       <h5>Allocation</h5>
     </div>
   </div>
+
+
+  <!-- Show events table only if role is EDUCATOR -->
+<!-- Show event cards only if role is EDUCATOR -->
+<div *ngIf="roles==='EDUCATOR'" class="events-cards">
+<div class="page-container">
+
+  <!-- Update Form -->
+  <div class="card" *ngIf="isUpdate">
+    <div class="card-header">
+      <h3>Update Event Material</h3>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+        <input type="hidden" formControlName="id" />
+
+        <div class="form-group">
+          <label>Event Name</label>
+          <input type="text" formControlName="name" class="form-control"
+                 [class.is-invalid]="itemForm.get('name')?.invalid && itemForm.get('name')?.touched" />
+          <div class="invalid-feedback" *ngIf="itemForm.get('name')?.invalid && itemForm.get('name')?.touched">
+            Name is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Description</label>
+          <textarea formControlName="description" class="form-control" rows="3"
+                    [class.is-invalid]="itemForm.get('description')?.invalid && itemForm.get('description')?.touched"></textarea>
+          <div class="invalid-feedback" *ngIf="itemForm.get('description')?.invalid && itemForm.get('description')?.touched">
+            Description is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Materials</label>
+          <input type="text" formControlName="materials" class="form-control" />
+        </div>
+
+        <div class="alert alert-danger" *ngIf="showError">{{ errorMessage }}</div>
+        <div class="alert alert-success" *ngIf="showMessage">{{ responseMessage }}</div>
+
+        <button type="submit" class="btn btn-primary">Update Event</button>
+        <button type="button" class="btn btn-primary ml-2" (click)="isUpdate=false">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Events Agenda -->
+  <div class="agenda-container" *ngIf="!isUpdate">
+    <h2 class="agenda-title"><b>Upcoming Events</b></h2>
+    <div class="agenda-grid">
+      <div class="agenda-card" *ngFor="let event of eventList; let i = index">
+        <div class="agenda-card-header">
+          <h4><b>{{ event.name }}</b></h4>
+          <span class="agenda-date">{{ event.date | date:'mediumDate' }}</span>
+        </div>
+        <div class="agenda-card-body">
+          <p><strong>Description:</strong> {{ event.description }}</p>
+          <p><strong>Materials:</strong> {{ event.materials }}</p>
+        </div>
+        <div class="agenda-card-footer" *ngIf="role!=='STUDENT'">
+          <button class="btn btn-sm btn-warning btnedit" (click)="edit(event)">Edit</button>
+          <button class="btn btn-sm btn-danger ml-2 btndelete" (click)="deleteEvent(event.id)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
 </div>

@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   itemForm!: FormGroup;
   showError = false;
   errorMessage = '';
+  currentYear: number = new Date().getFullYear();
 
   constructor(
     private fb: FormBuilder,

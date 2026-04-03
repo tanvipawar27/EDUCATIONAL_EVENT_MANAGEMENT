@@ -9,7 +9,7 @@
     <ul class="nav flex-column">
       <li><a routerLink="/dashboard" class="nav-link"><i class="fas fa-home"></i> Dashboard</a></li>
       <li><a routerLink="/create-event" class="nav-link" *ngIf="roleName==='INSTITUTION'"><i class="fas fa-calendar-plus"></i> Add Event</a></li>
-      <li><a routerLink="/add-resource" class="nav-link" *ngIf="roleName==='INSTITUTION' || roleName==='EDUCATOR'"><i class="fas fa-book"></i> Add Resource</a></li>
+      <li><a routerLink="/add-resource" class="nav-link" *ngIf="roleName==='INSTITUTION'"><i class="fas fa-book"></i> Add Resource</a></li>
       <li><a routerLink="/resource-allocate" class="nav-link" *ngIf="roleName==='INSTITUTION'"><i class="fas fa-tasks"></i> Allocate Resource</a></li>
       <!-- <li><a routerLink="/view-events" class="nav-link" *ngIf="roleName==='INSTITUTION' || roleName==='EDUCATOR'"><i class="fas fa-calendar-alt"></i> View Event</a></li> -->
       <li><a routerLink="/register-for-event" class="nav-link" *ngIf="roleName==='STUDENT'"><i class="fas fa-user-check"></i> Register Event</a></li>
