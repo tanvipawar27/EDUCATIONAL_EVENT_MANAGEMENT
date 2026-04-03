@@ -35,9 +35,9 @@ export class HttpService {
       { headers: this.getHeaders() }
     );
   }
-
+   
   // ✅ NEWLY ADDED: Get all students
-  getAllStudents(): Observable<any> {
+  getAllUsers(): Observable<any> {
     return this.http.get(
       `${this.serverName}/api/student/all`,
       { headers: this.getHeaders() }

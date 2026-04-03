@@ -54,7 +54,7 @@
           <p><strong>Description:</strong> {{ event.description }}</p>
           <p><strong>Materials:</strong> {{ event.materials }}</p>
         </div>
-        <div class="agenda-card-footer">
+        <div class="agenda-card-footer" *ngIf="role!=='STUDENT'">
           <button class="btn btn-sm btn-warning" (click)="edit(event)">Edit</button>
           <button class="btn btn-sm btn-danger ml-2" (click)="deleteEvent(event.id)">Delete</button>
         </div>

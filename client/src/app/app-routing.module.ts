@@ -17,6 +17,8 @@ import { AuthService } from '../services/auth.service';
 import { ViewResourceComponent } from './view-resources/view-resources.component';
 import { LandingComponent } from './home/home.component';
 import { ViewAllocationComponent } from './view-allocation/view-allocation.component';
+import { ViewStudentsComponent } from './view-students/view-students.component';
+import { ViewEducatorsComponent } from './view-educators/view-educators.component';
 
 
 const routes: Routes = [
@@ -30,6 +32,8 @@ const routes: Routes = [
   { path: 'resource-allocate', component: ResourceAllocateComponent },
   {path:'view-allocations' , component:ViewAllocationComponent},  
   { path: 'view-events', component: ViewEventsComponent },  
+  { path: 'view-students', component: ViewStudentsComponent },
+  { path: 'view-educators', component: ViewEducatorsComponent },
   { path: 'booking-details', component: BookingDetailsComponent }, 
   { path: 'register-for-event', component: RegisterForEventComponent },   
   { path: '', redirectTo: '/app-landing', pathMatch: 'full' },

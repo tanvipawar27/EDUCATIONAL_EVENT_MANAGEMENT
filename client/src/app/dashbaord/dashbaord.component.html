@@ -4,56 +4,51 @@
     <p>Manage educational events, resources, and registrations from one place.</p>
   </div>
 
-  <div class="row">
-    <!-- Create Event -->
-    <div class="col-md-4" *ngIf="roles==='INSTITUTION'">
-      <div class="circle-card" routerLink="/create-event" style="background-image: url('assets/create-event.jpg');">
-        <h5>Create Event</h5>
-      </div>
-    </div>
-
-    <!-- View Resource -->
-    <div class="col-md-4" *ngIf="roles==='EDUCATOR' || roles==='INSTITUTION'">
-      <div class="circle-card" routerLink="/view-resource" style="background-image: url('assets/add-resource.jpg');">
-        <h5>View Resource</h5>
-      </div>
-    </div>
-
-    <!-- Allocate Resources -->
-    <div class="col-md-4" *ngIf="roles==='INSTITUTION'">
-      <div class="circle-card" routerLink="/resource-allocate" style="background-image: url('assets/allocate-bg.jpg');">
-        <h5>Allocate Resources</h5>
-      </div>
+    <!-- View Events -->
+  <div class="col-md-4">
+    <div class="circle-card" routerLink="/view-events" style="background-image: url('assets/view-events.jpg');">
+      <h5>View Events</h5>
     </div>
   </div>
 
-  <div class="row">
-    <!-- View Events -->
-    <div class="col-md-4" *ngIf="roles==='EDUCATOR' || roles==='INSTITUTION'">
-      <div class="circle-card" routerLink="/view-events" style="background-image: url('assets/view-events.jpg');">
-        <h5>View Events</h5>
-      </div>
+ <!-- view resources -->
+  <div class="col-md-4" *ngIf="roles==='INSTITUTION'">
+    <div class="circle-card" routerLink="/view-resource" style="background-image: url('assets/add-resource.jpg');">
+      <h5>View Resource</h5>
     </div>
+  </div>
 
-    <!-- Register for Event -->
-    <div class="col-md-4" *ngIf="roles==='STUDENT'">
-      <div class="circle-card" routerLink="/register-for-event" style="background-image: url('assets/register-bg.jpg');">
-        <h5>Register</h5>
-      </div>
+  <!-- Allocate Resources -->
+  <div class="col-md-4" *ngIf="roles==='INSTITUTION'">
+    <div class="circle-card" routerLink="/view-students" style="background-image: url('assets/allocate-bg.jpg');">
+      <h5>View Students</h5>
     </div>
-
-    <!-- My Bookings -->
-    <div class="col-md-4" *ngIf="roles==='STUDENT'">
-      <div class="circle-card" routerLink="/booking-details" style="background-image: url('assets/bookings-bg.jpg');">
-        <h5>My Bookings</h5>
-      </div>
+  </div>
+  <!-- Allocate Resources -->
+  <div class="col-md-4" *ngIf="roles==='INSTITUTION'">
+    <div class="circle-card" routerLink="/view-educators" style="background-image: url('assets/allocate-bg.jpg');">
+      <h5>View Educators</h5>
     </div>
+  </div>
 
-    <!-- view allocation -->
-      <div class="col-md-4" *ngIf="roles==='INSTITUTION'">
-      <div class="circle-card" routerLink="/view-allocations" style="background-image: url('assets/bookings-bg.jpg');">
-        <h5>Allocation</h5>
-      </div>
+  <!-- Register for Event -->
+  <!-- <div class="col-md-4" *ngIf="roles==='STUDENT'">
+    <div class="circle-card" routerLink="/register-for-event" style="background-image: url('assets/register-bg.jpg');">
+      <h5>Register</h5>
+    </div>
+  </div>-->
+
+  <!-- My Bookings -->
+  <div class="col-md-4" *ngIf="roles==='STUDENT'">
+    <div class="circle-card" routerLink="/booking-details" style="background-image: url('assets/bookings-bg.jpg');">
+      <h5>My Bookings</h5>
+    </div>
+  </div> 
+
+  <!-- View Allocation -->
+  <div class="col-md-4" *ngIf="roles==='INSTITUTION'">
+    <div class="circle-card" routerLink="/view-allocations" style="background-image: url('assets/bookings-bg.jpg');">
+      <h5>Allocation</h5>
     </div>
   </div>
 </div>

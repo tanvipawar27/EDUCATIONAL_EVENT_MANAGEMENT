@@ -18,6 +18,8 @@ import { RegisterForEventComponent } from './register-for-event/register-for-eve
 import { ViewResourceComponent } from './view-resources/view-resources.component';
 import { LandingComponent } from './home/home.component';
 import { ViewAllocationComponent } from './view-allocation/view-allocation.component';
+import { ViewStudentsComponent } from './view-students/view-students.component';
+import { ViewEducatorsComponent } from './view-educators/view-educators.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { ViewAllocationComponent } from './view-allocation/view-allocation.compo
       BookingDetailsComponent,
       ViewResourceComponent,
       RegisterForEventComponent,
-      ViewAllocationComponent
+      ViewAllocationComponent,
+      ViewStudentsComponent,
+      ViewEducatorsComponent
   ],
   imports: [
     BrowserModule,

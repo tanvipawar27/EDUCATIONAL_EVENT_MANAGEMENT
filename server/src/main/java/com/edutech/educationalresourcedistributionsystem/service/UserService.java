@@ -15,6 +15,8 @@ import java.util.Collections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 @Service
 public class UserService implements UserDetailsService {
 
@@ -46,6 +48,13 @@ public class UserService implements UserDetailsService {
         }
         return user;
     }
+
+     public List<User> getAllUsers() {
+        logger.info("Fetching all users from repository");
+        List<User> users = userRepository.findAll();
+        logger.debug("Total users fetched: {}", users.size());
+        return users;
+     }
 
     // Required by Spring Security
     @Override

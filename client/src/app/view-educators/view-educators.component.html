@@ -1,0 +1,35 @@
+<div class="page-container">
+  <div class="card-header text-center mb-4">
+    <h3>All Educators</h3>
+  </div>
+
+  <!-- Loading state -->
+  <div *ngIf="loading" class="text-center">
+    <p>Loading students...</p>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="errorMessage" class="alert alert-danger text-center">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Students table -->
+  <table class="table table-striped table-bordered" *ngIf="!loading && !errorMessage">
+    <thead class="table-dark">
+      <tr>
+        <th>S.No.</th>
+        <th>Name</th>
+        <!-- <th>Role</th> -->
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students; let i=index">
+        <td>{{i+1}}</td>
+        <td>{{ student.username }}</td>
+        <!-- <td>{{ student.role }}</td> -->
+        <td>{{ student.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

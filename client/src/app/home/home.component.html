@@ -1,47 +1,71 @@
-<div class="landing-page">
  
-  <!-- Hero -->
-  <div class="landing-card">
-    <h1 class="landing-title">
-      <b>EduSphere</b>
-    </h1>
-    <h2>
-      Educational Event Management Platform
-    </h2>
+<div class="landing">
  
-    <p class="landing-subtitle">
-      <b>Plan, manage, and participate in educational events with secure
-      role-based access for institutions, educators, and students.</b>
-    </p>
+  <div class="content">
+<div class="pill">
+<span class="pill__dot"></span>
+<span class="pill__text">Fast • Secure • Role-based</span>
+</div>
  
-    <div class="action-buttons">
-      <button class="btn-primary" (click)="goToLogin()">
-        Login
-      </button>
+    <h1 class="title">
+
+      Welcome to <span class="accent">EduEvent</span>
+</h1>
  
-      <button class="btn-outline" (click)="goToRegister()">
-        Register
-      </button>
-    </div>
-  </div>
+    <p class="subtitle">
+
+      EduEvent is an educational event management platform where educators can create and manage events,
+
+      and students can explore, register, and access event materials easily.
+</p>
  
-  <!-- Features -->
-  <div class="feature-section">
-    <div class="feature-card">
-      <h3>Event Scheduling</h3>
-      <p>Create and manage workshops, seminars, and conferences.</p>
-    </div>
+    <!-- 3 overview boxes -->
+<div class="boxes">
+<div class="box">
+<div class="box__icon">🎯</div>
+<h3 class="box__title">Event Management</h3>
+<p class="box__text">
+
+          Educators can create events, update details, and manage schedules smoothly.
+</p>
+</div>
  
-    <div class="feature-card">
-      <h3>Resource Allocation</h3>
-      <p>Assign classrooms, materials, and teaching aids effortlessly.</p>
-    </div>
+      <div class="box">
+<div class="box__icon">📝</div>
+<h3 class="box__title">Easy Registration</h3>
+<p class="box__text">
+
+          Students can browse events, register quickly, and view booking details anytime.
+</p>
+</div>
  
-    <div class="feature-card">
-      <h3>Secure Access</h3>
-      <p>JWT-based authentication with role-based authorization.</p>
-    </div>
-  </div>
+      <div class="box">
+<div class="box__icon">📚</div>
+<h3 class="box__title">Materials & Updates</h3>
+<p class="box__text">
+
+          Share materials and announcements so students stay updated and prepared.
+</p>
+</div>
+</div>
+ 
+    <!-- Buttons -->
+<div class="actions">
+<button class="button" (click)="goToLogin()">
+<span class="blob1"></span>
+<span class="inner">Login</span>
+</button>
+ 
+      <button class="button button--secondary" (click)="goToRegister()">
+<span class="blob1"></span>
+<span class="inner">Register</span>
+</button>
+</div>
+ 
+    <footer class="footer">
+<span>© {{ currentYear }} EduEvent</span>
+</footer>
+</div>
  
 </div>
  

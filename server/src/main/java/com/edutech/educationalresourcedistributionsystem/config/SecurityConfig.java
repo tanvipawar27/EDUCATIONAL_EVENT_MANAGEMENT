@@ -69,15 +69,15 @@ public class SecurityConfig {
                 // Public endpoints
                 .antMatchers("/api/user/register", "/api/user/login").permitAll()
                 // Institution endpoints
-                .antMatchers("/api/institution/**").hasAnyAuthority("INSTITUTION","STUDENT")
-                .antMatchers("/api/institution/events/**").hasAuthority("STUDENT")
+                .antMatchers("/api/institution/**").hasAnyAuthority("INSTITUTION","STUDENT","EDUCATOR")
+                .antMatchers("/api/institution/events/**").hasAnyAuthority("INSTITUTION","STUDENT","EDUCATOR")
                 // Educator endpoints
-                .antMatchers("/api/educator/**").hasAnyAuthority("EDUCATOR","INSTITUTION")
+                .antMatchers("/api/educator/**").hasAnyAuthority("EDUCATOR","INSTITUTION","STUDENT")
                 
 
                 
                 // Student endpoints
-                .antMatchers("/api/student/**").hasAnyAuthority("STUDENT","INSTITUTION")
+                .antMatchers("/api/student/**").hasAnyAuthority("INSTITUTION","STUDENT","EDUCATOR")
                 // Any other request requires authentication
                 .anyRequest().authenticated()
             )

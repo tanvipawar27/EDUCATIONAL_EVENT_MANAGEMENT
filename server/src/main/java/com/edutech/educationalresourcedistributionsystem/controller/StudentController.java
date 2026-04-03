@@ -6,7 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.edutech.educationalresourcedistributionsystem.entity.EventRegistration;
+import com.edutech.educationalresourcedistributionsystem.entity.User;
 import com.edutech.educationalresourcedistributionsystem.service.RegistrationService;
+import com.edutech.educationalresourcedistributionsystem.service.UserService;
 
 import java.util.List;
 import org.slf4j.Logger;
@@ -21,6 +23,9 @@ public class StudentController {
 
     @Autowired
     private RegistrationService registrationService;
+
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/register/{eventId}")
     public ResponseEntity<EventRegistration> registerForEvent(
@@ -47,6 +52,19 @@ public class StudentController {
             return new ResponseEntity<>(registrations, HttpStatus.OK);
         } catch (Exception e) {
             logger.error("Error fetching registration status for student {}: {}", studentId, e.getMessage(), e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<User>> getAllUsers() {
+        logger.info("Fetching all users via /api/student/all");
+        try {
+            List<User> users = userService.getAllUsers();
+            System.out.println(users);
+            return new ResponseEntity<>(users, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.error("Error fetching all users: {}", e.getMessage(), e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
