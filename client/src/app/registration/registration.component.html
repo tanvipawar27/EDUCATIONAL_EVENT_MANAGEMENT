@@ -1,53 +1,139 @@
 <div class="auth-container">
-<div class="auth-card">
-<div class="auth-header">
-<h2>Create Account</h2>
-<p>Register to join EduTech Platform</p>
-</div>
-<form [formGroup]="itemForm" (ngSubmit)="onRegister()">
-<div class="form-group">
-<label>Username</label>
-<input type="text" formControlName="username" placeholder="Enter username" class="form-control"
+  <div class="auth-card">
+    <div class="auth-header">
+      <h2>Create Account</h2>
+      <p>Register to join EduTech Platform</p>
+    </div>
+
+    <form [formGroup]="itemForm" (ngSubmit)="onRegister()">
+
+      <!-- Username -->
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" formControlName="username" placeholder="Enter username" class="form-control"
           [class.is-invalid]="itemForm.get('username')?.invalid && itemForm.get('username')?.touched" />
-<div class="invalid-feedback" *ngIf="itemForm.get('username')?.invalid && itemForm.get('username')?.touched">
-          Username is required.
-</div>
-</div>
-<div class="form-group">
-<label>Email</label>
-<input type="email" formControlName="email" placeholder="Enter email" class="form-control"
+
+        <!-- Specific error messages -->
+        <div class="invalid-feedback" *ngIf="itemForm.get('username')?.touched && itemForm.get('username')?.invalid">
+          <div *ngIf="itemForm.get('username')?.errors?.['required']">
+            Username is required.
+          </div>
+          <div *ngIf="itemForm.get('username')?.errors?.['minlength']">
+            Username must be at least 2 characters long.
+          </div>
+          <div *ngIf="itemForm.get('username')?.errors?.['invalidUsername']">
+            Username must contain letters (only numbers are not allowed).
+          </div>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" formControlName="email" placeholder="Enter email" class="form-control"
           [class.is-invalid]="itemForm.get('email')?.invalid && itemForm.get('email')?.touched" />
-<div class="invalid-feedback" *ngIf="itemForm.get('email')?.errors?.['required'] && itemForm.get('email')?.touched">
-          Email is required.
-</div>
-<div class="invalid-feedback" *ngIf="itemForm.get('email')?.errors?.['email'] && itemForm.get('email')?.touched">
-          Please enter a valid email.
-</div>
-</div>
-<div class="form-group">
-<label>Password</label>
-<input type="password" formControlName="password" placeholder="Enter password" class="form-control"
+
+        <!-- Specific error messages -->
+        <div class="invalid-feedback" *ngIf="itemForm.get('email')?.touched && itemForm.get('email')?.invalid">
+          <div *ngIf="itemForm.get('email')?.errors?.['required']">
+            Email is required.
+          </div>
+          <div *ngIf="itemForm.get('email')?.errors?.['pattern']">
+            Please enter a valid email (e.g., user@example.com).
+          </div>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" formControlName="password" placeholder="Enter password" class="form-control"
           [class.is-invalid]="itemForm.get('password')?.invalid && itemForm.get('password')?.touched" />
-<div class="invalid-feedback" *ngIf="itemForm.get('password')?.invalid && itemForm.get('password')?.touched">
-          Password is required.
-</div>
-</div>
-<div class="form-group">
-<label>Role</label>
-<select formControlName="role" class="form-control"
+
+        <!-- Specific error messages -->
+        <div class="invalid-feedback" *ngIf="itemForm.get('password')?.touched && itemForm.get('password')?.invalid">
+          <div *ngIf="itemForm.get('password')?.errors?.['required']">
+            Password is required.
+          </div>
+          <div *ngIf="itemForm.get('password')?.errors?.['invalidPassword']">
+            Password must contain:
+            <ul>
+              <li>At least 8 characters</li>
+              <li>At least one uppercase letter</li>
+              <li>At least one lowercase letter</li>
+              <li>At least one number</li>
+              <li>At least one special character (@$!%*?&)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" formControlName="confirmPassword" placeholder="Re-enter password" class="form-control"
+          [class.is-invalid]="itemForm.hasError('passwordMismatch') && itemForm.get('confirmPassword')?.touched" />
+
+        <!-- Specific error messages -->
+        <div class="invalid-feedback" *ngIf="itemForm.get('confirmPassword')?.touched && itemForm.hasError('passwordMismatch')">
+          Passwords do not match.
+        </div>
+      </div>
+
+      <!-- Role -->
+      <div class="form-group">
+        <label>Role</label>
+        <select formControlName="role" class="form-control"
           [class.is-invalid]="itemForm.get('role')?.invalid && itemForm.get('role')?.touched">
-<option value="">Select Role</option>
-<option value="INSTITUTION">Institution</option>
-<option value="EDUCATOR">Educator</option>
-<option value="STUDENT">Student</option>
-</select>
-<div class="invalid-feedback" *ngIf="itemForm.get('role')?.invalid && itemForm.get('role')?.touched">
+          <option value="">Select Role</option>
+          <option value="INSTITUTION">Institution</option>
+          <option value="EDUCATOR">Educator</option>
+          <option value="STUDENT">Student</option>
+        </select>
+
+        <!-- Specific error messages -->
+        <div class="invalid-feedback" *ngIf="itemForm.get('role')?.touched && itemForm.get('role')?.invalid">
           Role is required.
-</div>
-</div>
-<div class="alert alert-info" *ngIf="showMessage">{{ responseMessage }}</div>
-<button type="submit" class="btn btn-primary btn-block">Register</button>
-<p class="login-link">Already have an account? <a routerLink="/login" style="cursor:pointer;">Login</a></p>
-</form>
-</div>
+        </div>
+      </div>
+
+      <!-- Captcha -->
+      <div class="form-group">
+        <label>Captcha</label>
+        <div style="display:flex; align-items:center; margin-bottom:8px;">
+          <div style="display:flex; background:#eee; padding:8px 14px; user-select:none;">
+            <span *ngFor="let c of captchaChars"
+              [style.transform]="'rotate(' + c.rotate + 'deg)'"
+              [style.fontSize.px]="c.size"
+              [style.marginTop.px]="c.top"
+              style="font-weight:bold; margin-right:4px;">
+              {{ c.char }}
+            </span>
+          </div>
+          <button type="button" style="margin-left:10px; border:none; background:transparent; cursor:pointer;"
+            (click)="generateCaptcha()">↻</button>
+        </div>
+        <input type="text" formControlName="captcha" placeholder="Enter captcha" class="form-control"
+          [class.is-invalid]="itemForm.get('captcha')?.invalid && itemForm.get('captcha')?.touched" />
+
+        <!-- Specific error messages -->
+        <div class="invalid-feedback" *ngIf="itemForm.get('captcha')?.touched && itemForm.get('captcha')?.invalid">
+          Captcha is required.
+        </div>
+      </div>
+
+      <!-- Message -->
+      <div class="alert alert-info" *ngIf="showMessage">
+        {{ responseMessage }}
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="btn btn-primary btn-block">Register</button>
+
+      <p class="login-link">
+        Already have an account?
+        <a routerLink="/login" style="cursor:pointer;">Login</a>
+      </p>
+    </form>
+  </div>
 </div>
