@@ -1,175 +1,299 @@
-:host {
-  display: block;
-  min-height: 100vh;
-  background-image: url('/assets/resource-bg.jpg'); /* same background */
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  font-family: 'Inter', sans-serif;
-}
- 
- 
-/* Page container centers the update card */
+/* =====================================================
+   PAGE CONTAINER
+   ===================================================== */
 .page-container {
-  display: flex;
-  flex-direction: column;
-  // justify-content: center;
-  min-height: inherit;
-  padding: 2rem;
-}
- 
-/* Glass-style card for update form */
-.card {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(10px);
-  border-radius: 25px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-  max-width: 500px;
-  width: 100%;
-  padding: 2rem;
-  animation: fadeInUp 0.8s ease forwards;
-}
- 
-.card-header {
-  background-color: #fff;
-  border-radius: 20px;
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  font-weight: bold;
-}
- 
-.card-header h3 {
-  margin: 0;
-  font-weight: 700;
-  letter-spacing: 1px;
-  color: #2a9d8f;
-}
- 
-.card-body {
-  padding: 1rem;
-}
- 
-/* Agenda section */
-.agenda-container {
-  margin: 2rem;
-}
- 
-.agenda-title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #264653;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
- 
-.agenda-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.5rem;
-}
- 
-.agenda-card {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(6px);
-  border-radius: 20px;
-  padding: 1.5rem;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-  transition: transform 0.2s ease;
-  animation: fadeInUp 0.8s ease forwards;
-}
- 
-.agenda-card:hover {
-  transform: translateY(-5px);
-}
- 
-.agenda-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  color: #2a9d8f;
-}
- 
-.agenda-date {
-  font-size: 0.9rem;
-  color: #555;
-}
- 
-.agenda-card-body {
-  margin-top: 1rem;
-  color: #333;
-}
- 
-.agenda-card-footer {
-  margin-top: 1rem;
-  text-align: right;
-}
- 
-.agenda-card-footer .btn-warning {
-  border-radius: 20px;
-  font-weight: 600;
-  background-color: #f4a261;
-  border: none;
+  max-width: 1200px;
+  margin: auto;
+  padding: 24px;
   color: #fff;
-  transition: background 0.3s, transform 0.2s;
-  margin-right: 20px;
 }
-.agenda-card-footer .btn-danger {
-  border-radius: 20px;
-  font-weight: 600;
-  background-color: #ee2031;
-  border: none;
-  color: #fff;
-  transition: background 0.3s, transform 0.2s;
-  margin-right: 20px;
+
+/* =====================================================
+   ✅ UPDATE FORM CARD (CORRECTLY TARGETED)
+   This matches: <div class="card" *ngIf="isUpdate">
+   ===================================================== */
+.page-container > .card:not(.agenda-card) {
+  max-width: 620px;
+  margin: 0 auto 40px;
+
+  background: rgba(255,255,255,0.08);
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(16px);
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.7),
+    inset 0 0 0 1px rgba(255,255,255,0.08);
+
+  animation: updateEnter 0.5s ease-out both;
 }
-.agenda-card-footer .btn-warning:hover {
-  background-color: #e76f51;
-  transform: scale(1.05);
-}
- 
-/* Alerts */
-.alert {
-  border-radius: 12px;
-  margin-top: 1rem;
-  padding: 12px 16px;
-  font-weight: 600;
-}
- 
-.alert-danger {
-  background: rgba(230, 57, 70, 0.1);
-  color: #e63946;
-}
- 
-.alert-success {
-  background: rgba(42, 157, 143, 0.12);
-  color: #2a9d8f;
-}
- 
-/* Animation */
-@keyframes fadeInUp {
+
+@keyframes updateEnter {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(20px) scale(0.97);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
 }
+
+/* Header */
+.page-container > .card:not(.agenda-card) .card-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.page-container > .card:not(.agenda-card) .card-header h3 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 0 16px rgba(63,233,255,0.45);
+}
+
+/* Body */
+.page-container > .card:not(.agenda-card) .card-body {
+  padding: 24px;
+}
+
+/* =====================================================
+   UPDATE FORM FIELDS
+   ===================================================== */
+.page-container > .card:not(.agenda-card) .form-group {
+  margin-bottom: 18px;
+}
+
+.page-container > .card:not(.agenda-card) label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.92);
+}
+
+.page-container > .card:not(.agenda-card) .form-control {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.28);
+  color: #fff;
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.page-container > .card:not(.agenda-card) .form-control:focus {
+  outline: none;
+  border-color: #3fe9ff;
+  box-shadow: 0 0 0 3px rgba(63,233,255,0.28);
+}
+
+.page-container > .card:not(.agenda-card) .form-control.is-invalid {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 2px rgba(255,107,107,0.35);
+}
+
+/* =====================================================
+   UPDATE FORM BUTTONS
+   ===================================================== */
+.page-container > .card:not(.agenda-card) .btn-success {
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px;
+
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 16px;
+  border: none;
+
+  background: linear-gradient(90deg, #3fe9ff, #5e3aee);
+  color: #fff;
+
+  box-shadow: 0 0 22px rgba(63,233,255,0.45);
+}
+
+.page-container > .card:not(.agenda-card) .btn-secondary {
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px;
+
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+  border-radius: 16px;
+}
+
+/* =====================================================
+   AGENDA SECTION
+   ===================================================== */
+.agenda-container {
+  margin-top: 40px;
+}
+
+.agenda-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 26px;
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 0 14px rgba(63,233,255,0.35);
+}
+
+/* =====================================================
+   AGENDA CONTROLS
+   ===================================================== */
+.agenda-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.agenda-controls label {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* =====================================================
+   AGENDA GRID
+   ===================================================== */
+.agenda-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 26px;
+  margin-top: 30px;
+}
+
+/* =====================================================
+   EVENT CARD
+   ===================================================== */
+.agenda-card {
+  background: rgba(255,255,255,0.06);
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.14);
+  transition: transform 0.25s ease, box-shadow 0.3s ease;
+}
+
+.agenda-card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 30px 70px rgba(0,0,0,0.75),
+    0 0 28px rgba(63,233,255,0.35);
+}
+
+/* =====================================================
+   CARD HEADER
+   ===================================================== */
+.agenda-card-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.agenda-card-header h5 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.agenda-date {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
+}
+
+/* =====================================================
+   BADGES
+   ===================================================== */
 .badge {
   padding: 4px 10px;
-  border-radius: 8px;
-  font-size: 0.8rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
   font-weight: 600;
-  margin-left: 10px;
 }
+
 .badge-upcoming {
   background: rgba(63,233,255,0.2);
-  color: #04464e;
+  color: #3fe9ff;
 }
+
 .badge-completed {
-  background: rgba(197,107,240,0.2);
-  color: #c56bf0;
+  background: rgba(255,107,107,0.2);
+  color: #ff6b6b;
+}
+
+.badge-registered {
+  background: rgba(94,58,238,0.25);
+  color: #c5b7ff;
+}
+
+/* =====================================================
+   CARD BODY
+   ===================================================== */
+.agenda-card-body p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 6px;
+}
+
+/* =====================================================
+   CARD FOOTER ACTIONS
+   ===================================================== */
+.agenda-card-footer {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* =====================================================
+   EDIT & DELETE BUTTONS
+   ===================================================== */
+.btn-warning {
+  background: rgba(255,193,7,0.15);
+  color: #ffc107;
+  border: 1px solid rgba(255,193,7,0.35);
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.btn-danger {
+  background: rgba(255,77,109,0.15);
+  color: #ff4d6d;
+  border: 1px solid rgba(255,77,109,0.4);
+  border-radius: 10px;
+}
+
+/* =====================================================
+   FINAL PRIMARY BUTTON STANDARD
+   ===================================================== */
+.btn-primary {
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px;
+
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 16px;
+  border: none;
+
+  background: linear-gradient(90deg, #3fe9ff, #5e3aee);
+  color: #fff;
+
+  box-shadow: 0 0 22px rgba(63,233,255,0.45);
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 768px) {
+  .agenda-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
