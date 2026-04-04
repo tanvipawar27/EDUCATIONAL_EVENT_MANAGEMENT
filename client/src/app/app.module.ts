@@ -1,13 +1,15 @@
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { HttpService } from '../services/http.service';
 import { DashbaordComponent } from './dashbaord/dashbaord.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { AddResourceComponent } from './add-resource/add-resource.component';
@@ -20,33 +22,46 @@ import { LandingComponent } from './home/home.component';
 import { ViewAllocationComponent } from './view-allocation/view-allocation.component';
 import { ViewStudentsComponent } from './view-students/view-students.component';
 import { ViewEducatorsComponent } from './view-educators/view-educators.component';
+import { ChatbotComponent } from './Chat-Component/chatbot.component';
+
+/* ✅ ADD THIS */
+import { FeedbackComponent } from './feedback/feedback.component';
+
+import { HttpService } from '../services/http.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
     LoginComponent,
-      RegistrationComponent,
-      DashbaordComponent,    
-      CreateEventComponent,
-      AddResourceComponent,
-      ResourceAllocateComponent,
-      ViewEventsComponent,
-      BookingDetailsComponent,
-      ViewResourceComponent,
-      RegisterForEventComponent,
-      ViewAllocationComponent,
-      ViewStudentsComponent,
-      ViewEducatorsComponent
+    ChatbotComponent,
+    RegistrationComponent,
+    DashbaordComponent,
+    CreateEventComponent,
+    AddResourceComponent,
+    ResourceAllocateComponent,
+    ViewEventsComponent,
+    BookingDetailsComponent,
+    ViewResourceComponent,
+    RegisterForEventComponent,
+    ViewAllocationComponent,
+    ViewStudentsComponent,
+    ViewEducatorsComponent,
+
+    /* ✅ ADD THIS */
+    FeedbackComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
+    FormsModule,          // ✅ required for ngModel
     ReactiveFormsModule,
-    HttpClientModule 
+    HttpClientModule      // ✅ correct place
   ],
-  providers: [HttpService,HttpClientModule ],
+  providers: [
+    HttpService           // ✅ ONLY services here
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

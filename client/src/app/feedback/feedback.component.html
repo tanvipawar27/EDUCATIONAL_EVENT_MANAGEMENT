@@ -1,0 +1,63 @@
+
+<div class="feedback-container">
+
+  <h2>Student Feedback</h2>
+
+  <!-- Success Message -->
+  <div class="alert alert-success" *ngIf="successMessage">
+    {{ successMessage }}
+  </div>
+
+  <!-- Error Message -->
+  <div class="alert alert-danger" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Student Name -->
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Your Name"
+    [(ngModel)]="studentName" />
+
+  <br>
+
+  <!-- Student Email -->
+  <input
+    type="email"
+    class="form-control"
+    placeholder="Your Email"
+    [(ngModel)]="studentEmail" />
+
+  <br>
+
+  <!-- Feedback Message -->
+  <textarea
+    class="form-control"
+    rows="4"
+    placeholder="Write your feedback"
+    [(ngModel)]="message">
+  </textarea>
+
+  <br>
+
+  <!-- Rating -->
+  <label>Rating</label>
+  <select class="form-control" [(ngModel)]="rating">
+    <option *ngFor="let r of [1,2,3,4,5]" [value]="r">
+      {{ r }} ⭐
+    </option>
+  </select>
+
+  <br>
+
+  <!-- ✅ IMPORTANT: type="button" -->
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="submitFeedback()">
+    Submit Feedback
+  </button>
+
+</div>
+``

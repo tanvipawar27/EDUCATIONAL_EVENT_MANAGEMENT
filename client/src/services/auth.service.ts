@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -13,7 +14,7 @@ export class AuthService {
   private username: string = '';
 
   constructor(private router: Router) {
-    // Restore state from localStorage when service initializes
+
     const storedToken = localStorage.getItem('token');
     const storedRole = localStorage.getItem('role');
     const storedUser = localStorage.getItem('username');
@@ -23,12 +24,15 @@ export class AuthService {
       this.token = storedToken;
       this.isLoggedIn = true;
     }
+
     if (storedRole) {
       this.roleName = storedRole;
     }
+
     if (storedUser) {
       this.username = storedUser;
     }
+
     if (storedId) {
       this.id = storedId;
     }
@@ -53,7 +57,7 @@ export class AuthService {
     localStorage.setItem('username', name);
   }
 
-  // ✅ Save student/user ID
+  // ✅ Save user ID
   setId(id: string): void {
     this.id = id;
     localStorage.setItem('studentId', id);
@@ -80,7 +84,20 @@ export class AuthService {
     return this.token || localStorage.getItem('token');
   }
 
-  // ✅ Logout clears everything
+  // ✅ Role helpers (BEST PRACTICE)
+  isStudent(): boolean {
+    return this.getRole() === 'STUDENT';
+  }
+
+  isEducator(): boolean {
+    return this.getRole() === 'EDUCATOR';
+  }
+
+  isInstitution(): boolean {
+    return this.getRole() === 'INSTITUTION';
+  }
+
+  // ✅ Logout
   logout(): void {
     this.token = '';
     this.isLoggedIn = false;
@@ -96,3 +113,4 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 }
+

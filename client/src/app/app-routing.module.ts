@@ -19,23 +19,30 @@ import { LandingComponent } from './home/home.component';
 import { ViewAllocationComponent } from './view-allocation/view-allocation.component';
 import { ViewStudentsComponent } from './view-students/view-students.component';
 import { ViewEducatorsComponent } from './view-educators/view-educators.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 
 const routes: Routes = [
-  {path:'app-landing' ,component:LandingComponent},
+  { path: 'app-landing', component: LandingComponent },
+
+  {
+    path: 'student/feedback',
+    component: FeedbackComponent
+  },
+
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'dashboard', component: DashbaordComponent },
-  { path: 'create-event', component: CreateEventComponent },  
-  { path: 'add-resource', component: AddResourceComponent }, 
+  { path: 'create-event', component: CreateEventComponent },
+  { path: 'add-resource', component: AddResourceComponent },
   { path: 'view-resource', component: ViewResourceComponent },
   { path: 'resource-allocate', component: ResourceAllocateComponent },
-  {path:'view-allocations' , component:ViewAllocationComponent},  
-  { path: 'view-events', component: ViewEventsComponent },  
+  { path: 'view-allocations', component: ViewAllocationComponent },
+  { path: 'view-events', component: ViewEventsComponent },
   { path: 'view-students', component: ViewStudentsComponent },
   { path: 'view-educators', component: ViewEducatorsComponent },
-  { path: 'booking-details', component: BookingDetailsComponent }, 
-  { path: 'register-for-event', component: RegisterForEventComponent },   
+  { path: 'booking-details', component: BookingDetailsComponent },
+  { path: 'register-for-event', component: RegisterForEventComponent },
   { path: '', redirectTo: '/app-landing', pathMatch: 'full' },
 
   { path: '**', redirectTo: '/app-landing', pathMatch: 'full' },
@@ -45,5 +52,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {constructor(private auth:AuthService){}
+export class AppRoutingModule {
+    constructor(private auth: AuthService) { }
 }
