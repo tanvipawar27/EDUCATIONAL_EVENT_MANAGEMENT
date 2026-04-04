@@ -71,7 +71,7 @@
   </nav>
  
   <!-- ================= MAIN CONTENT ================= -->
-<main class="main-content" [class.full-width]="!IsLoggin">
+<main class="main-content" [class.full-width]="!IsLoggin" [class.no-margin]="isPublicPage()">>
 <router-outlet></router-outlet>
 </main>
  

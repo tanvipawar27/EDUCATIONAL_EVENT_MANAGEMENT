@@ -67,7 +67,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 // Public endpoints
-                .antMatchers("/api/user/register", "/api/user/login").permitAll()
+                .antMatchers("/api/user/register", "/api/user/login","/api/otp/**").permitAll()
                 // Institution endpoints
                 .antMatchers("/api/institution/**").hasAnyAuthority("INSTITUTION","STUDENT","EDUCATOR")
                 .antMatchers("/api/institution/events/**").hasAnyAuthority("INSTITUTION","STUDENT","EDUCATOR")

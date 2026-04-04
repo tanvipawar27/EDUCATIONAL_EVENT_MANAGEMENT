@@ -136,6 +136,25 @@ getRegistrationStatus(studentId: any): Observable<any> {
     { headers: this.getHeaders() }
   );
 }
+
+// ---------------- OTP ----------------
+sendOtp(email: string): Observable<object> {
+  return this.http.post(
+    `${this.serverName}/api/otp/send?email=${encodeURIComponent(email)}`,
+    null,
+    { headers: this.getHeaders(), responseType: 'text' as 'json' } // ✅ expect text
+  );
+}
+ 
+verifyOtp(email: string, otp: string): Observable<object> {
+  return this.http.post(
+    `${this.serverName}/api/otp/verify?email=${encodeURIComponent(email)}&otp=${encodeURIComponent(otp)}`,
+    null,
+    { headers: this.getHeaders(), responseType: 'text' as 'json' } // ✅ expect text
+  );
+}
  
  
 }
+ 
+ 

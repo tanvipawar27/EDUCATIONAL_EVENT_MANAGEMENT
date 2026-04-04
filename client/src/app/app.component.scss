@@ -140,14 +140,18 @@
   flex: 1;
   padding: 26px;
   margin-left: 300px;
+  
 }
 
  
 .main-content.full-width {
   padding: 0;
 }
- 
-/* ================= RESPONSIVE ================= */
+
+.main-content.no-margin {
+  margin-left: 0;
+}
+
  
 @media (max-width: 768px) {
   .aurora-sidebar {

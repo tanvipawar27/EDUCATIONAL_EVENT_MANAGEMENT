@@ -1,121 +1,124 @@
 <div class="landing">
-  <div class="content">
-    <!-- Pill -->
-    <div class="pill">
-      <span class="pill__dot"></span>
-      <span class="pill__text">Create • Manage • Join</span>
-    </div>
-
+<div class="content">
+<!-- Pill -->
+<div class="pill">
+<span class="pill__dot"></span>
+<span class="pill__text">Create • Manage • Join</span>
+</div>
+ 
     <!-- Title -->
-    <h1 class="title">
+<h1 class="title">
       Register on <span class="accent">EduSphere</span>
-    </h1>
-    <p class="subtitle">
+</h1>
+<p class="subtitle">
       Fill in your details to create an account and start exploring events.
-    </p>
-
+</p>
+ 
     <!-- Registration Form -->
-    <form [formGroup]="itemForm" (ngSubmit)="onRegister()" class="register-form">
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input id="username" type="text" formControlName="username" placeholder="Choose a username" />
-        <div *ngIf="itemForm.get('username')?.hasError('invalidUsername') && itemForm.get('username')?.touched" class="error-message">
+<form [formGroup]="itemForm" (ngSubmit)="onRegister()" class="register-form">
+ 
+      <!-- Username -->
+<div class="form-group">
+<label for="username">Username</label>
+<input id="username" type="text" formControlName="username" placeholder="Choose a username" />
+<div *ngIf="itemForm.get('username')?.hasError('invalidUsername') && itemForm.get('username')?.touched" class="error-message">
           Username must be alphanumeric and not only numbers.
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input id="email" type="email" formControlName="email" placeholder="Enter your email" />
-        <div *ngIf="itemForm.get('email')?.invalid && itemForm.get('email')?.touched" class="error-message">
+</div>
+</div>
+ 
+      <!-- Email + Send OTP -->
+<div class="form-group">
+<label for="email">Email</label>
+<div style="display:flex; gap:10px; align-items:center;">
+<input id="email" type="email" formControlName="email" placeholder="Enter your email" />
+<button 
+            type="button" 
+            class="button button--secondary" 
+            (click)="sendOtp()" 
+            [disabled]="!itemForm.get('email')?.valid">
+            Send OTP
+</button>
+</div>
+<div *ngIf="itemForm.get('email')?.invalid && itemForm.get('email')?.touched" class="error-message">
           Please enter a valid email address.
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input id="password" type="password" formControlName="password" placeholder="Enter a strong password" />
-        <div *ngIf="itemForm.get('password')?.hasError('invalidPassword') && itemForm.get('password')?.touched" class="error-message">
-          Password must be at least 8 characters, with uppercase, lowercase, number, and special character.
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <input id="confirmPassword" type="password" formControlName="confirmPassword" placeholder="Re-enter your password" />
-        <div *ngIf="itemForm.hasError('passwordMismatch') && itemForm.get('confirmPassword')?.touched" class="error-message">
-          Passwords do not match.
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="role">Role</label>
-        <select id="role" formControlName="role">
-          <option value="" disabled>Select your role</option>
-          <option value="INSTITUTION">Institution</option>
-          <option value="EDUCATOR">Educator</option>
-          <option value="STUDENT">Student</option>
-        </select>
-      </div>
-
-      
-<!-- ✅ CAPTCHA (NEW – minimal, matches UI) -->
+</div>
+</div>
+ 
+      <!-- OTP Field (appears after Send OTP) -->
+<div class="form-group" *ngIf="otpSent && !otpVerified">
+<label for="otp">Enter OTP</label>
+<div style="display:flex; gap:10px; align-items:center;">
+<input id="otp" type="text" formControlName="otp" placeholder="Enter OTP" />
+<button 
+            type="button" 
+            class="button button--secondary" 
+            (click)="verifyOtp()" 
+            [disabled]="!itemForm.get('otp')?.value">
+            Verify OTP
+</button>
+</div>
+</div>
+ 
+      <!-- OTP Verified Message -->
+<div *ngIf="otpVerified" class="success-message">
+        ✅ OTP Verified
+</div>
+ 
+      <!-- Password -->
+<div class="form-group">
+<label for="password">Password</label>
+<input id="password" type="password" formControlName="password" placeholder="Enter a strong password" />
+</div>
+ 
+      <!-- Confirm Password -->
+<div class="form-group">
+<label for="confirmPassword">Confirm Password</label>
+<input id="confirmPassword" type="password" formControlName="confirmPassword" placeholder="Re-enter your password" />
+</div>
+ 
+      <!-- Role -->
+<div class="form-group">
+<label for="role">Role</label>
+<select id="role" formControlName="role">
+<option value="" disabled>Select your role</option>
+<option value="INSTITUTION">Institution</option>
+<option value="EDUCATOR">Educator</option>
+<option value="STUDENT">Student</option>
+</select>
+</div>
+ 
+      <!-- Captcha -->
 <div class="form-group">
 <label>
-
           Captcha:
-<span class="accent" style="font-weight:600">
-
-            {{ captchaText }}
-</span>
+<span class="accent" style="font-weight:600">{{ captchaText }}</span>
 </label>
- 
-        <input
-
-          type="number"
-
-          formControlName="captcha"
-
-          placeholder="Solve captcha"
-
-        />
- 
-        <small
-
-          class="accent"
-
-          style="cursor:pointer; font-size:12px"
-
-          (click)="generateCaptcha()">
-
+<input type="number" formControlName="captcha" placeholder="Solve captcha" />
+<small class="accent" style="cursor:pointer; font-size:12px" (click)="generateCaptcha()">
           Refresh Captcha 🔄
 </small>
 </div>
-
  
-
-      <div class="actions">
-        <button class="button" type="submit">
-          <span class="blob1"></span>
-          <span class="inner">Register</span>
-        </button>
-
-        <!-- ✅ Use a method instead of router directly -->
-        <button class="button button--secondary" type="button" (click)="goToLogin()">
-          <span class="blob1"></span>
-          <span class="inner">Back to Login</span>
-        </button>
-      </div>
-    </form>
-
+      <!-- Actions -->
+<div class="actions">
+<!-- Register disabled until OTP verified -->
+<button class="button" type="submit" [disabled]="itemForm.invalid || !otpVerified">
+          Register
+</button>
+<button class="button button--secondary" type="button" (click)="goToLogin()">
+          Back to Login
+</button>
+</div>
+</form>
+ 
     <!-- Response Message -->
-    <div *ngIf="showMessage" class="response-message">
+<div *ngIf="showMessage" class="response-message">
       {{ responseMessage }}
-    </div>
-
+</div>
+ 
     <!-- Footer -->
-    <footer class="footer">
-      <span>© {{ currentYear }} EduSphere</span>
-    </footer>
-  </div>
+<footer class="footer">
+<span>© {{ currentYear }} EduSphere</span>
+</footer>
+</div>
 </div>

@@ -93,6 +93,6 @@ export class AuthService {
     localStorage.removeItem('username');
     localStorage.removeItem('studentId');
 
-    this.router.navigate(['/login']);
+    this.router.navigate(['/app-landing']);
   }
 }

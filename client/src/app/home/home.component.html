@@ -1,177 +1,217 @@
-<div class="landing">
- 
-  <!-- ================= HEADER ================= -->
-<header class="site-header">
-<div class="logo">EduEvent</div>
- 
-    <nav class="nav-links">
-<a href="#core-features" class="nav-item">Features</a>
-<a href="#institution" class="nav-item">Institution</a>
-<a href="#educator" class="nav-item">Educator</a>
-<a href="#student" class="nav-item">Student</a>
-<a href="#contact" class="nav-item">Contact Us</a>
+<div class="landing" id="home">
+
+  <header class="site-header">
+    <div class="logo">EduSphere</div>
+<nav class="nav-links">
+  <a (click)="scrollTo('home')" class="nav-item">Home</a>
+  <a (click)="scrollTo('core-features')" class="nav-item">Features</a>
+  <a (click)="scrollTo('institution')" class="nav-item">Institution</a>
+  <a (click)="scrollTo('educator')" class="nav-item">Educator</a>
+  <a (click)="scrollTo('student')" class="nav-item">Student</a>
+  <a (click)="scrollTo('contact')" class="nav-item">Contact Us</a>
 </nav>
- 
+
     <div class="header-actions">
-<button class="btn btn-outline mx-1" (click)="goToLogin()">Login</button>
-<button class="btn btn-primary mx-1" (click)="goToRegister()">Register</button>
-</div>
-</header>
- 
+      <button class="btn btn-outline mx-1" (click)="goToLogin()">Login</button>
+      <button class="btn btn-primary mx-1" (click)="goToRegister()">Register</button>
+    </div>
+  </header>
+
   <!-- ================= HERO ================= -->
-<section class="hero">
-<h1 class="hero-title">Educational Event Management Platform</h1>
-<p class="hero-subtitle">
-
+  <section class="hero">
+    <h1 class="hero-title">Educational Event Management Platform</h1>
+    <p class="hero-subtitle">
       A centralized platform for institutions, educators, and students
-
       to manage events, resources, and participation seamlessly.
-</p>
-</section>
- 
-  <!-- ================= CORE FEATURES ================= -->
-<section class="features-boxes" id="core-features">
-<h2 class="section-title">What You Can Do with EduEvent</h2>
- 
-    <div class="boxes-grid">
-<div class="feature-box">
-<div class="feature-icon">📅</div>
-<h3>Manage Events</h3>
-<p>Create, update and manage educational events easily.</p>
-</div>
- 
-      <div class="feature-box">
-<div class="feature-icon">👨‍🎓</div>
-<h3>Register & Participate</h3>
-<p>Students can browse and register for events effortlessly.</p>
-</div>
- 
-      <div class="feature-box">
-<div class="feature-icon">📚</div>
-<h3>Resources & Updates</h3>
-<p>Share materials, announcements and updates securely.</p>
-</div>
-</div>
-</section>
- 
-  <!-- ================= STATS ================= -->
-<section class="stats">
-<div class="stats-grid">
-<div class="stat">
-<div class="stat-icon">🎓</div>
-<h3 class="stat-number" data-target="100">0</h3>
-<p>Educators</p>
-</div>
- 
-      <div class="stat">
-<div class="stat-icon">👨‍🎓</div>
-<h3 class="stat-number" data-target="1000">0</h3>
-<p>Students</p>
-</div>
- 
-      <div class="stat">
-<div class="stat-icon">📅</div>
-<h3 class="stat-number" data-target="250">0</h3>
-<p>Events</p>
-</div>
- 
-      <div class="stat">
-<div class="stat-icon">🏫</div>
-<h3 class="stat-number" data-target="10">0</h3>
-<p>Institutions</p>
-</div>
-</div>
-</section>
- 
-  <!-- ================= ROLES ================= -->
-<section class="roles-section">
-<h2 class="section-title">Who Is EduEvent For?</h2>
- 
-    <div class="roles-grid">
-<div class="role-card" id="institution">
-<div class="role-icon">🏫</div>
-<h3>Institutions</h3>
-<ul>
-<li>Create and manage events</li>
-<li>Allocate resources</li>
-<li>Manage users</li>
-</ul>
-</div>
- 
-      <div class="role-card" id="educator">
-<div class="role-icon">🎓</div>
-<h3>Educators</h3>
-<ul>
-<li>Upload learning resources</li>
-<li>Manage assigned events</li>
-<li>Track participation</li>
-</ul>
-</div>
- 
-      <div class="role-card" id="student">
-<div class="role-icon">👨‍🎓</div>
-<h3>Students</h3>
-<ul>
-<li>Register for events</li>
-<li>View bookings</li>
-<li>Access resources</li>
-</ul>
-</div>
-</div>
-</section>
- 
-  <!-- ================= CONTACT / TEAM ================= -->
-<section class="contact" id="contact">
-<h2 class="section-title">Our Team</h2>
-<p>We are a group of five members working together on EduEvent.</p>
- 
-  <div class="roles-grid">
-<!-- Team Member 1 -->
-<div class="role-card">
-<div class="role-icon">👩‍💻</div>
-<h3>Tanvi Pawar</h3>
-<p>Frontend Developer</p>
-<p class="member-email">tanvi.pawar@eduEvent.com</p>
-</div>
- 
-    <!-- Team Member 2 -->
-<div class="role-card">
-<div class="role-icon">🧠</div>
-<h3>Vasu Tyagi</h3>
-<p>Backend Developer</p>
-<p class="member-email">vasuTyagi@eduEvent.com</p>
-</div>
- 
-    <!-- Team Member 3 -->
-<div class="role-card">
-<div class="role-icon">🗄️</div>
-<h3>Abhishek Kumar</h3>
-<p>Database Engineer</p>
-<p class="member-email">member3@eduEvent.com</p>
-</div>
- 
-    <!-- Team Member 4 -->
-<div class="role-card">
-<div class="role-icon">🎨</div>
-<h3>Arpit Singh</h3>
-<p>UI / UX Designer</p>
-<p class="member-email">arpitS@eduEvent.com</p>
-</div>
- 
-    <!-- Team Member 5 -->
-<div class="role-card">
-<div class="role-icon">📋</div>
-<h3>Tushar</h3>
-<p>Project Coordinator</p>
-<p class="member-email">tushar@eduEvent.com</p>
-</div>
-</div>
-</section>
-<!-- ================= FOOTER ================= -->
-<footer class="footer">
+    </p>
+  </section>
 
-    © {{ currentYear }} EduEvent. All rights reserved.
+  <!-- ================= CORE FEATURES ================= -->
+  <section class="features-boxes" id="core-features">
+    <h2 class="section-title">What You Can Do with EduEvent</h2>
+
+    <div class="boxes-grid">
+      <div class="feature-box">
+        <div class="feature-icon">📅</div>
+        <h3>Manage Events</h3>
+        <p>Create, update and manage educational events easily.</p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon">👨‍🎓</div>
+        <h3>Register & Participate</h3>
+        <p>Students can browse and register for events effortlessly.</p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon">📚</div>
+        <h3>Resources & Updates</h3>
+        <p>Share materials, announcements and updates securely.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STATS ================= -->
+  <section class="stats">
+    <div class="stats-grid">
+
+      <div class="stat">
+        <div class="stat-icon">🎓</div>
+        <h3 class="stat-number" data-target="100">0+</h3>
+        <p>Educators</p>
+      </div>
+
+      <div class="stat">
+        <div class="stat-icon">👨‍🎓</div>
+        <h3 class="stat-number" data-target="1000">0+</h3>
+        <p>Students</p>
+      </div>
+
+      <div class="stat">
+        <div class="stat-icon">📅</div>
+        <h3 class="stat-number" data-target="250">0+</h3>
+        <p>Events</p>
+      </div>
+
+      <div class="stat">
+        <div class="stat-icon">🏫</div>
+        <h3 class="stat-number" data-target="10">0+</h3>
+        <p>Institutions</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= ROLES ================= -->
+  <section class="roles-section" id="institution">
+    <h2 class="section-title">Who Is EduEvent For?</h2>
+
+    <div class="roles-grid">
+
+      <!-- Institution -->
+      <div class="role-card">
+        <div class="role-icon">🏫</div>
+        <h3>Institutions</h3>
+        <ul>
+          <li>Create and manage events</li>
+          <li>Allocate resources</li>
+          <li>Manage users</li>
+        </ul>
+      </div>
+
+      <!-- Educator -->
+      <div class="role-card" id="educator">
+        <div class="role-icon">🎓</div>
+        <h3>Educators</h3>
+        <ul>
+          <li>Upload learning resources</li>
+          <li>Manage assigned events</li>
+          <li>Track participation</li>
+        </ul>
+      </div>
+
+      <!-- Student -->
+      <div class="role-card" id="student">
+        <div class="role-icon">👨‍🎓</div>
+        <h3>Students</h3>
+        <ul>
+          <li>Register for events</li>
+          <li>View bookings</li>
+          <li>Access resources</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= CONTACT / TEAM ================= -->
+  <section class="contact" id="contact">
+    <h2 class="section-title">Our Team</h2>
+    <p>We are a group of five members working together on EduEvent.</p>
+
+    <div class="roles-grid">
+
+      <div class="role-card">
+        <div class="role-icon">👩‍💻</div>
+        <h3>Tanvi Pawar</h3>
+        <p>Frontend Developer</p>
+        <p class="member-email">tanvi.pawar@eduEvent.com</p>
+      </div>
+
+      <div class="role-card">
+        <div class="role-icon">🧠</div>
+        <h3>Vasu Tyagi</h3>
+        <p>Backend Developer</p>
+        <p class="member-email">vasuTyagi@eduEvent.com</p>
+      </div>
+
+      <div class="role-card">
+        <div class="role-icon">🗄️</div>
+        <h3>Abhishek Kumar</h3>
+        <p>Database Engineer</p>
+        <p class="member-email">member3@eduEvent.com</p>
+      </div>
+
+      <div class="role-card">
+        <div class="role-icon">🎨</div>
+        <h3>Arpit Singh</h3>
+        <p>UI / UX Designer</p>
+        <p class="member-email">arpitS@eduEvent.com</p>
+      </div>
+
+      <div class="role-card">
+        <div class="role-icon">📋</div>
+        <h3>Tushar</h3>
+        <p>Project Coordinator</p>
+        <p class="member-email">tushar@eduEvent.com</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+  <div class="footer-container">
+    <!-- Company Info -->
+    <div class="footer-section">
+      <h3>EduSphere</h3>
+      <p>Educational Event Management Platform</p>
+      <p>© {{ currentYear }} EduSphere. All rights reserved.</p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a (click)="scrollTo('home')">Home</a></li>
+        <li><a (click)="scrollTo('core-features')">Features</a></li>
+        <li><a (click)="goToLogin()">Login</a></li>
+        <li><a (click)="goToRegister()">Register</a></li>
+        <li><a (click)="scrollTo('contact')">Contact Us</a></li>
+        <li><a href="#">About Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <p>Email: support@edusphere.com</p>
+      <p>Phone: +91-123-456-7890</p>
+      <p>Address: Mumbai, Maharashtra, India</p>
+    </div>
+
+    <!-- Social Media -->
+    <div class="footer-section">
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
 </footer>
- 
+
+
 </div>
- 
