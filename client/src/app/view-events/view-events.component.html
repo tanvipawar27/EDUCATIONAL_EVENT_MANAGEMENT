@@ -1,64 +1,119 @@
 <div class="page-container">
-
+ 
   <!-- Update Form -->
-  <div class="card" *ngIf="isUpdate">
-    <div class="card-header">
-      <h3>Update Event Material</h3>
-    </div>
-    <div class="card-body">
-      <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
-        <input type="hidden" formControlName="id" />
-
+<div class="card" *ngIf="isUpdate">
+<div class="card-header">
+<h3>Update Event Material</h3>
+</div>
+<div class="card-body">
+<form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+<input type="hidden" formControlName="id" />
+ 
         <div class="form-group">
-          <label>Event Name</label>
-          <input type="text" formControlName="name" class="form-control"
+<label>Event Name</label>
+<input type="text" formControlName="name" class="form-control"
                  [class.is-invalid]="itemForm.get('name')?.invalid && itemForm.get('name')?.touched" />
-          <div class="invalid-feedback" *ngIf="itemForm.get('name')?.invalid && itemForm.get('name')?.touched">
+<div class="invalid-feedback" *ngIf="itemForm.get('name')?.invalid && itemForm.get('name')?.touched">
             Name is required.
-          </div>
-        </div>
-
+</div>
+</div>
+ 
         <div class="form-group">
-          <label>Description</label>
-          <textarea formControlName="description" class="form-control" rows="3"
+<label>Description</label>
+<textarea formControlName="description" class="form-control" rows="3"
                     [class.is-invalid]="itemForm.get('description')?.invalid && itemForm.get('description')?.touched"></textarea>
-          <div class="invalid-feedback" *ngIf="itemForm.get('description')?.invalid && itemForm.get('description')?.touched">
+<div class="invalid-feedback" *ngIf="itemForm.get('description')?.invalid && itemForm.get('description')?.touched">
             Description is required.
-          </div>
-        </div>
-
+</div>
+</div>
+ 
         <div class="form-group">
-          <label>Materials</label>
-          <input type="text" formControlName="materials" class="form-control" />
-        </div>
-
+<label>Materials</label>
+<input type="text" formControlName="materials" class="form-control" />
+</div>
+ 
         <div class="alert alert-danger" *ngIf="showError">{{ errorMessage }}</div>
-        <div class="alert alert-success" *ngIf="showMessage">{{ responseMessage }}</div>
-
+<div class="alert alert-success" *ngIf="showMessage">{{ responseMessage }}</div>
+ 
         <button type="submit" class="btn btn-success">Update Event</button>
-        <button type="button" class="btn btn-secondary ml-2" (click)="isUpdate=false">Cancel</button>
-      </form>
-    </div>
-  </div>
-
+<button type="button" class="btn btn-secondary ml-2" (click)="isUpdate=false">Cancel</button>
+</form>
+</div>
+</div>
+ 
   <!-- Events Agenda -->
-  <div class="agenda-container" *ngIf="!isUpdate">
-    <h4 class="agenda-title">Events Agenda</h4>
-    <div class="agenda-grid">
-      <div class="agenda-card" *ngFor="let event of eventList; let i = index">
-        <div class="agenda-card-header">
-          <h5>{{ event.name }}</h5>
-          <span class="agenda-date">{{ event.date | date:'mediumDate' }}</span>
-        </div>
-        <div class="agenda-card-body">
-          <p><strong>Description:</strong> {{ event.description }}</p>
-          <p><strong>Materials:</strong> {{ event.materials }}</p>
-        </div>
-        <div class="agenda-card-footer" *ngIf="role!=='STUDENT'">
-          <button class="btn btn-sm btn-warning" (click)="edit(event)">Edit</button>
-          <button class="btn btn-sm btn-danger ml-2" (click)="deleteEvent(event.id)">Delete</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="agenda-container" *ngIf="!isUpdate">
+<h4 class="agenda-title">Events Agenda</h4>
+ 
+    <!-- Controls -->
+<div class="agenda-controls mb-3">
+<label for="filterSelect"><strong>Filter Events:</strong></label>
+<select id="filterSelect" class="form-control d-inline-block w-auto ml-2"
+              [(ngModel)]="filterOption" (change)="applyFilters()">
+<option value="ALL">All</option>
+<option value="UPCOMING">Upcoming</option>
+<option value="COMPLETED">Completed</option>
+</select>
+ 
+      <button class="btn btn-outline-secondary ml-3" (click)="toggleSortOrder()">
+        Sort by Date: {{ sortAscending ? 'Ascending' : 'Descending' }}
+</button>
+</div>
+ 
+ 
+    <!-- <div class="fixed-top">
+<div class="alert alert-danger text-center" *ngIf="showError">
+    {{ errorMessage }}
+</div>
+<div class="alert alert-success text-center" *ngIf="showMessage">
+    {{ responseMessage }}
+</div>
+</div> -->
+ 
+    <!-- Agenda Grid -->
+<div class="agenda-grid">
+<div class="agenda-card" *ngFor="let event of filteredEvents">
+<div class="agenda-card-header">
+<h5>{{ event.name }}</h5>
+<span class="agenda-date">{{ event.date | date:'mediumDate' }}</span>
+<span class="badge" [ngClass]="isUpcoming(event.date) ? 'badge-upcoming' : 'badge-completed'">
+            {{ isUpcoming(event.date) ? 'Upcoming' : 'Completed' }}
+</span>
+<span class="badge badge-registered" *ngIf="isRegistered(event.id)">
+            Registered
+</span>
+</div>
+<div class="agenda-card-body">
+<p><strong>Description:</strong> {{ event.description }}</p>
+<p><strong>Materials:</strong> {{ event.materials }}</p>
+ 
+          <div *ngIf="event.resourceAllocations?.length">
+<strong>Study Materials:</strong>
+<div *ngFor="let t of event.resourceAllocations; let i = index">
+<p><strong>Material No- {{ i+1 }}</strong></p>
+<p><strong>Material Type:</strong> {{ t.resourceType }}</p>
+<p><strong>Materials Description:</strong> {{ t.description }}</p>
+</div>
+</div>
+</div>
+<div class="agenda-card-footer">
+<ng-container *ngIf="role!=='STUDENT'">
+<button class="btn btn-sm btn-warning" (click)="edit(event)">Edit</button>
+<button class="btn btn-sm btn-danger ml-2" (click)="deleteEvent(event.id)">Delete</button>
+</ng-container>
+ 
+          <ng-container *ngIf="role==='STUDENT' && isUpcoming(event.date)">
+<button class="btn btn-sm btn-primary"
+                    (click)="registerForEvent(event.id)"
+                    [disabled]="isRegistered(event.id)">
+              {{ isRegistered(event.id) ? 'Registered' : 'Register' }}
+</button>
+</ng-container>
+</div>
+</div>
+</div>
+ 
+    <div class="fix-top alert alert-danger mt-3" *ngIf="showError">{{ errorMessage }}</div>
+<div class="fix-top alert alert-success mt-3" *ngIf="showMessage">{{ responseMessage }}</div>
+</div>
 </div>

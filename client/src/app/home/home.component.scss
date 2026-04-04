@@ -1,510 +1,397 @@
+/* ======================================================
+   AURORA THEME – FINAL, CONSISTENT, STRUCTURE-SAFE
+   ====================================================== */
  
+html {
+  scroll-behavior: smooth;
+}
+ 
+/* Offset for sticky header */
+#core-features,
+#institution,
+#educator,
+#student,
+#contact {
+  scroll-margin-top: 90px;
+}
+ 
+/* =========================
+   PAGE BACKGROUND (AURORA)
+   ========================= */
 .landing {
-
   min-height: 100vh;
-
   color: #fff;
-
-  display: grid;
-
-  place-items: center;
-
-  padding: 24px;
-
-  overflow: hidden;
-
+  font-family: system-ui, Segoe UI, Roboto, Arial;
+ 
+  background:
+    radial-gradient(900px 600px at 10% 10%, rgba(63,233,255,0.20), transparent 60%),
+    radial-gradient(900px 600px at 90% 15%, rgba(197,107,240,0.20), transparent 60%),
+    radial-gradient(900px 700px at 50% 120%, rgba(94,58,238,0.25), transparent 65%),
+    #040508;
+ 
   position: relative;
-
+  overflow-x: hidden;
+}
+ 
+/* =========================
+   HEADER
+   ========================= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+ 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ 
+  padding: 16px 28px;
+ 
+  background: rgba(6, 8, 12, 0.75);
+  backdrop-filter: blur(14px);
+ 
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+ 
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+ 
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+ 
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.75);
+  position: relative;
+}
+ 
+/* Active / hover underline glow */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+ 
+  background: linear-gradient(90deg, #3fe9ff, #c56bf0);
+  box-shadow: 0 0 14px rgba(63,233,255,0.7);
+ 
+  transition: width 0.3s ease;
+}
+ 
+.nav-links a:hover,
+.nav-links a.active {
+  color: #ffffff;
+}
+ 
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+ 
+/* =========================
+   HERO
+   ========================= */
+.hero {
+  padding: 120px 24px 100px;
+  text-align: center;
+}
+ 
+.hero-title {
+  font-size: 3rem;
+  margin-bottom: 14px;
+ 
+  background: linear-gradient(90deg, #3fe9ff, #c56bf0, #5e3aee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+ 
+  text-shadow: 0 0 30px rgba(94,58,238,0.35);
+}
+ 
+.hero-subtitle {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  line-height: 1.6;
+ 
+  color: rgba(255,255,255,0.78);
+}
+ 
+/* =========================
+   BUTTONS
+   ========================= */
+.btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+}
+ 
+.btn-primary {
+  color: #fff;
+  background: linear-gradient(90deg, #3fe9ff, #5e3aee);
+  box-shadow: 0 0 20px rgba(63,233,255,0.45);
+}
+ 
+.btn-primary:hover {
+  box-shadow:
+    0 0 30px rgba(63,233,255,0.7),
+    0 0 60px rgba(94,58,238,0.5);
+  transform: translateY(-2px);
+}
+ 
+.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.35);
+  color: #fff;
+}
+ 
+.btn-outline:hover {
+  background: rgba(255,255,255,0.1);
+}
+ 
+/* =========================
+   SECTION TITLES
+   ========================= */
+.section-title {
+  text-align: center;
+  font-size: 1.9rem;
+  margin-bottom: 42px;
+}
+ 
+/* =========================
+   CORE FEATURE BOXES
+   ========================= */
+.features-boxes {
+  padding: 90px 24px;
+}
+ 
+.boxes-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+ 
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+ 
+.feature-box {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 22px;
+ 
+  padding: 28px;
   text-align: center;
  
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial,
-
-    "Noto Sans", "Helvetica Neue", sans-serif;
- 
-  /* Base + aurora gradients */
-
-  background:
-
-    radial-gradient(1100px 700px at 10% 12%, rgba(63, 233, 255, 0.14), transparent 60%),
-
-    radial-gradient(900px 650px at 88% 18%, rgba(197, 107, 240, 0.14), transparent 58%),
-
-    radial-gradient(900px 700px at 50% 105%, rgba(94, 58, 238, 0.16), transparent 62%),
-
-    radial-gradient(600px 450px at 70% 65%, rgba(63, 233, 255, 0.08), transparent 60%),
-
-    #050607;
-
-}
- 
-/* Aurora “light sheet” layer */
-
-.landing::before {
-
-  content: "";
-
-  position: absolute;
-
-  inset: -40%;
-
-  pointer-events: none;
-
-  opacity: 0.7;
- 
-  background:
-
-    conic-gradient(
-
-      from 220deg at 50% 50%,
-
-      rgba(63, 233, 255, 0.0),
-
-      rgba(63, 233, 255, 0.12),
-
-      rgba(94, 58, 238, 0.14),
-
-      rgba(197, 107, 240, 0.12),
-
-      rgba(63, 233, 255, 0.0)
-
-    );
- 
-  filter: blur(60px);
-
-  transform: translateZ(0);
-
-  animation: auroraSpin 16s linear infinite;
-
-}
- 
-/* Soft “grid + stars” sparkle layer */
-
-.landing::after {
-
-  content: "";
-
-  position: absolute;
-
-  inset: 0;
-
-  pointer-events: none;
-
-  opacity: 0.18;
- 
-  /* tiny dots + faint lines */
-
-  background-image:
-
-    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.35) 1px, transparent 1.5px),
-
-    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
- 
-  background-size: 22px 22px, 120px 120px, 120px 120px;
-
-  mix-blend-mode: screen;
- 
-  /* fade out edges so it stays premium */
-
-  mask-image: radial-gradient(circle at 50% 30%, black 0%, transparent 68%);
-
-}
- 
-/* Reduce motion support */
-
-@media (prefers-reduced-motion: reduce) {
-
-  .landing::before {
-
-    animation: none;
-
-  }
-
-}
- 
-/* Aurora animation */
-
-@keyframes auroraSpin {
-
-  0%   { transform: rotate(0deg) scale(1.02); }
-
-  50%  { transform: rotate(180deg) scale(1.06); }
-
-  100% { transform: rotate(360deg) scale(1.02); }
-
-}
- 
-/* ===== Content Wrapper ===== */
-
-.content {
-
   position: relative;
-
-  z-index: 2;
-
-  width: min(920px, 100%);
-
+  overflow: hidden;
 }
  
-/* ===== Top pill ===== */
-
-.pill {
-
-  display: inline-flex;
-
-  gap: 10px;
-
-  align-items: center;
-
-  padding: 8px 12px;
-
-  border-radius: 9999px;
-
-  background: rgba(255, 255, 255, 0.06);
-
-  border: 1px solid rgba(255, 255, 255, 0.10);
-
-  width: fit-content;
-
-  margin-bottom: 14px;
-
+/* Aurora glow */
+.feature-box::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(circle, rgba(63,233,255,0.35), transparent 65%);
+  opacity: 0;
+  filter: blur(24px);
+  transition: opacity 0.35s ease;
 }
  
-.pill__dot {
-
-  width: 10px;
-
-  height: 10px;
-
-  border-radius: 9999px;
-
-  background: #3fe9ff;
-
-  box-shadow: 0 0 18px rgba(63, 233, 255, 0.55);
-
+.feature-box:hover::before {
+  opacity: 1;
 }
  
-.pill__text {
-
-  font-size: 0.9rem;
-
-  color: rgba(255, 255, 255, 0.78);
-
+.feature-box:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 35px 80px rgba(0,0,0,0.65);
 }
  
-/* ===== Heading & subtitle ===== */
-
-.title {
-
-  font-size: clamp(2.1rem, 3.6vw, 3.2rem);
-
-  line-height: 1.1;
-
-  margin: 0 0 10px;
-
-  letter-spacing: -0.5px;
-
+.feature-icon {
+  font-size: 2.4rem;
+  margin-bottom: 12px;
 }
  
-.accent {
-
-  background: linear-gradient(90deg, #3fe9ff 0%, #c56bf0 45%, #5e3aee 100%);
-
-  -webkit-background-clip: text;
-
-  background-clip: text;
-
-  color: transparent;
-
+/* =========================
+   STATS
+   ========================= */
+.stats {
+  padding: 80px 24px;
+  background: rgba(255,255,255,0.03);
 }
  
-.subtitle {
-
-  font-size: 1.08rem;
-
-  color: rgba(255, 255, 255, 0.75);
-
-  line-height: 1.6;
-
-  margin: 0 auto 26px;
-
-  width: min(72ch, 100%);
-
-}
+.stats-grid {
+  max-width: 1100px;
+  margin: 0 auto;
  
-/* ===== 3 Overview Boxes ===== */
-
-.boxes {
-
   display: grid;
-
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-
-  gap: 14px;
-
-  margin: 0 auto 26px;
-
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
 }
  
-.box {
-
-  padding: 16px 16px 18px;
-
+.stat {
+  background: rgba(255,255,255,0.06);
   border-radius: 20px;
-
-  background: rgba(255, 255, 255, 0.06);
-
-  border: 1px solid rgba(255, 255, 255, 0.10);
-
-  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
-
-  text-align: left;
+  padding: 26px;
  
-  /* soft inner glow */
-
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-
+  text-align: center;
+ 
+  position: relative;
 }
  
-.box:hover {
-
-  transform: translateY(-4px);
-
-  border-color: rgba(255, 255, 255, 0.18);
-
-  background: rgba(255, 255, 255, 0.075);
-
+.stat:hover {
+  transform: translateY(-8px) scale(1.06);
+  box-shadow:
+    0 0 25px rgba(63,233,255,0.4),
+    0 30px 70px rgba(0,0,0,0.6);
 }
  
-.box__icon {
-
-  font-size: 1.5rem;
-
-  margin-bottom: 10px;
-
+.stat-icon {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+  animation: statPulse 3s ease-in-out infinite;
 }
  
-.box__title {
-
-  margin: 0 0 6px;
-
-  font-size: 1.05rem;
-
+@keyframes statPulse {
+  0%,100% { opacity: 0.6; }
+  50% { opacity: 1; }
 }
  
-.box__text {
-
-  margin: 0;
-
-  font-size: 0.95rem;
-
-  line-height: 1.55;
-
-  color: rgba(255, 255, 255, 0.74);
-
+/* =========================
+   ROLES
+   ========================= */
+.roles-section {
+  padding: 90px 24px;
 }
  
-/* ===== Actions (Login/Register) ===== */
-
-.actions {
-
+.roles-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+ 
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 28px;
+}
+ 
+.role-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 24px;
+  padding: 30px;
+  text-align: center;
+ 
+  position: relative;
+  overflow: hidden;
+}
+ 
+.role-card::after {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  background: radial-gradient(circle, rgba(197,107,240,0.35), transparent 65%);
+  opacity: 0;
+  filter: blur(28px);
+  transition: opacity 0.35s ease;
+}
+ 
+.role-card:hover::after {
+  opacity: 1;
+}
+ 
+.role-card:hover {
+  transform: translateY(-12px) scale(1.05);
+  box-shadow: 0 40px 90px rgba(0,0,0,0.7);
+}
+ 
+.role-icon {
+  font-size: 2.7rem;
+  margin-bottom: 12px;
+}
+ 
+.role-card ul {
+  list-style: none;
+  padding: 0;
+}
+ 
+.role-card li {
+  margin-bottom: 8px;
+  color: rgba(255,255,255,0.8);
+}
+ 
+/* =========================
+   CONTACT
+   ========================= */
+.contact {
+  padding: 80px 24px;
+  text-align: center;
+}
+ 
+/* =========================
+   TEAM MEMBER TEXT STYLING
+   ========================= */
+ 
+.team {
   display: flex;
-
-  justify-content: center;
-
-  gap: 14px;
-
   flex-wrap: wrap;
-
-  margin-top: 6px;
-
-}
- 
-/* ===== Footer ===== */
-
-.footer {
-
-  margin-top: 34px;
-
-  font-size: 0.92rem;
-
-  color: rgba(255, 255, 255, 0.6);
-
-}
- 
-/* Responsive: stack boxes */
-
-@media (max-width: 900px) {
-
-  .boxes {
-
-    grid-template-columns: 1fr;
-
-  }
-
-}
- 
-/* ==========================================================
-
-   ✅ YOUR BUTTON STYLES (UNCHANGED FORMAT)
-
-   ========================================================== */
- 
-.button {
-
-  cursor: pointer;
-
-  font-size: 1.4rem;
-
-  border-radius: 16px;
-
-  border: none;
-
-  padding: 2px;
-
-  background: radial-gradient(circle 80px at 80% -10%, #ffffff, #181b1b);
-
-  position: relative;
-
-  transition: transform 0.15s ease, filter 0.15s ease;
-
-}
- 
-.button:hover {
-
-  filter: brightness(1.03);
-
-}
- 
-.button:active {
-
-  transform: translateY(1px) scale(0.99);
-
-}
- 
-.button::after {
-
-  content: "";
-
-  position: absolute;
-
-  width: 65%;
-
-  height: 60%;
-
-  border-radius: 120px;
-
-  top: 0;
-
-  right: 0;
-
-  box-shadow: 0 0 20px #ffffff38;
-
-  z-index: -1;
-
-}
- 
-.blob1 {
-
-  position: absolute;
-
-  width: 70px;
-
-  height: 100%;
-
-  border-radius: 16px;
-
-  bottom: 0;
-
-  left: 0;
-
-  background: radial-gradient(
-
-    circle 60px at 0% 100%,
-
-    #3fe9ff,
-
-    #0000ff80,
-
-    transparent
-
-  );
-
-  box-shadow: -10px 10px 30px #0051ff2d;
-
-}
- 
-.inner {
-
-  padding: 14px 28px;
-
-  border-radius: 14px;
-
-  color: #fff;
-
-  z-index: 3;
-
-  position: relative;
-
-  background: radial-gradient(circle 80px at 80% -50%, #777777, #0f1111);
-
-  display: inline-flex;
-
-  align-items: center;
-
   justify-content: center;
-
-  width: 100%;
-
+  gap: 20px;
+  margin-top: 30px;
 }
  
-.inner::before {
-
-  content: "";
-
-  width: 100%;
-
-  height: 100%;
-
-  left: 0;
-
-  top: 0;
-
-  border-radius: 14px;
-
-  background: radial-gradient(
-
-    circle 60px at 0% 100%,
-
-    #00e1ff1a,
-
-    #0000ff11,
-
-    transparent
-
-  );
-
-  position: absolute;
-
+.team-member h4 {
+  margin-bottom: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
  
-/* Secondary: same format, slight pink/violet glow */
-
-.button--secondary .blob1 {
-
-  background: radial-gradient(
-
-    circle 60px at 0% 100%,
-
-    #c56bf0,
-
-    rgba(197, 107, 240, 0.55),
-
-    transparent
-
-  );
-
-  box-shadow: -10px 10px 30px rgba(197, 107, 240, 0.18);
-
+.member-role {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 6px;
+}
+ 
+.member-email {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+  word-break: break-word;
+}
+ 
+/* =========================
+   FOOTER
+   ========================= */
+.footer {
+  padding: 18px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+ 
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media (max-width: 900px) {
+  .boxes-grid,
+  .stats-grid,
+  .roles-grid {
+    grid-template-columns: 1fr;
+  }
+ 
+  .nav-links {
+    display: none;
+  }
+}
+.member-email {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.65);
+  word-break: break-word;
 }

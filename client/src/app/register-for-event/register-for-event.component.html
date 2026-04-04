@@ -1,37 +1,46 @@
 <div class="page-container">
-  <div class="card">
-    <div class="card-header">
-      <h3>Register for Event</h3>
-    </div>
-    <div class="card-body">
-      <form [formGroup]="registerForm" (ngSubmit)="submit()">
-
-        <!-- Event ID (or dropdown) -->
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Event ID"
-          formControlName="eventId"
-        />
-
+<div class="card">
+<div class="card-header">
+<h3>Register for Event</h3>
+</div>
+<div class="card-body">
+<form [formGroup]="registerForm" (ngSubmit)="submit()">
+ 
+        <!-- Event ID (or dropdown of events) -->
+<div class="form-group">
+<label for="eventId">Event ID</label>
+<input
+            id="eventId"
+            type="text"
+            class="form-control"
+            placeholder="Enter Event ID"
+            formControlName="eventId"
+          />
+<div class="invalid-feedback" *ngIf="registerForm.get('eventId')?.invalid && registerForm.get('eventId')?.touched">
+            Event ID is required.
+</div>
+</div>
+ 
         <!-- Student ID removed (auto-filled from login) -->
-
+<!-- Status removed (backend sets REGISTERED) -->
+ 
         <button
           type="submit"
           class="btn btn-primary mt-3 w-100"
           [disabled]="registerForm.invalid"
-        >
+>
           Register
-        </button>
-      </form>
-
-      <div class="alert alert-danger mt-3" *ngIf="showError">
+</button>
+</form>
+ 
+      <!-- Alerts -->
+<div class="alert alert-danger mt-3" *ngIf="showError">
         {{ errorMessage }}
-      </div>
-
+</div>
+ 
       <div class="alert alert-success mt-3" *ngIf="showMessage">
         {{ responseMessage }}
-      </div>
-    </div>
-  </div>
+</div>
+</div>
+</div>
 </div>
