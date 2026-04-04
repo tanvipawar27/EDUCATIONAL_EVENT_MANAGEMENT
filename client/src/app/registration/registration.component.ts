@@ -9,26 +9,63 @@ import { HttpService } from '../../services/http.service';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
-currentYear: number = new Date().getFullYear();
+  currentYear: number = new Date().getFullYear();
   itemForm!: FormGroup;
   showMessage: boolean = false;
   responseMessage: any = '';
+
+  captchaText ='';
+  captchaAnswer!: number;
 
   constructor(
     private fb: FormBuilder,
     private httpService: HttpService,
     private router: Router
-  ) {}
+  ) { }
+
 
   ngOnInit(): void {
+
     this.itemForm = this.fb.group({
+
       username: ['', [Validators.required, Validators.minLength(2), this.usernameValidator]],
+
       email: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],
+
       password: ['', [Validators.required, this.passwordValidator]],
+
       confirmPassword: ['', Validators.required],
-      role: ['', Validators.required]
+
+      role: ['', Validators.required],
+
+      // ✅ CAPTCHA control (NEW)
+
+      captcha: ['', Validators.required]
+
     }, { validators: this.passwordsMatchValidator });
+
+    // ✅ Generate captcha on load
+
+    this.generateCaptcha();
+
   }
+
+  // ✅ CAPTCHA generator (NEW)
+
+  generateCaptcha(): void {
+
+    const a = Math.floor(Math.random() * 10);
+
+    const b = Math.floor(Math.random() * 10);
+
+    this.captchaText = `${a} + ${b}`;
+
+    this.captchaAnswer = a + b;
+
+    this.itemForm.get('captcha')?.reset();
+
+  }
+
 
   // ✅ Custom username validator
   usernameValidator(control: AbstractControl): ValidationErrors | null {
@@ -62,6 +99,21 @@ currentYear: number = new Date().getFullYear();
       this.itemForm.markAllAsTouched();
       return;
     }
+
+    // ✅ CAPTCHA validation (NEW)
+
+    if (this.itemForm.value.captcha != this.captchaAnswer) {
+
+      this.showMessage = true;
+
+      this.responseMessage = 'Invalid captcha.';
+
+      this.generateCaptcha();
+
+      return;
+
+    }
+
 
     const payload = { ...this.itemForm.value };
     delete payload.confirmPassword;

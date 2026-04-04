@@ -16,19 +16,53 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   currentYear: number = new Date().getFullYear();
 
+  captchaText ="";
+  captchaAnswer!: number;
+
   constructor(
     private fb: FormBuilder,
     private httpService: HttpService,
     private authService: AuthService,
     private router: Router
   ) {}
+ngOnInit(): void {
 
-  ngOnInit(): void {
     this.itemForm = this.fb.group({
+
       username: ['', Validators.required],
-      password: ['', Validators.required]
+
+      password: ['', Validators.required],
+ 
+      // ✅ CAPTCHA form control (NEW)
+
+      captcha: ['', Validators.required]
+
     });
+ 
+    // ✅ Generate captcha on load
+
+    this.generateCaptcha();
+
   }
+ 
+  // ✅ CAPTCHA generator (NEW)
+
+  generateCaptcha(): void {
+
+    const a = Math.floor(Math.random() * 10);
+
+    const b = Math.floor(Math.random() * 10);
+
+    this.captchaText = `${a} + ${b}`;
+
+    this.captchaAnswer = a + b;
+
+ 
+    this.itemForm.get('captcha')?.reset();
+
+  }
+
+ 
 
   registration(): void {
     this.router.navigate(['/registration']);
@@ -40,6 +74,23 @@ export class LoginComponent implements OnInit {
       this.errorMessage = 'Please fill in all required fields.';
       return;
     }
+
+    
+
+    // ✅ CAPTCHA validation (NEW)
+
+    if (this.itemForm.value.captcha != this.captchaAnswer) {
+
+      this.showError = true;
+
+      this.errorMessage = 'Invalid captcha.';
+
+      this.generateCaptcha();
+
+      return;
+
+    }
+ 
 
     this.httpService.Login(this.itemForm.value).subscribe({
       next: (res: any) => {

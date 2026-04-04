@@ -58,6 +58,42 @@
         </select>
       </div>
 
+      
+<!-- ✅ CAPTCHA (NEW – minimal, matches UI) -->
+<div class="form-group">
+<label>
+
+          Captcha:
+<span class="accent" style="font-weight:600">
+
+            {{ captchaText }}
+</span>
+</label>
+ 
+        <input
+
+          type="number"
+
+          formControlName="captcha"
+
+          placeholder="Solve captcha"
+
+        />
+ 
+        <small
+
+          class="accent"
+
+          style="cursor:pointer; font-size:12px"
+
+          (click)="generateCaptcha()">
+
+          Refresh Captcha 🔄
+</small>
+</div>
+
+ 
+
       <div class="actions">
         <button class="button" type="submit">
           <span class="blob1"></span>
