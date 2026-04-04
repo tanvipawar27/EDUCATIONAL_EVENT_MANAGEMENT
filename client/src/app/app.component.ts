@@ -1,34 +1,3 @@
-// import { Component } from '@angular/core';
-// import { AuthService } from '../services/auth.service';
-// import { Router } from '@angular/router';
-
-// @Component({
-//   selector: 'app-root',
-//   templateUrl: './app.component.html',
-//   styleUrls: ['./app.component.scss']
-// })
-// export class AppComponent {
-//   IsLoggin:any=false;
-//   roleName: string | null;
-//   constructor(public authService: AuthService, private router:Router)
-//   {
-   
-//     this.IsLoggin=authService.getLoginStatus;
-//     this.roleName=authService.getRole();
-//     if(this.IsLoggin==false)
-//     {
-//       this.router.navigateByUrl('/login'); 
-    
-//     }
-//   }
-//   logout()
-// {
-//   this.authService.logout();
-//   window.location.reload();
-// }
-
-// }
-
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from '../services/auth.service';
@@ -55,6 +24,22 @@ export class AppComponent {
       }
     });
   }
+  ngOnInit(): void {
+  this.setFixedHeight();
+  window.addEventListener('resize', this.setFixedHeight.bind(this));
+}
+
+setFixedHeight(): void {
+  const landing = document.querySelector('.landing') as HTMLElement;
+  if (landing) {
+    landing.style.height = `${window.innerHeight}px`;
+    landing.style.position = 'fixed';
+    landing.style.top = '0';
+    landing.style.left = '0';
+    landing.style.width = '100%';
+  }
+}
+
 
   logout() {
     this.authService.logout();

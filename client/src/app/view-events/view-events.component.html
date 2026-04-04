@@ -85,14 +85,14 @@
 </div>
 <div class="agenda-card-body">
 <p><strong>Description:</strong> {{ event.description }}</p>
-<p><strong>Materials:</strong> {{ event.materials }}</p>
+<p><strong>Utilities:</strong> {{ event.materials }}</p>
  
           <div *ngIf="event.resourceAllocations?.length">
-<strong>Study Materials:</strong>
+<strong>Study Resources:</strong>
 <div *ngFor="let t of event.resourceAllocations; let i = index">
-<p><strong>Material No- {{ i+1 }}</strong></p>
-<p><strong>Material Type:</strong> {{ t.resourceType }}</p>
-<p><strong>Materials Description:</strong> {{ t.description }}</p>
+<p><strong>Resource No- {{ i+1 }}</strong></p>
+<p><strong>Resource Type:</strong> {{ t.resourceType }}</p>
+<p><strong>Resource Description:</strong> {{ t.description }}</p>
 </div>
 </div>
 </div>
