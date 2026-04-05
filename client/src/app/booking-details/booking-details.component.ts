@@ -51,12 +51,17 @@ export class BookingDetailsComponent implements OnInit {
         }
       },
       error: (err) => {
-        console.log(err)
-        console.error('API error:', err);
-        this.eventList = []; // clear stale data
-        this.showError = true;
-        this.errorMessage = 'Failed to fetch booking details.';
-      }
+  this.eventList = [];
+  this.showError = true;
+  if (err.status === 404) {
+    this.errorMessage = 'No bookings found for this student.';
+  } else if (err.status === 401) {
+    this.errorMessage = 'Session expired. Please log in again.';
+  } else {
+    this.errorMessage = 'Failed to fetch booking details. Please try later.';
+  }
+}
+
     });
   }
 }

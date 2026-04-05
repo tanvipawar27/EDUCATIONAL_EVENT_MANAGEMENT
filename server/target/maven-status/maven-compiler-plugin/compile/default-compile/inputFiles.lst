@@ -6,6 +6,8 @@
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/controller/OtpController.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/config/Configurations.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/dto/LoginResponse.java
+/home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/controller/ChatController.java
+/home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/service/ChatService.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/repository/EventRegistrationRepository.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/jwt/JwtUtil.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/controller/EducatorController.java

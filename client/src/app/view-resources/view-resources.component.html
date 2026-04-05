@@ -3,8 +3,17 @@
     <h3>All Resources</h3>
   </div>
 
+  <!-- Search Bar -->
+  <div class="mb-3">
+    <input type="text"
+           class="form-control"
+           placeholder="Search resources..."
+           [(ngModel)]="searchTerm"
+           (input)="applySearch()" />
+  </div>
+
   <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let res of resourceList; let i = index">
+    <div class="col-md-4 mb-4" *ngFor="let res of filteredResources; let i = index">
       <div class="card h-100 shadow-sm">
         <div class="card-body">
           <h5 class="card-title text-primary">Resource {{ i + 1 }}</h5>

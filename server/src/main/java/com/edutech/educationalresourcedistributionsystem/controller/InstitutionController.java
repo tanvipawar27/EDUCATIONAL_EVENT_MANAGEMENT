@@ -101,4 +101,24 @@ public class InstitutionController {
         logger.debug("Number of events with allocations fetched: {}", eventsWithResources.size());
         return new ResponseEntity<>(eventsWithResources, HttpStatus.OK);
     }
+
+    // ✅ Get Event by ID
+@GetMapping("/event/{id}")
+public ResponseEntity<Event> getEventById(@PathVariable Long id) {
+    logger.info("Fetching event with ID: {}", id);
+    try {
+        Event event = eventService.getEventById(id);
+        if (event != null) {
+            logger.info("Event with ID {} fetched successfully", id);
+            return new ResponseEntity<>(event, HttpStatus.OK);
+        } else {
+            logger.warn("Event with ID {} not found", id);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    } catch (Exception e) {
+        logger.error("Error fetching event with ID {}: {}", id, e.getMessage(), e);
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
+
 }

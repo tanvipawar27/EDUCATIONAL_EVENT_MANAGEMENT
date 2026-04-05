@@ -43,35 +43,40 @@
  
   <!-- Events Agenda -->
 <div class="agenda-container" *ngIf="!isUpdate">
-<h4 class="agenda-title">Events Agenda</h4>
+<h1 class="agenda-title">Events Agenda</h1>
  
     <!-- Controls -->
-<div class="agenda-controls mb-3">
-<label for="filterSelect"><strong>Filter Events:</strong></label>
-<select id="filterSelect" class="form-control d-inline-block w-auto ml-2"
-              [(ngModel)]="filterOption" (change)="applyFilters()">
-<option value="ALL">All</option>
-<option value="UPCOMING">Upcoming</option>
-<option value="COMPLETED">Completed</option>
-</select>
- 
-      <button class="btn btn-outline-secondary ml-3" (click)="toggleSortOrder()">
-        Sort by Date: {{ sortAscending ? 'Ascending' : 'Descending' }}
-</button>
+<div class="agenda-controls">
+  <!-- Row 1: Search Bar -->
+  <div class="search-row">
+    <input type="text"
+           class="form-control search-input"
+           placeholder="Search events..."
+           [(ngModel)]="searchTerm"
+           (input)="applyFilters()" />
+  </div>
+
+  <!-- Row 2: Filter + Sort -->
+  <div class="filter-row">
+    <label for="filterSelect"><strong>Filter Events:</strong></label>
+    <select id="filterSelect"
+            class="form-control d-inline-block w-auto ml-2"
+            [(ngModel)]="filterOption"
+            (change)="applyFilters()">
+      <option value="ALL">All</option>
+      <option value="UPCOMING">Upcoming</option>
+      <option value="COMPLETED">Completed</option>
+    </select>
+
+    <button class="btn btn-outline-secondary ml-3" (click)="toggleSortOrder()">
+      Sort by Date: {{ sortAscending ? 'Ascending' : 'Descending' }}
+    </button>
+  </div>
 </div>
- 
- 
-    <!-- <div class="fixed-top">
-<div class="alert alert-danger text-center" *ngIf="showError">
-    {{ errorMessage }}
-</div>
-<div class="alert alert-success text-center" *ngIf="showMessage">
-    {{ responseMessage }}
-</div>
-</div> -->
- 
+
+
     <!-- Agenda Grid -->
-<div class="agenda-grid">
+<!-- <div class="agenda-grid">
 <div class="agenda-card" *ngFor="let event of filteredEvents">
 <div class="agenda-card-header">
 <h5>{{ event.name }}</h5>
@@ -111,8 +116,28 @@
 </ng-container>
 </div>
 </div>
+</div> -->
+ <div class="agenda-grid">
+  <div class="agenda-card"
+       *ngFor="let event of filteredEvents"
+       [routerLink]="['/view-event', event.id]">
+    <div class="agenda-card-header">
+      <h5>{{ event.name }}</h5>
+      <span class="agenda-date">{{ event.date | date:'mediumDate' }}</span>
+      <span class="badge" [ngClass]="isUpcoming(event.date) ? 'badge-upcoming' : 'badge-completed'">
+        {{ isUpcoming(event.date) ? 'Upcoming' : 'Completed' }}
+      </span>
+      <span class="badge badge-registered" *ngIf="isRegistered(event.id)">
+        Registered
+      </span>
+    </div>
+    <div class="agenda-card-body">
+      <p><strong>Description:</strong> {{ event.description }}</p>
+      <p><strong>Utilities:</strong> {{ event.materials }}</p>
+    </div>
+  </div>
 </div>
- 
+
     <div class="fix-top alert alert-danger mt-3" *ngIf="showError">{{ errorMessage }}</div>
 <div class="fix-top alert alert-success mt-3" *ngIf="showMessage">{{ responseMessage }}</div>
 </div>

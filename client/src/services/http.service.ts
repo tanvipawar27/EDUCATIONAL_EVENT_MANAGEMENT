@@ -153,7 +153,27 @@ verifyOtp(email: string, otp: string): Observable<object> {
     { headers: this.getHeaders(), responseType: 'text' as 'json' } // ✅ expect text
   );
 }
- 
+
+// ---------------- INSTITUTION ----------------
+
+// Get event by ID
+getEventById(eventId: any): Observable<any> {
+  return this.http.get(
+    `${this.serverName}/api/institution/event/${eventId}`,
+    { headers: this.getHeaders() }
+  );
+}
+
+ sendMessage(message: string): Observable<string> {
+  return this.http.post(
+    `${this.serverName}/api/chat/message`,
+    message,
+    {
+      headers: this.getHeaders(),
+      responseType: 'text' // ✅ correct for plain text
+    }
+  );
+}
  
 }
  

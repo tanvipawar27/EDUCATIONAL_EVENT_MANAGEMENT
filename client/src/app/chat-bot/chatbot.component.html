@@ -1,0 +1,23 @@
+<!-- Floating Chat Icon -->
+<div class="chat-icon" (click)="toggleChat()" *ngIf="!isOpen">
+  💬
+</div>
+ 
+<!-- Popup Chat Window -->
+<div class="chat-popup" *ngIf="isOpen">
+<div class="chat-header">
+<span>EduSphere AI Assistant</span>
+<button class="close-btn" (click)="toggleChat()">✖</button>
+</div>
+ 
+  <div class="chat-window">
+<div *ngFor="let msg of messages" [ngClass]="msg.sender">
+<strong>{{ msg.sender }}:</strong> {{ msg.text }}
+</div>
+</div>
+ 
+  <div class="chat-input">
+<input [(ngModel)]="userInput" placeholder="Type your message..." />
+<button (click)="sendMessage()">Send</button>
+</div>
+</div>

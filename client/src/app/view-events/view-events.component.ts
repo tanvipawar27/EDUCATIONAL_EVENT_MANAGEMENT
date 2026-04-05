@@ -291,44 +291,36 @@ export class ViewEventsComponent implements OnInit {
     this.applyFilters();
 
   }
- 
-  // ✅ Apply filter + sort
+searchTerm: string = '';  // new property
 
-  applyFilters(): void {
+applyFilters(): void {
+  const today = new Date();
 
-    const today = new Date();
- 
-    // Filter based on dropdown selection
+  this.filteredEvents = this.eventList.filter(event => {
+    const eventDate = new Date(event.date);
 
-    this.filteredEvents = this.eventList.filter(event => {
+    // Filter by status
+    if (this.filterOption === 'UPCOMING' && eventDate < today) return false;
+    if (this.filterOption === 'COMPLETED' && eventDate >= today) return false;
 
-      const eventDate = new Date(event.date);
+    // ✅ Additional search filter
+    if (this.searchTerm) {
+      const term = this.searchTerm.toLowerCase();
+      const matchesName = event.name.toLowerCase().includes(term);
+      const matchesDesc = event.description.toLowerCase().includes(term);
+      const matchesMaterials = event.materials?.toLowerCase().includes(term);
+      return matchesName || matchesDesc || matchesMaterials;
+    }
 
-      if (this.filterOption === 'UPCOMING') {
+    return true;
+  });
 
-        return eventDate >= today;
-
-      } else if (this.filterOption === 'COMPLETED') {
-
-        return eventDate < today;
-
-      }
-
-      return true; // ALL
-
-    });
- 
-    // Sort
-
-    this.filteredEvents.sort((a, b) => {
-
-      const diff = new Date(a.date).getTime() - new Date(b.date).getTime();
-
-      return this.sortAscending ? diff : -diff;
-
-    });
-
-  }
+  // Sort
+  this.filteredEvents.sort((a, b) => {
+    const diff = new Date(a.date).getTime() - new Date(b.date).getTime();
+    return this.sortAscending ? diff : -diff;
+  });
+}
 
 }
 

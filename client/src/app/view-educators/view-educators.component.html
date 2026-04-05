@@ -3,6 +3,15 @@
     <h3>All Educators</h3>
   </div>
 
+  <!-- Search Bar -->
+  <div class="mb-3">
+    <input type="text"
+           class="form-control"
+           placeholder="Search educators..."
+           [(ngModel)]="searchTerm"
+           (input)="applySearch()" />
+  </div>
+
   <!-- Loading state -->
   <div *ngIf="loading" class="text-center">
     <p>Loading educators...</p>
@@ -13,22 +22,20 @@
     {{ errorMessage }}
   </div>
 
-  <!-- Students table -->
+  <!-- Educators table -->
   <table class="table table-striped table-bordered" *ngIf="!loading && !errorMessage">
     <thead class="table-dark">
       <tr>
         <th>S.No.</th>
         <th>Name</th>
-        <!-- <th>Role</th> -->
         <th>Email</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let student of students; let i=index">
-        <td>{{i+1}}</td>
-        <td>{{ student.username }}</td>
-        <!-- <td>{{ student.role }}</td> -->
-        <td>{{ student.email }}</td>
+      <tr *ngFor="let educator of filteredEducators; let i=index">
+        <td>{{ i+1 }}</td>
+        <td>{{ educator.username }}</td>
+        <td>{{ educator.email }}</td>
       </tr>
     </tbody>
   </table>

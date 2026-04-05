@@ -19,6 +19,7 @@ import { LandingComponent } from './home/home.component';
 import { ViewAllocationComponent } from './view-allocation/view-allocation.component';
 import { ViewStudentsComponent } from './view-students/view-students.component';
 import { ViewEducatorsComponent } from './view-educators/view-educators.component';
+import { ViewEventComponent } from './view-event/view-event.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'view-resource', component: ViewResourceComponent },
   { path: 'resource-allocate', component: ResourceAllocateComponent },
   {path:'view-allocations' , component:ViewAllocationComponent},  
+  { path: 'view-event/:id', component: ViewEventComponent},  
   { path: 'view-events', component: ViewEventsComponent },  
   { path: 'view-students', component: ViewStudentsComponent },
   { path: 'view-educators', component: ViewEducatorsComponent },

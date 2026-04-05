@@ -20,6 +20,8 @@ import { LandingComponent } from './home/home.component';
 import { ViewAllocationComponent } from './view-allocation/view-allocation.component';
 import { ViewStudentsComponent } from './view-students/view-students.component';
 import { ViewEducatorsComponent } from './view-educators/view-educators.component';
+import { ViewEventComponent } from './view-event/view-event.component';
+import { ChatbotComponent } from './chat-bot/chatbot.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { ViewEducatorsComponent } from './view-educators/view-educators.componen
       RegisterForEventComponent,
       ViewAllocationComponent,
       ViewStudentsComponent,
-      ViewEducatorsComponent
+      ViewEducatorsComponent,
+      ViewEventComponent,
+      ChatbotComponent
   ],
   imports: [
     BrowserModule,
