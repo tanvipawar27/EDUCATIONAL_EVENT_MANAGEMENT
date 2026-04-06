@@ -1,8 +1,10 @@
 <div class="dashboard-container">
+ 
   <div class="welcome-banner">
     <h2>Welcome, {{userName}} 👋</h2>
     <p>Manage educational events, resources, and registrations from one place.</p>
   </div>
+   <app-student-stats></app-student-stats>
 
     <!-- View Events -->
   <div class="col-md-4" *ngIf="roles!=='EDUCATOR'">
