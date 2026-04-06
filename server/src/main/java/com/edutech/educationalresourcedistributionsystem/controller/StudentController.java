@@ -77,6 +77,22 @@ public ResponseEntity<?> registerForEvent(
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+        
+
+@GetMapping("/registrations/{studentId}")
+
+    public ResponseEntity<List<EventRegistration>> getStudentRegistrations(
+
+            @PathVariable Long studentId) {
+ 
+        List<EventRegistration> registrations =
+
+                registrationService.getRegistrationsByStudentId(studentId);
+ 
+        return ResponseEntity.ok(registrations);
+
+    }
+ 
  
     @GetMapping("/all")
     public ResponseEntity<List<User>> getAllUsers() {

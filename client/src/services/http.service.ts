@@ -164,6 +164,20 @@ getEventById(eventId: any): Observable<any> {
   );
 }
 
+
+  getStudentRegistrations(studentId: number): Observable<any> {
+
+  return this.http.get(
+
+    `${this.serverName}/api/student/registrations/${studentId}`,
+
+    { headers: this.getHeaders() }
+
+  );
+
+}
+ 
+
  sendMessage(message: string): Observable<string> {
   return this.http.post(
     `${this.serverName}/api/chat/message`,

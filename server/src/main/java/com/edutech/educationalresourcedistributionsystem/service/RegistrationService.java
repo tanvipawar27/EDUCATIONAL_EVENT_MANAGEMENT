@@ -22,6 +22,11 @@ public class RegistrationService {
  
     @Autowired
     private EventRepository eventRepository;
+ public List<EventRegistration> getRegistrationsByStudentId(Long studentId) {
+
+        return registrationRepository.findByStudentId(studentId);
+
+    }
  
     // public EventRegistration registerForEvent(Long eventId, EventRegistration registration) {
     //     logger.info("Registering student {} for event {}", registration.getStudentId(), eventId);

@@ -108,9 +108,6 @@ ngOnInit(): void {
       }
     });
   }
-  
- scrollTo(section: string): void {
-    this.router.navigate(['/'], { fragment: section });
-  }
+
 
 }
