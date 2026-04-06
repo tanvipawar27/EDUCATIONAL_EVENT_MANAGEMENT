@@ -1,8 +1,3 @@
-// ═══════════════════════════════════════════════════════
-//  STUDENT STATS — THEMED
-// ═══════════════════════════════════════════════════════
-$ease-out-expo: cubic-bezier(.16,1,.3,1);
-$T: 0.42s ease;
 
 .student-stats {
   display: grid;
@@ -12,70 +7,57 @@ $T: 0.42s ease;
 }
 
 .stat-card {
-  padding: 1.8rem 1.5rem;
+  padding: 1.75rem 1.5rem;
   border-radius: 20px;
   text-align: center;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: var(--glass-shadow);
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  box-shadow: 0 2px 12px rgba(79,110,247,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
-  transition: transform 0.35s $ease-out-expo, box-shadow 0.35s, background $T, border-color $T;
-  animation: statPop 0.6s $ease-out-expo both;
+  animation: statFadeIn 0.55s cubic-bezier(.16,1,.3,1) both;
 
-  &::after {
+  &::before {
     content: '';
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
+    height: 3px;
+    background: var(--btn-grad);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.4s $ease-out-expo;
+    transition: transform 0.35s ease;
   }
 
   &:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: var(--shadow-hover);
-    border-color: var(--accent-1);
-
-    &::after { transform: scaleX(1); }
+    transform: translateY(-6px);
+    box-shadow: 0 14px 36px rgba(79,110,247,0.14);
+    &::before { transform: scaleX(1); }
   }
 }
 
-@keyframes statPop {
-  from { opacity: 0; transform: scale(0.92) translateY(14px); }
-  to   { opacity: 1; transform: scale(1); }
+@keyframes statFadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .stat-card h3 {
   font-family: 'Sora', sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
-  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  transition: opacity $T;
+  color: var(--text-sub);
 }
 
 .stat-card p {
   font-family: 'Sora', sans-serif;
-  font-size: 3rem;
-  font-weight: 900;
+  font-size: 2.6rem;
+  font-weight: 800;
   margin: 0;
-  color: var(--stat-num);
-  line-height: 1;
-  transition: color $T;
-}
-
-@media (max-width: 600px) {
-  .student-stats { grid-template-columns: 1fr 1fr; gap: 0.85rem; }
-  .stat-card { padding: 1.3rem 1rem; }
-  .stat-card p { font-size: 2.2rem; }
+  background: var(--btn-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

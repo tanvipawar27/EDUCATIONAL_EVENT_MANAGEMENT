@@ -61,11 +61,12 @@
 <ng-container *ngIf="roleName === 'INSTITUTION'">
 <li><a routerLink="/create-event"     routerLinkActive="active">📅 Events</a></li>
 <li><a routerLink="/add-resource"     routerLinkActive="active">🗂️ Resources</a></li>
-<li><a routerLink="/resource-allocate" routerLinkActive="active">🔧 Allocate</a></li>
+<!-- <li><a routerLink="/resource-allocate" routerLinkActive="active">🔧 Allocate</a></li> -->
 </ng-container>
 <!-- EDUCATOR links -->
 <ng-container *ngIf="roleName === 'EDUCATOR'">
 <li><a routerLink="/view-events"      routerLinkActive="active">📅 Agenda</a></li>
+<li><a routerLink="/resource-allocate" routerLinkActive="active">🔧 Allocate</a></li>
 </ng-container>
 <!-- STUDENT links -->
 <ng-container *ngIf="roleName === 'STUDENT'">

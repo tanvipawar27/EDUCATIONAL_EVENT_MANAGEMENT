@@ -1,97 +1,124 @@
-// ═══════════════════════════════════════════════════════
-//  FORM PAGE — SHARED STYLES
-//  Used by: add-resource, create-event, resource-allocate
-// ═══════════════════════════════════════════════════════
 $ease-out-expo: cubic-bezier(.16,1,.3,1);
-$T: 0.42s ease;
+$T: 0.4s ease;
 
-:host { display: block; min-height: 100vh; position: relative; }
+:host { display: block; min-height: 100vh; position: relative; background: var(--bg); }
+
+/* Hide aurora on form pages */
+.aurora-bg, .light-bg { display: none !important; }
 
 .form-page-root {
-  position: relative; min-height: 100vh;
-  background: var(--bg); transition: background $T;
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg);
 }
 
 .form-page-inner {
-  position: relative; z-index: 1;
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 3rem 1.5rem;
+  background: linear-gradient(145deg, #f0f4ff 0%, #fdf8ff 100%);
 }
 
-// ── Form Card ────────────────────────────────────────────
+/* ── Form Card ── */
 .form-card {
-  width: 100%; max-width: 560px;
-  position: relative; overflow: hidden;
+  width: 100%;
+  max-width: 560px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 24px;
+  box-shadow: 0 8px 40px rgba(79,110,247,0.12);
+  position: relative;
+  overflow: hidden;
+  animation: cardPopIn 0.55s $ease-out-expo both;
+}
+
+@keyframes cardPopIn {
+  from { opacity: 0; transform: scale(0.94) translateY(16px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .form-card-accent {
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
+  height: 4px;
+  background: var(--btn-grad);
 }
 
 .form-card-header {
-  display: flex; align-items: center; gap: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
   padding: 1.8rem 2rem;
   border-bottom: 1px solid var(--border);
 
   h2 {
-    font-family: 'Sora', sans-serif; font-size: 1.5rem; font-weight: 800;
-    color: var(--text); letter-spacing: -0.025em;
-    transition: color $T; margin-bottom: 0.2rem;
+    font-family: 'Sora', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.025em;
+    margin-bottom: 0.2rem;
   }
-  p { font-size: 0.83rem; color: var(--text-sub); transition: color $T; }
+  p { font-size: 0.83rem; color: var(--text-sub); }
 }
 
 .form-card-icon {
-  width: 52px; height: 52px; flex-shrink: 0;
+  width: 52px; height: 52px;
+  flex-shrink: 0;
   border-radius: 14px;
-  background: var(--glow-1);
-  border: 1px solid var(--border-card);
-  display: flex; align-items: center; justify-content: center;
+  background: rgba(79,110,247,0.08);
+  border: 1px solid rgba(79,110,247,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 1.6rem;
 }
 
 .form-card-body { padding: 2rem; }
-
 .form-group { margin-bottom: 1.3rem; }
 
-// Form control override
 .form-control {
-  width: 100%; padding: 0.85rem 1rem;
+  width: 100%;
+  padding: 0.85rem 1rem;
   border-radius: 12px;
   background: var(--bg-input);
   border: 1.5px solid var(--border);
   color: var(--text);
-  font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
-  outline: none; resize: none;
-  transition: border-color 0.25s, background $T, box-shadow 0.25s, transform 0.2s;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  resize: none;
+  transition: border-color 0.22s, box-shadow 0.22s, transform 0.18s;
 
   &::placeholder { color: var(--text-muted); }
-
   &:focus {
     border-color: var(--accent-1);
-    box-shadow: 0 0 0 3px var(--glow-1);
+    box-shadow: 0 0 0 3px rgba(79,110,247,0.10);
     transform: scale(1.005);
   }
-
   &.is-invalid {
     border-color: var(--accent-4);
-    box-shadow: 0 0 0 2px rgba(244,114,182,0.25);
+    box-shadow: 0 0 0 2px rgba(244,63,94,0.10);
   }
 }
 
-// Select
-select.form-control option { background: var(--bg); color: var(--text); }
+select.form-control option { background: #fff; color: var(--text); }
 
 label {
-  font-family: 'Sora', sans-serif; font-size: 0.8rem; font-weight: 600;
-  color: var(--text-sub); margin-bottom: 0.42rem; display: block;
-  letter-spacing: 0.03em; transition: color $T;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-sub);
+  margin-bottom: 0.42rem;
+  display: block;
+  letter-spacing: 0.03em;
 }
 
 .invalid-feedback {
-  font-size: 0.78rem; color: var(--accent-4);
+  font-size: 0.78rem;
+  color: var(--accent-4);
   margin-top: 0.35rem;
   animation: shake 0.4s ease;
 }
@@ -103,28 +130,37 @@ label {
 }
 
 .btn-primary {
-  width: 100%; padding: 0.95rem;
-  border-radius: 12px; border: none;
+  width: 100%;
+  padding: 0.95rem;
+  border-radius: 12px;
+  border: none;
   background: var(--btn-grad);
   color: #fff;
-  font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 700;
+  font-family: 'Sora', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 6px 24px var(--glow-1);
+  box-shadow: 0 4px 18px rgba(79,110,247,0.25);
   transition: transform 0.22s, opacity 0.22s, box-shadow 0.22s;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 
-  &:hover { transform: translateY(-2px); opacity: 0.9; box-shadow: 0 14px 36px var(--glow-1); }
+  &:hover  { transform: translateY(-2px); opacity: 0.92; box-shadow: 0 10px 32px rgba(79,110,247,0.28); }
   &:active { transform: scale(0.97); }
-  &:disabled { opacity: 0.42; cursor: not-allowed; transform: none; }
+  &:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
 }
 
 .alert {
-  padding: 0.85rem 1.1rem; border-radius: 12px;
-  font-size: 0.875rem; margin-top: 1rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  margin-top: 1rem;
   animation: toastIn 0.5s cubic-bezier(.2,1.4,.4,1) both;
 }
-.alert-danger  { background: var(--alert-danger-bg);  color: var(--alert-danger-txt);  border: 1px solid var(--alert-danger-border); }
-.alert-success { background: var(--alert-success-bg); color: var(--alert-success-txt); border: 1px solid var(--alert-success-border); }
+.alert-danger  { background: rgba(244,63,94,0.08);  color: #c0132d;  border: 1px solid rgba(244,63,94,0.22); }
+.alert-success { background: rgba(5,150,105,0.08); color: #065f46; border: 1px solid rgba(5,150,105,0.22); }
 
 @keyframes toastIn {
   from { opacity: 0; transform: translateY(-8px) scale(0.95); }
