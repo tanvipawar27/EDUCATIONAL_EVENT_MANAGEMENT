@@ -1,89 +1,219 @@
-/* Floating Icon */
+// ═══════════════════════════════════════════════════════
+//  CHATBOT — THEMED
+// ═══════════════════════════════════════════════════════
+$ease-out-expo: cubic-bezier(.16,1,.3,1);
+$T: 0.42s ease;
+
+/* ── Floating icon ────────────────────────────────────── */
 .chat-icon {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #0078d7;
-  color: white;
-  font-size: 24px;
-  padding: 15px;
+  bottom: 24px;
+  right: 24px;
+  width: 54px;
+  height: 54px;
   border-radius: 50%;
+  background: var(--btn-grad);
+  color: #fff;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-  transition: transform 0.2s;
+  box-shadow: 0 6px 24px var(--glow-1);
+  transition: transform 0.25s $ease-out-expo, box-shadow 0.25s;
+  z-index: 2000;
+  border: 2px solid var(--border-card);
+
+  &:hover {
+    transform: scale(1.12) translateY(-2px);
+    box-shadow: 0 12px 36px var(--glow-1);
+  }
 }
-.chat-icon:hover {
-  transform: scale(1.1);
-}
- 
-/* Popup Chat */
+
+/* ── Chat popup ───────────────────────────────────────── */
 .chat-popup {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 350px;
-  height: 400px;
-  max-height: 500px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  bottom: 24px;
+  right: 24px;
+  width: 360px;
+  height: 440px;
+  max-height: 85vh;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  backdrop-filter: blur(20px) saturate(1.5);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  box-shadow: var(--glass-shadow);
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  z-index: 2000;
+  transition: background $T, border-color $T;
+  animation: chatPop 0.4s $ease-out-expo both;
 }
- 
+
+@keyframes chatPop {
+  from { opacity: 0; transform: scale(0.88) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── Accent bar ───────────────────────────────────────── */
+.chat-popup::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
+  flex-shrink: 0;
+}
+
+/* ── Header ───────────────────────────────────────────── */
 .chat-header {
-  background: #0078d7;
-  color: white;
-  padding: 10px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--glow-1);
+  flex-shrink: 0;
+  transition: background $T, border-color $T;
+
+  span {
+    font-family: 'Sora', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    transition: color $T;
+  }
 }
- 
+
 .close-btn {
-  background: transparent;
+  background: none;
   border: none;
-  color: white;
-  font-size: 18px;
+  color: var(--text-sub);
+  font-size: 1rem;
   cursor: pointer;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover { background: var(--alert-danger-bg); color: var(--accent-4); }
 }
- 
+
+/* ── Chat window ──────────────────────────────────────── */
 .chat-window {
   flex: 1;
-  padding: 10px;
+  padding: 1rem;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { background: var(--border-card); border-radius: 2px; }
 }
- 
+
+.chat-window > div {
+  max-width: 88%;
+  padding: 0.6rem 0.9rem;
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.855rem;
+  line-height: 1.55;
+  animation: msgIn 0.3s $ease-out-expo both;
+
+  strong {
+    font-family: 'Sora', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+}
+
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* You (user) messages — right aligned */
+.You {
+  align-self: flex-end;
+  background: var(--btn-grad);
+  color: #000;
+  border-radius: 14px 14px 4px 14px;
+
+  strong { color: rgba(255,255,255,0.75); }
+}
+
+/* AI messages — left aligned */
+.AI {
+  align-self: flex-start;
+  background: var(--glass-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 14px 14px 14px 4px;
+  transition: background $T, border-color $T, color $T;
+
+  strong { color: var(--accent-1); }
+}
+
+/* ── Input area ───────────────────────────────────────── */
 .chat-input {
   display: flex;
-  gap: 10px;
-  padding: 10px;
-  border-top: 1px solid #ddd;
+  gap: 0.6rem;
+  padding: 0.8rem 1rem;
+  border-top: 1px solid var(--border);
+  background: var(--glow-1);
+  flex-shrink: 0;
+  transition: background $T, border-color $T;
+
+  input {
+    flex: 1;
+    padding: 0.6rem 0.9rem;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    background: var(--bg-input);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.2s, background $T, color $T;
+
+    &::placeholder { color: var(--text-muted); }
+    &:focus { border-color: var(--accent-1); box-shadow: 0 0 0 2px var(--glow-1); }
+  }
+
+  button {
+    padding: 0.6rem 1.1rem;
+    border-radius: 10px;
+    border: none;
+    background: var(--btn-grad);
+    color: #000;
+    font-family: 'Sora', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+
+    &:hover { opacity: 0.88; transform: translateY(-1px); }
+    &:active { transform: scale(0.96); }
+  }
 }
- 
-.chat-input input {
-  flex: 1;
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+
+@media (max-width: 480px) {
+  .chat-popup {
+    width: calc(100vw - 2rem);
+    right: 1rem;
+    bottom: 1rem;
+  }
 }
- 
-.chat-input button {
-  background: #0078d7;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
-  cursor: pointer;
-}
- 
-.You {
-  text-align: right;
-  color: #0078d7;
-}
- 
-.AI {
-  text-align: left;
-  color: #2c3e50;
+.chat-icon{
+  background-color: black;
 }

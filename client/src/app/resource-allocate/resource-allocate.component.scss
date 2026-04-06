@@ -1,252 +1,171 @@
-/* =====================================================
-   HOST
-   ===================================================== */
-:host {
-  display: block;
-  min-height: 100vh;
-}
+// ═══════════════════════════════════════════════════════
+//  RESOURCE ALLOCATE — THEMED
+// ═══════════════════════════════════════════════════════
+$ease-out-expo: cubic-bezier(.16,1,.3,1);
+$T: 0.42s ease;
 
-/* =====================================================
-   PAGE CONTAINER
-   ===================================================== */
+:host { display: block; min-height: 100vh; position: relative; }
+
 .page-container {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
-  padding: 40px 16px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
-  font-family: system-ui, Segoe UI, Roboto, Arial;
-  color: #fff;
-
-  background:
-    radial-gradient(900px 600px at 10% 10%, rgba(63,233,255,0.18), transparent 60%),
-    radial-gradient(900px 600px at 90% 15%, rgba(197,107,240,0.18), transparent 60%),
-    radial-gradient(900px 700px at 50% 120%, rgba(94,58,238,0.22), transparent 65%),
-    #040508;
-
-  animation: pageFadeIn 0.9s ease-out both;
+  padding: 3rem 1.5rem;
+  background: var(--bg);
+  transition: background $T;
 }
 
-@keyframes pageFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* =====================================================
-   CARD
-   ===================================================== */
+/* ── Card ─────────────────────────────────────────────── */
 .card {
   width: 100%;
-  max-width: 520px;
-
-  background: rgba(255,255,255,0.07) !important;
-  border-radius: 26px;
-  border: 1px solid rgba(255,255,255,0.16);
-  backdrop-filter: blur(16px);
-
-  box-shadow:
-    0 30px 80px rgba(0,0,0,0.7),
-    inset 0 0 0 1px rgba(255,255,255,0.08);
-
-  animation: formPop 0.8s ease-out both;
+  max-width: 540px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  box-shadow: var(--glass-shadow);
+  overflow: hidden;
+  transition: background $T, border-color $T;
+  animation: cardPop 0.65s $ease-out-expo both;
 }
 
-@keyframes formPop {
-  0% {
-    opacity: 0;
-    transform: scale(0.92) translateY(40px);
-  }
-  60% {
-    opacity: 1;
-    transform: scale(1.03);
-  }
-  100% {
-    transform: scale(1);
-  }
+@keyframes cardPop {
+  0%   { opacity: 0; transform: scale(0.93) translateY(28px); }
+  60%  { opacity: 1; transform: scale(1.015); }
+  100% { transform: scale(1); }
 }
 
-/* =====================================================
-   CARD HEADER (OVERRIDE BOOTSTRAP)
-   ===================================================== */
-.card-header {
-  padding: 22px 26px;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
-  background: transparent !important;
-}
-
-.card-header h3 {
-  margin: 0;
-  font-size: 1.6rem;
-  font-weight: 700;
-
-  background: linear-gradient(90deg, #3fe9ff, #c56bf0, #5e3aee);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  animation: titleGlow 3s ease-in-out infinite;
-}
-
-@keyframes titleGlow {
-  0%,100% {
-    filter: drop-shadow(0 0 8px rgba(63,233,255,0.3));
-  }
-  50% {
-    filter: drop-shadow(0 0 18px rgba(197,107,240,0.6));
-  }
-}
-
-/* =====================================================
-   CARD BODY
-   ===================================================== */
-.card-body {
-  padding: 26px;
-}
-
-/* =====================================================
-   FORM GROUPS
-   ===================================================== */
-.form-group {
-  margin-bottom: 18px;
-}
-
-.form-group label {
+/* ── Accent top bar ───────────────────────────────────── */
+.card::before {
+  content: '';
   display: block;
-  margin-bottom: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: rgba(255,255,255,0.85);
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
 }
 
-/* =====================================================
-   SELECT & INPUT FIELDS
-   ===================================================== */
+/* ── Card header ──────────────────────────────────────── */
+.card-header {
+  padding: 1.6rem 2rem 1.4rem;
+  border-bottom: 1px solid var(--border);
+  background: transparent;
+
+  h3 {
+    margin: 0;
+    font-family: 'Sora', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* ── Card body ────────────────────────────────────────── */
+.card-body { padding: 1.8rem 2rem; }
+
+/* ── Form group ───────────────────────────────────────── */
+.form-group {
+  margin-bottom: 1.3rem;
+}
+
+/* ── Select / Input ───────────────────────────────────── */
 .form-control {
   width: 100%;
-  padding: 12px 14px;
-
-  border-radius: 14px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.25);
-  color: #fff;
-
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.2s ease;
-}
-
-.form-control option {
-  color: #000;
-}
-
-/* Focus glow ✨ */
-.form-control:focus {
+  padding: 0.88rem 1rem;
+  border-radius: 12px;
+  background: var(--bg-input);
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
   outline: none;
-  border-color: #3fe9ff;
-  box-shadow:
-    0 0 0 3px rgba(63,233,255,0.25),
-    0 0 25px rgba(94,58,238,0.35);
-  transform: scale(1.02);
+  transition: border-color 0.25s, background $T, box-shadow 0.25s, color $T, transform 0.2s;
+
+  &::placeholder { color: var(--text-muted); }
+
+  &:focus {
+    border-color: var(--accent-1);
+    box-shadow: 0 0 0 3px var(--glow-1);
+    transform: scale(1.015);
+  }
+
+  &.is-invalid {
+    border-color: var(--accent-4);
+    box-shadow: 0 0 0 2px rgba(244,114,182,0.2);
+  }
 }
 
-/* =====================================================
-   INVALID STATE
-   ===================================================== */
-.form-control.is-invalid {
-  border-color: #ff4d6d;
-  box-shadow: 0 0 0 2px rgba(255,77,109,0.35);
-}
+select.form-control { cursor: pointer; }
+select.form-control option { background: var(--bg); color: var(--text); }
 
+/* ── Invalid feedback ─────────────────────────────────── */
 .invalid-feedback {
-  margin-top: 4px;
-  font-size: 0.8rem;
-  color: #ff7a90;
+  font-size: 0.75rem;
+  color: var(--accent-4);
+  margin-top: 0.3rem;
   animation: shake 0.4s ease;
 }
 
 @keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-4px); }
-  50% { transform: translateX(4px); }
-  75% { transform: translateX(-4px); }
-  100% { transform: translateX(0); }
+  0%,100% { transform: translateX(0); }
+  25%      { transform: translateX(-4px); }
+  75%      { transform: translateX(4px); }
 }
 
-/* =====================================================
-   ALERTS (POP-UP FEEL)
-   ===================================================== */
+/* ── Alerts ───────────────────────────────────────────── */
 .alert {
-  margin-top: 14px;
-  padding: 12px 16px;
-  border-radius: 14px;
-  animation: toastPop 0.6s cubic-bezier(.2,1.4,.4,1) both;
+  border-radius: 12px;
+  padding: 0.82rem 1rem;
+  font-size: 0.875rem;
+  border: 1px solid;
+  margin-top: 0.8rem;
+  animation: toastIn 0.4s ease both;
 }
 
-@keyframes toastPop {
-  from {
-    opacity: 0;
-    transform: translateY(-10px) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(-6px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* =====================================================
-   SUBMIT BUTTON — AURORA BLOB STYLE
-   ===================================================== */
-/* =====================================================
-   PRIMARY BUTTON — COMPACT AURORA STYLE
-   ===================================================== */
-/* =====================================================
-   PRIMARY BUTTON — FINAL STANDARD
-   ===================================================== */
+.alert-danger {
+  background: var(--alert-danger-bg);
+  color: var(--alert-danger-txt);
+  border-color: var(--alert-danger-border);
+}
+
+.alert-success {
+  background: var(--alert-success-bg);
+  color: var(--alert-success-txt);
+  border-color: var(--alert-success-border);
+}
+
+/* ── Submit button ────────────────────────────────────── */
 .btn-primary {
   width: 100%;
-  margin-top: 18px;
-  padding: 14px;
-
-  font-size: 1.05rem;
-  font-weight: 600;
-
-  border-radius: 16px;
+  margin-top: 1rem;
+  padding: 0.95rem;
+  border-radius: 12px;
   border: none;
-
-  background: linear-gradient(90deg, #3fe9ff, #5e3aee);
+  background: var(--btn-grad);
   color: #fff;
+  font-family: 'Sora', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 22px var(--glow-1);
+  transition: transform 0.22s, opacity 0.22s, box-shadow 0.22s;
 
-  box-shadow: 0 0 22px rgba(63,233,255,0.45);
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  &:hover { transform: translateY(-2px); opacity: 0.9; box-shadow: 0 14px 36px var(--glow-1); }
+  &:active { transform: scale(0.97); }
 }
 
-/* Hover glow */
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 0 35px rgba(63,233,255,0.7),
-    0 0 70px rgba(94,58,238,0.5);
-}
-
-/* Click bounce */
-.btn-primary:active {
-  transform: scale(0.96);
-}
-
-
-/* =====================================================
-   RESPONSIVE
-   ===================================================== */
 @media (max-width: 576px) {
-  .card-header h3 {
-    font-size: 1.35rem;
-  }
+  .card-header h3 { font-size: 1.2rem; }
+  .card-body, .card-header { padding-left: 1.3rem; padding-right: 1.3rem; }
 }

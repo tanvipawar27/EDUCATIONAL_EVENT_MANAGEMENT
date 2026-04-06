@@ -1,46 +1,150 @@
-<div class="page-container">
-<div class="card">
-<div class="card-header">
-<h3>Register for Event</h3>
-</div>
-<div class="card-body">
-<form [formGroup]="registerForm" (ngSubmit)="submit()">
- 
-        <!-- Event ID (or dropdown of events) -->
-<div class="form-group">
-<label for="eventId">Event ID</label>
-<input
-            id="eventId"
-            type="text"
-            class="form-control"
-            placeholder="Enter Event ID"
-            formControlName="eventId"
-          />
-<div class="invalid-feedback" *ngIf="registerForm.get('eventId')?.invalid && registerForm.get('eventId')?.touched">
-            Event ID is required.
-</div>
-</div>
- 
-        <!-- Student ID removed (auto-filled from login) -->
-<!-- Status removed (backend sets REGISTERED) -->
- 
-        <button
-          type="submit"
-          class="btn btn-primary mt-3 w-100"
-          [disabled]="registerForm.invalid"
->
-          Register
-</button>
-</form>
- 
-      <!-- Alerts -->
-<div class="alert alert-danger mt-3" *ngIf="showError">
-        {{ errorMessage }}
-</div>
- 
-      <div class="alert alert-success mt-3" *ngIf="showMessage">
-        {{ responseMessage }}
-</div>
-</div>
-</div>
+<!-- REGISTER FOR EVENT — CHECKBOX SELECTION -->
+<div class="rfe-root">
+
+  <!-- Aurora background -->
+  <div class="aurora-bg">
+    <div class="aurora-orb aurora-orb-1"></div>
+    <div class="aurora-orb aurora-orb-2"></div>
+    <div class="aurora-orb aurora-orb-3"></div>
+  </div>
+  <div class="light-bg"></div>
+
+  <div class="rfe-inner page-enter">
+
+    <!-- ── HEADER ── -->
+    <div class="rfe-page-header">
+      <div class="rfe-badge">
+        <span class="badge-pulse"></span>
+        Event Registration Open
+      </div>
+      <h1 class="rfe-headline">
+        Register for <span class="gradient-text">Events</span>
+      </h1>
+      <p class="rfe-sub">
+        Select one or more events below and confirm your registration instantly.
+      </p>
+    </div>
+
+    <!-- ── MAIN CONTENT ── -->
+    <div class="rfe-content">
+
+      <!-- Loading state -->
+      <div class="loading-state" *ngIf="isLoading">
+        <div class="spinner"></div>
+        <p>Fetching available events…</p>
+      </div>
+
+      <!-- Empty state -->
+      <div class="empty-state glass-card" *ngIf="!isLoading && eventList.length === 0">
+        <span class="empty-icon">📭</span>
+        <h3>No Events Available</h3>
+        <p>There are no upcoming events right now. Check back soon!</p>
+      </div>
+
+      <!-- Events grid -->
+      <div class="events-section" *ngIf="!isLoading && eventList.length > 0">
+
+        <!-- Search + selection bar -->
+        <div class="toolbar glass-card">
+          <div class="search-wrap">
+            <span class="search-icon">🔍</span>
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Search events…"
+              [(ngModel)]="searchTerm"
+              (input)="applySearch()"
+            />
+          </div>
+          <div class="toolbar-right">
+            <span class="selected-count" *ngIf="selectedIds.size > 0">
+              {{ selectedIds.size }} selected
+            </span>
+            <button class="btn-clear" *ngIf="selectedIds.size > 0" (click)="clearAll()">
+              Clear all
+            </button>
+          </div>
+        </div>
+
+        <!-- Event cards -->
+        <div class="cards-grid">
+          <label
+            class="event-card glass-card"
+            *ngFor="let event of filteredEvents; let i = index"
+            [class.selected]="selectedIds.has(event.id)"
+            [class.already-registered]="registeredIds.has(event.id)"
+            [style.animation-delay]="(i * 0.06) + 's'"
+          >
+            <!-- Hidden checkbox -->
+            <input
+              type="checkbox"
+              class="hidden-checkbox"
+              [value]="event.id"
+              [checked]="selectedIds.has(event.id)"
+              [disabled]="registeredIds.has(event.id)"
+              (change)="toggleEvent(event.id)"
+            />
+
+            <!-- Custom check indicator -->
+            <div class="card-check">
+              <span class="check-circle" [class.checked]="selectedIds.has(event.id)">
+                <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
+                  <path d="M1.5 5L5 8.5L11.5 1.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </div>
+
+            <!-- Status badges -->
+            <div class="card-badges">
+              <span class="status-badge upcoming" *ngIf="isUpcoming(event.date)">📅 Upcoming</span>
+              <span class="status-badge completed" *ngIf="!isUpcoming(event.date)">✔ Completed</span>
+              <span class="status-badge already" *ngIf="registeredIds.has(event.id)">✓ Registered</span>
+            </div>
+
+            <!-- Card content -->
+            <div class="card-body">
+              <div class="card-date-chip">{{ event.date | date:'MMM d, yyyy' }}</div>
+              <h3 class="card-title">{{ event.name }}</h3>
+              <p class="card-desc">{{ event.description }}</p>
+              <div class="card-meta" *ngIf="event.materials">
+                <span class="meta-label">🛠️ Materials:</span>
+                <span class="meta-value">{{ event.materials }}</span>
+              </div>
+            </div>
+
+            <!-- Selected overlay glow -->
+            <div class="selected-glow"></div>
+          </label>
+        </div>
+
+        <!-- Alerts -->
+        <div class="alert alert-danger" *ngIf="showError">⚠️ {{ errorMessage }}</div>
+        <div class="alert alert-success" *ngIf="showMessage">🎉 {{ responseMessage }}</div>
+
+        <!-- Sticky submit bar (appears when ≥1 selected) -->
+        <div class="submit-bar" [class.visible]="selectedIds.size > 0">
+          <div class="submit-bar-inner glass-card">
+            <div class="submit-bar-left">
+              <span class="submit-count-pill">{{ selectedIds.size }}</span>
+              <span class="submit-bar-label">
+                event{{ selectedIds.size !== 1 ? 's' : '' }} selected
+              </span>
+            </div>
+            <button
+              class="btn-register"
+              [disabled]="selectedIds.size === 0 || isSubmitting"
+              (click)="submit()"
+            >
+              <span *ngIf="!isSubmitting">🎟️ Confirm Registration →</span>
+              <span *ngIf="isSubmitting" class="submitting-text">
+                <span class="dot-pulse"></span>
+                Registering…
+              </span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div>
