@@ -1,58 +1,78 @@
-<div class="page-container">
-  <div class="form-card">
-    <div class="card-header">
-      <h3>Create New Event</h3>
-    </div>
-    <div class="card-body">
-      <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
-        
-        <!-- Event Name -->
-        <div class="form-group mb-3">
-          <label>Event Name</label>
-          <input type="text" formControlName="name" class="form-control" placeholder="Enter event name"
-            [class.is-invalid]="name?.invalid && name?.touched" />
-          <div class="invalid-feedback" *ngIf="name?.invalid && name?.touched">
-            Event name is required (min 3 characters).
-          </div>
+<!-- CREATE EVENT COMPONENT -->
+<div class="form-page-root">
+  <div class="aurora-bg">
+    <div class="aurora-orb aurora-orb-1"></div>
+    <div class="aurora-orb aurora-orb-2"></div>
+    <div class="aurora-orb aurora-orb-3"></div>
+  </div>
+  <div class="light-bg"></div>
+
+  <div class="form-page-inner page-enter">
+    <div class="form-card glass-card card-pop">
+      <div class="form-card-accent"></div>
+
+      <div class="form-card-header">
+        <div class="form-card-icon">📅</div>
+        <div>
+          <h2>Create New Event</h2>
+          <p>Schedule a workshop, seminar, or conference</p>
         </div>
+      </div>
 
-        <!-- Description -->
-        <div class="form-group mb-3">
-          <label>Description</label>
-          <textarea formControlName="description" class="form-control" rows="3" placeholder="Enter description"
-            [class.is-invalid]="description?.invalid && description?.touched"></textarea>
-          <div class="invalid-feedback" *ngIf="description?.invalid && description?.touched">
-            Description is required (min 10 characters).
+      <div class="form-card-body">
+        <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+
+          <!-- Event Name -->
+          <div class="form-group">
+            <label>Event Name</label>
+            <input type="text" formControlName="name" class="form-control"
+                   placeholder="e.g. Angular Workshop 2025"
+                   [class.is-invalid]="name?.invalid && name?.touched" />
+            <div class="invalid-feedback" *ngIf="name?.invalid && name?.touched">
+              Event name is required (min 3 characters).
+            </div>
           </div>
-        </div>
 
-        <!-- Materials -->
-        <div class="form-group mb-3">
-          <label>Utilities</label>
-          <input type="text" formControlName="materials" class="form-control" placeholder="Enter materials"
-            [class.is-invalid]="materials?.invalid && materials?.touched" />
-          <div class="invalid-feedback" *ngIf="materials?.invalid && materials?.touched">
-            Materials are required (min 3 characters).
+          <!-- Description -->
+          <div class="form-group">
+            <label>Description</label>
+            <textarea formControlName="description" class="form-control" rows="3"
+                      placeholder="Describe what participants can expect..."
+                      [class.is-invalid]="description?.invalid && description?.touched"></textarea>
+            <div class="invalid-feedback" *ngIf="description?.invalid && description?.touched">
+              Description is required (min 10 characters).
+            </div>
           </div>
-        </div>
 
-        <!-- Event Date -->
-        <div class="form-group mb-3">
-          <label>Event Date</label>
-          <input type="date" formControlName="date" class="form-control"
-            [class.is-invalid]="date?.invalid && date?.touched" />
-          <div class="invalid-feedback" *ngIf="date?.invalid && date?.touched">
-            Event date is required.
+          <!-- Materials / Utilities -->
+          <div class="form-group">
+            <label>Utilities / Materials</label>
+            <input type="text" formControlName="materials" class="form-control"
+                   placeholder="e.g. Projector, Whiteboard, Laptops"
+                   [class.is-invalid]="materials?.invalid && materials?.touched" />
+            <div class="invalid-feedback" *ngIf="materials?.invalid && materials?.touched">
+              Materials are required (min 3 characters).
+            </div>
           </div>
-        </div>
 
-        <!-- Feedback Messages -->
-        <div class="alert alert-danger" *ngIf="showError">{{ errorMessage }}</div>
-        <div class="alert alert-success" *ngIf="showMessage">{{ responseMessage }}</div>
+          <!-- Event Date -->
+          <div class="form-group">
+            <label>Event Date</label>
+            <input type="date" formControlName="date" class="form-control"
+                   [class.is-invalid]="date?.invalid && date?.touched" />
+            <div class="invalid-feedback" *ngIf="date?.invalid && date?.touched">
+              Event date is required.
+            </div>
+          </div>
 
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary w-100">Create Event</button>
-      </form>
+          <div class="alert alert-danger" *ngIf="showError">⚠️ {{ errorMessage }}</div>
+          <div class="alert alert-success" *ngIf="showMessage">✅ {{ responseMessage }}</div>
+
+          <button type="submit" class="btn-primary" style="margin-top:0.5rem">
+            Create Event →
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

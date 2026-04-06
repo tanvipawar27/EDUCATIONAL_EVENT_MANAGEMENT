@@ -1,300 +1,314 @@
-:host {
-  display: inline !important;
-}
+// ═══════════════════════════════════════════════════════
+//  DASHBOARD COMPONENT — THEMED STYLES
+// ═══════════════════════════════════════════════════════
+$ease-out-expo: cubic-bezier(.16,1,.3,1);
+$T: 0.42s ease;
 
-.dashboard-container {
+:host { display: block; position: relative; }
+
+.dashboard-root {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
-  padding: 40px 24px;
-  font-family: system-ui, Segoe UI, Roboto, Arial;
-  color: #fff;
-
-  background:
-    radial-gradient(900px 600px at 10% 10%, rgba(63,233,255,0.18), transparent 60%),
-    radial-gradient(900px 600px at 90% 15%, rgba(197,107,240,0.18), transparent 60%),
-    radial-gradient(900px 700px at 50% 120%, rgba(94,58,238,0.22), transparent 65%),
-    #040508;
-
-  animation: pageEnter 0.9s ease-out both;
-  border-radius: 20px !important;
+  padding: 2rem 1.75rem 4rem;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
-/* Page enter animation */
-@keyframes pageEnter {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* =====================================================
-   WELCOME BANNER
-   ===================================================== */
+// ── Welcome Banner ──────────────────────────────────────
 .welcome-banner {
-  margin-bottom: 50px;
-  padding: 28px 32px;
-  border-radius: 20px;
-
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  backdrop-filter: blur(14px);
-  
-}
-
-.welcome-banner h2 {
-  font-size: 2rem;
-  margin-bottom: 8px;
-  
-
-  background: linear-gradient(90deg, #3fe9ff, #c56bf0, #5e3aee);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-    font-weight: 800;
-
-}
-
-.welcome-banner p {
-  color: rgba(255,255,255,0.75);
-  margin: 0;
-  font-weight: 800;
-}
-
-/* =====================================================
-   DASHBOARD ACTION CARDS (ROWS & COLUMNS)
-   ===================================================== */
-.col-md-4 {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
-}
-
-/* Card */
-.circle-card {
-  width: 100%;
-  max-width: 320px;
-  height: 160px;
-
-  border-radius: 18px;
-  cursor: pointer;
-
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.14);
-  backdrop-filter: blur(14px);
-
-  box-shadow: 0 18px 45px rgba(0,0,0,0.6);
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 2rem 2.5rem;
+  margin-bottom: 2.5rem;
   position: relative;
   overflow: hidden;
 
-  animation: cardPop 0.6s ease-out both;
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
+  }
 
-/* Card pop animation */
-@keyframes cardPop {
-  0% {
-    opacity: 0;
-    transform: scale(0.85) translateY(20px);
-  }
-  60% {
-    opacity: 1;
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
   }
 }
 
-/* Card title */
-.circle-card h5 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin: 0;
-  text-align: center;
+.welcome-role-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0.28rem 0.85rem;
+  border-radius: 999px;
+  background: var(--glow-1);
+  border: 1px solid var(--border-card);
+  color: var(--accent-1);
+  font-family: 'Sora', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+}
+
+.role-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent-3);
+  animation: pulseDot 2s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%,100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(0.6); opacity: 0.5; }
+}
+
+.welcome-title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
   font-weight: 800;
-
-  background: linear-gradient(90deg, #3fe9ff, #c56bf0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+  line-height: 1.2;
+  transition: color $T;
 }
 
-/* Hover delight */
-.circle-card:hover {
-  transform: translateY(-10px) scale(1.05);
-  box-shadow:
-    0 35px 80px rgba(0,0,0,0.75),
-    0 0 35px rgba(63,233,255,0.45);
+.welcome-sub {
+  font-size: 0.92rem;
+  color: var(--text-sub);
+  max-width: 520px;
+  line-height: 1.72;
+  transition: color $T;
 }
 
-/* Click feedback */
-.circle-card:active {
-  transform: scale(0.97);
+.welcome-illustration {
+  font-size: 4.5rem;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 20px var(--glow-1));
+  animation: floatY 4s ease-in-out infinite;
+
+  @media (max-width: 600px) { font-size: 3rem; }
 }
 
-/* Glow aura */
-.circle-card::after {
-  content: "";
-  position: absolute;
-  inset: -25px;
-  background: radial-gradient(circle, rgba(94,58,238,0.35), transparent 65%);
-  opacity: 0;
-  transition: opacity 0.35s ease;
+@keyframes floatY {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
 }
 
-.circle-card:hover::after {
-  opacity: 1;
+// ── Section Label ───────────────────────────────────────
+.section-label { margin-bottom: 1.75rem; }
+
+.section-eyebrow {
+  display: inline-block;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--accent-3); margin-bottom: 0.4rem;
 }
 
-/* =====================================================
-   EDUCATOR SECTION
-   ===================================================== */
-.events-cards {
-  margin-top: 60px;
+.section-heading {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(1.35rem, 2.5vw, 1.9rem);
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  transition: color $T;
 }
 
-.page-container {
-  max-width: 1200px;
-  margin: auto;
+// ── Action Cards Grid ───────────────────────────────────
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+
+  &--student {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    max-width: 960px;
+  }
 }
 
-/* =====================================================
-   UPDATE FORM
-   ===================================================== */
-.card {
-  background: rgba(255,255,255,0.06);
-  border-radius: 22px;
-  border: 1px solid rgba(255,255,255,0.14);
+.action-card {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 1.5rem 1.75rem;
+  border-radius: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
   overflow: hidden;
+  animation: cardPop 0.6s $ease-out-expo both;
+  transition: transform 0.3s $ease-out-expo, box-shadow 0.3s;
+
+  &::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--glow-1), transparent 65%);
+    opacity: 0; transition: opacity 0.3s;
+  }
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    &::after { opacity: 1; }
+    .action-arrow { transform: translateX(5px); }
+  }
 }
 
-.card-header {
-  padding: 18px 24px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+.action-icon-wrap {
+  width: 56px; height: 56px; flex-shrink: 0;
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem;
+}
+.icon-blue   { background: rgba(91,143,255,0.15); }
+.icon-teal   { background: rgba(52,217,195,0.15); }
+.icon-violet { background: rgba(167,139,250,0.15); }
+.icon-pink   { background: rgba(244,114,182,0.15); }
+.icon-gold   { background: rgba(251,191,36,0.15); }
+.icon-green  { background: rgba(74,222,128,0.15); }
+
+.action-body {
+  flex: 1;
+  h3 {
+    font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 700;
+    color: var(--text); margin-bottom: 0.28rem; transition: color $T;
+  }
+  p {
+    font-size: 0.82rem; color: var(--text-sub);
+    line-height: 1.55; transition: color $T;
+  }
 }
 
-.card-header h3 {
-  margin: 0;
-  font-size: 1.4rem;
+.action-arrow {
+  font-size: 1.3rem; color: var(--accent-1);
+  transition: transform 0.25s $ease-out-expo;
+  flex-shrink: 0;
 }
 
-.card-body {
-  padding: 24px;
-}
-
-.form-group label {
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.75);
-}
-
-.form-control {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.18);
-  color: #fff;
-}
-
-.form-control:focus {
-  outline: none;
-  border-color: #3fe9ff;
-  box-shadow: 0 0 0 2px rgba(63,233,255,0.25);
-}
-
-/* =====================================================
-   AGENDA
-   ===================================================== */
-.agenda-container {
-  margin-top: 40px;
-}
-
-.agenda-title {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 40px;
-}
-
+// ── Educator Agenda ─────────────────────────────────────
 .agenda-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
-  gap: 28px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.4rem;
+  margin-bottom: 3rem;
 }
 
-/* Agenda card */
 .agenda-card {
-  background: rgba(255,255,255,0.06);
-  border-radius: 22px;
-  padding: 22px;
-  border: 1px solid rgba(255,255,255,0.14);
+  padding: 1.6rem;
+  border-radius: 20px;
+  animation: cardPop 0.6s $ease-out-expo both;
+  transition: transform 0.3s $ease-out-expo, box-shadow 0.3s;
 
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+  }
 }
 
-.agenda-card:hover {
-  transform: translateY(-8px) scale(1.03);
-  box-shadow:
-    0 30px 70px rgba(0,0,0,0.7),
-    0 0 25px rgba(94,58,238,0.45);
-}
-
-.agenda-card-header {
+.agenda-card-top {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
 }
 
-.agenda-date {
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.65);
+.event-date-chip {
+  flex-shrink: 0;
+  padding: 0.3rem 0.7rem;
+  border-radius: 8px;
+  background: var(--glow-1);
+  border: 1px solid var(--border-card);
+  color: var(--accent-1);
+  font-family: 'Sora', sans-serif; font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.05em;
 }
 
-.agenda-card-body p {
-  color: rgba(255,255,255,0.8);
+.agenda-event-name {
+  font-family: 'Sora', sans-serif; font-size: 1.05rem; font-weight: 700;
+  color: var(--text); line-height: 1.3;
+  transition: color $T;
 }
 
-/* =====================================================
-   BUTTONS & ALERTS (POP FEEL)
-   ===================================================== */
-.btnedit {
-  background: linear-gradient(90deg, #3fe9ff, #5e3aee);
-  color: #fff;
-}
-
-.btndelete {
-  background: linear-gradient(90deg, #ff4d4d, #ff0077);
-  color: #fff;
-}
-
-.alert {
-  border-radius: 12px;
-  animation: toastPop 0.6s cubic-bezier(.2,1.4,.4,1) both;
-}
-
-/* Alert pop animation */
-@keyframes toastPop {
-  from {
-    opacity: 0;
-    transform: translateY(-10px) scale(0.9);
+.agenda-card-body {
+  margin-bottom: 1.2rem;
+  p {
+    font-size: 0.855rem; color: var(--text-sub);
+    line-height: 1.6; margin-bottom: 0.4rem; transition: color $T;
   }
-  to {
-    opacity: 1;
-    transform: scale(1);
+  strong { color: var(--text); font-weight: 600; }
+}
+
+.agenda-card-footer {
+  display: flex; gap: 0.65rem; flex-wrap: wrap;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+// ── Update Form ─────────────────────────────────────────
+.form-card {
+  max-width: 600px;
+  margin-bottom: 2.5rem;
+}
+
+.form-card-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 1.8rem;
+  border-bottom: 1px solid var(--border);
+
+  h3 {
+    font-family: 'Sora', sans-serif; font-size: 1.2rem; font-weight: 800;
+    color: var(--text); transition: color $T;
   }
 }
 
-/* =====================================================
-   RESPONSIVE
-   ===================================================== */
+.btn-icon-close {
+  background: none; border: none;
+  width: 32px; height: 32px; border-radius: 8px;
+  color: var(--text-sub); font-size: 1rem;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s;
+  &:hover { background: var(--glow-1); color: var(--accent-4); }
+}
+
+.themed-form { padding: 1.8rem; }
+
+.form-group { margin-bottom: 1.25rem; }
+
+.form-actions { display: flex; gap: 0.85rem; margin-top: 1.5rem; flex-wrap: wrap; }
+
+// ── Empty state ─────────────────────────────────────────
+.empty-state {
+  grid-column: 1 / -1;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 3.5rem; text-align: center; gap: 1rem;
+
+  .empty-icon { font-size: 3rem; }
+  p { color: var(--text-sub); font-size: 0.92rem; }
+}
+
+// ── Animations ──────────────────────────────────────────
+@keyframes cardPop {
+  0%   { opacity: 0; transform: scale(0.92) translateY(20px); }
+  60%  { opacity: 1; transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+// ── Responsive ──────────────────────────────────────────
 @media (max-width: 768px) {
-  .welcome-banner h2 {
-    font-size: 1.6rem;
-  }
-
-  .circle-card {
-    max-width: 100%;
-  }
+  .dashboard-root { padding: 1.25rem 1rem 3rem; }
+  .action-grid { grid-template-columns: 1fr; }
+  .agenda-grid { grid-template-columns: 1fr; }
 }
+

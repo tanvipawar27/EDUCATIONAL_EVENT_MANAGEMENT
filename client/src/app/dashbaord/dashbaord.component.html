@@ -1,119 +1,238 @@
-<div class="dashboard-container">
-  <div class="welcome-banner">
-    <h2>Welcome, {{userName}} 👋</h2>
-    <p>Manage educational events, resources, and registrations from one place.</p>
+<!-- Aurora + light backgrounds -->
+<div class="aurora-bg">
+  <div class="aurora-orb aurora-orb-1"></div>
+  <div class="aurora-orb aurora-orb-2"></div>
+  <div class="aurora-orb aurora-orb-3"></div>
+  <div class="aurora-orb aurora-orb-4"></div>
+</div>
+<div class="light-bg"></div>
+
+<div class="dashboard-root page-enter">
+
+  <!-- ── WELCOME BANNER ── -->
+  <div class="welcome-banner glass-card">
+    <div class="welcome-left">
+      <div class="welcome-role-tag">
+        <span class="role-dot"></span>
+        {{ roles }}
+      </div>
+      <h1 class="welcome-title">
+        Good to see you, <span class="gradient-text">{{ userName }}</span> 👋
+      </h1>
+      <p class="welcome-sub">
+        <ng-container *ngIf="roles === 'INSTITUTION'">Manage your events, resources, and team from one powerful dashboard.</ng-container>
+        <ng-container *ngIf="roles === 'EDUCATOR'">View your upcoming agenda, update materials, and track student engagement.</ng-container>
+        <ng-container *ngIf="roles === 'STUDENT'">Browse events, register, and track your educational journey.</ng-container>
+      </p>
+    </div>
+    <div class="welcome-illustration">
+      <ng-container *ngIf="roles === 'INSTITUTION'">🏛️</ng-container>
+      <ng-container *ngIf="roles === 'EDUCATOR'">👨‍🏫</ng-container>
+      <ng-container *ngIf="roles === 'STUDENT'">🎓</ng-container>
+    </div>
   </div>
+
+  <!-- ── STUDENT STATS ── -->
   <app-student-stats></app-student-stats>
-    <!-- View Events -->
-  <div class="col-md-4" *ngIf="roles!=='EDUCATOR'">
-    <div class="circle-card" routerLink="/view-events" style="background-image: url('https://images.unsplash.com/photo-1604147495798-57beb5d6af73?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGRhcmslMjB0aGVtZXxlbnwwfHwwfHx8MA%3D%3D');">
-      <h5>View Events</h5>
-    </div>
-  </div>
 
- <!-- view resources -->
-  <div class="col-md-4" *ngIf="roles==='INSTITUTION'">
-    <div class="circle-card" routerLink="/view-resource" style="background-image: url('https://images.unsplash.com/photo-1604147495798-57beb5d6af73?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGRhcmslMjB0aGVtZXxlbnwwfHwwfHx8MA%3D%3D');">
-      <h5>View Resource</h5>
+  <!-- ══════════════════════════════════════
+       INSTITUTION DASHBOARD
+  ══════════════════════════════════════ -->
+  <ng-container *ngIf="roles === 'INSTITUTION'">
+    <div class="section-label">
+      <span class="section-eyebrow">Quick Actions</span>
+      <h2 class="section-heading">Institution Control Panel</h2>
     </div>
-  </div>
 
-  <!-- Allocate Resources -->
-  <div class="col-md-4" *ngIf="roles==='INSTITUTION'">
-    <div class="circle-card" routerLink="/view-students" style="background-image: url('https://images.unsplash.com/photo-1604147495798-57beb5d6af73?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGRhcmslMjB0aGVtZXxlbnwwfHwwfHx8MA%3D%3D');">
-      <h5>View Students</h5>
+    <div class="action-grid">
+      <div class="action-card glass-card card-pop" routerLink="/create-event">
+        <div class="action-icon-wrap icon-blue">📅</div>
+        <div class="action-body">
+          <h3>Create Event</h3>
+          <p>Schedule workshops, seminars, and conferences with full logistics control.</p>
+        </div>
+        <span class="action-arrow">→</span>
+      </div>
+
+      <div class="action-card glass-card card-pop" routerLink="/add-resource" style="animation-delay:0.08s">
+        <div class="action-icon-wrap icon-teal">🗂️</div>
+        <div class="action-body">
+          <h3>Add Resource</h3>
+          <p>Register classrooms, projectors, and teaching materials to the system.</p>
+        </div>
+        <span class="action-arrow">→</span>
+      </div>
+
+      <div class="action-card glass-card card-pop" routerLink="/resource-allocate" style="animation-delay:0.16s">
+        <div class="action-icon-wrap icon-violet">🔧</div>
+        <div class="action-body">
+          <h3>Allocate Resources</h3>
+          <p>Assign resources to specific events — prevent clashes automatically.</p>
+        </div>
+        <span class="action-arrow">→</span>
+      </div>
+
+      <div class="action-card glass-card card-pop" routerLink="/view-events" style="animation-delay:0.24s">
+        <div class="action-icon-wrap icon-pink">📋</div>
+        <div class="action-body">
+          <h3>View Events</h3>
+          <p>Browse all scheduled events and manage details in real time.</p>
+        </div>
+        <span class="action-arrow">→</span>
+      </div>
+
+      <div class="action-card glass-card card-pop" routerLink="/view-resource" style="animation-delay:0.32s">
+        <div class="action-icon-wrap icon-gold">📦</div>
+        <div class="action-body">
+          <h3>View Resources</h3>
+          <p>See all registered resources and their current allocation status.</p>
+        </div>
+        <span class="action-arrow">→</span>
+      </div>
+
+      <div class="action-card glass-card card-pop" routerLink="/view-allocations" style="animation-delay:0.40s">
+        <div class="action-icon-wrap icon-green">🔗</div>
+        <div class="action-body">
+          <h3>View Allocations</h3>
+          <p>Review which resources have been assigned to which events.</p>
+        </div>
+        <span class="action-arrow">→</span>
+      </div>
+
+      <div class="action-card glass-card card-pop" routerLink="/view-students" style="animation-delay:0.48s">
+        <div class="action-icon-wrap icon-blue">🎓</div>
+        <div class="action-body">
+          <h3>View Students</h3>
+          <p>Access the complete registry of enrolled students on the platform.</p>
+        </div>
+        <span class="action-arrow">→</span>
+      </div>
+
+      <div class="action-card glass-card card-pop" routerLink="/view-educators" style="animation-delay:0.56s">
+        <div class="action-icon-wrap icon-teal">👨‍🏫</div>
+        <div class="action-body">
+          <h3>View Educators</h3>
+          <p>View all educators registered and active on the platform.</p>
+        </div>
+        <span class="action-arrow">→</span>
+      </div>
     </div>
-  </div>
-  <!-- Allocate Resources -->
-  <div class="col-md-4" *ngIf="roles==='INSTITUTION'">
-    <div class="circle-card" routerLink="/view-educators" style="background-image: url('https://images.unsplash.com/photo-1604147495798-57beb5d6af73?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGRhcmslMjB0aGVtZXxlbnwwfHwwfHx8MA%3D%3D');">
-      <h5>View Educators</h5>
+  </ng-container>
+
+  <!-- ══════════════════════════════════════
+       EDUCATOR DASHBOARD
+  ══════════════════════════════════════ -->
+  <ng-container *ngIf="roles === 'EDUCATOR'">
+    <div class="section-label">
+      <span class="section-eyebrow">Educator Portal</span>
+      <h2 class="section-heading">Your Event Agenda</h2>
     </div>
-  </div>
 
-  <!-- My Bookings -->
-  <div class="col-md-4" *ngIf="roles==='STUDENT'">
-    <div class="circle-card" routerLink="/booking-details" style="background-image: url('https://images.unsplash.com/photo-1604147495798-57beb5d6af73?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGRhcmslMjB0aGVtZXxlbnwwfHwwfHx8MA%3D%3D');">
-      <h5>My Bookings</h5>
-    </div>
-  </div> 
-
-  <!-- View Allocation -->
-  <div class="col-md-4" *ngIf="roles==='INSTITUTION'">
-    <div class="circle-card" routerLink="/view-allocations" style="background-image: url('https://images.unsplash.com/photo-1604147495798-57beb5d6af73?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGRhcmslMjB0aGVtZXxlbnwwfHwwfHx8MA%3D%3D');">
-      <h5>Allocation</h5>
-    </div>
-  </div>
-
-
-  <!-- Show events table only if role is EDUCATOR -->
-<!-- Show event cards only if role is EDUCATOR -->
-<div *ngIf="roles==='EDUCATOR'" class="events-cards">
-<div class="page-container">
-
-  <!-- Update Form -->
-  <div class="card" *ngIf="isUpdate">
-    <div class="card-header">
-      <h3>Update Event Material</h3>
-    </div>
-    <div class="card-body">
-      <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+    <!-- Update Form -->
+    <div class="form-card glass-card card-pop" *ngIf="isUpdate">
+      <div class="form-card-header">
+        <h3>✏️ Update Event Material</h3>
+        <button class="btn-icon-close" (click)="isUpdate=false">✕</button>
+      </div>
+      <form [formGroup]="itemForm" (ngSubmit)="onSubmit()" class="themed-form">
         <input type="hidden" formControlName="id" />
 
         <div class="form-group">
           <label>Event Name</label>
           <input type="text" formControlName="name" class="form-control"
-                 [class.is-invalid]="itemForm.get('name')?.invalid && itemForm.get('name')?.touched" />
-          <div class="invalid-feedback" *ngIf="itemForm.get('name')?.invalid && itemForm.get('name')?.touched">
-            Name is required.
-          </div>
+                 [class.is-invalid]="itemForm.get('name')?.invalid && itemForm.get('name')?.touched"
+                 placeholder="Enter event name" />
+          <div class="invalid-feedback" *ngIf="itemForm.get('name')?.invalid && itemForm.get('name')?.touched">Name is required.</div>
         </div>
 
         <div class="form-group">
           <label>Description</label>
           <textarea formControlName="description" class="form-control" rows="3"
-                    [class.is-invalid]="itemForm.get('description')?.invalid && itemForm.get('description')?.touched"></textarea>
-          <div class="invalid-feedback" *ngIf="itemForm.get('description')?.invalid && itemForm.get('description')?.touched">
-            Description is required.
-          </div>
+                    [class.is-invalid]="itemForm.get('description')?.invalid && itemForm.get('description')?.touched"
+                    placeholder="Describe the event"></textarea>
+          <div class="invalid-feedback" *ngIf="itemForm.get('description')?.invalid && itemForm.get('description')?.touched">Description is required.</div>
         </div>
 
         <div class="form-group">
-          <label>Materials</label>
-          <input type="text" formControlName="materials" class="form-control" />
+          <label>Materials / Utilities</label>
+          <input type="text" formControlName="materials" class="form-control" placeholder="e.g. Projector, Whiteboard" />
         </div>
 
         <div class="alert alert-danger" *ngIf="showError">{{ errorMessage }}</div>
         <div class="alert alert-success" *ngIf="showMessage">{{ responseMessage }}</div>
 
-        <button type="submit" class="btn btn-primary">Update Event</button>
-        <button type="button" class="btn btn-primary ml-2" (click)="isUpdate=false">Cancel</button>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary" style="width:auto;padding:0.75rem 1.8rem">Update Event</button>
+          <button type="button" class="btn-secondary" (click)="isUpdate=false">Cancel</button>
+        </div>
       </form>
     </div>
-  </div>
 
-  <!-- Events Agenda -->
-  <div class="agenda-container" *ngIf="!isUpdate">
-    <h2 class="agenda-title"><b>Upcoming Events</b></h2>
-    <div class="agenda-grid">
-      <div class="agenda-card" *ngFor="let event of eventList; let i = index">
-        <div class="agenda-card-header">
-          <h4><b>{{ event.name }}</b></h4>
-          <span class="agenda-date">{{ event.date | date:'mediumDate' }}</span>
+    <!-- Events Agenda Grid -->
+    <div class="agenda-grid" *ngIf="!isUpdate">
+      <div class="agenda-card glass-card" *ngFor="let event of eventList; let i = index"
+           [style.animation-delay]="(i * 0.07) + 's'">
+        <div class="agenda-card-top">
+          <div class="event-date-chip">{{ event.date | date:'MMM d' }}</div>
+          <h4 class="agenda-event-name">{{ event.name }}</h4>
         </div>
         <div class="agenda-card-body">
           <p><strong>Description:</strong> {{ event.description }}</p>
-          <p><strong>Materials:</strong> {{ event.materials }}</p>
+          <p *ngIf="event.materials"><strong>Materials:</strong> {{ event.materials }}</p>
         </div>
-        <div class="agenda-card-footer" *ngIf="role!=='STUDENT'">
-          <button class="btn btn-sm btn-warning btnedit" (click)="edit(event)">Edit</button>
-          <button class="btn btn-sm btn-danger ml-2 btndelete" (click)="deleteEvent(event.id)">Delete</button>
+        <div class="agenda-card-footer">
+          <button class="btn-warning" (click)="edit(event)">✏️ Edit</button>
+          <button class="btn-danger" (click)="deleteEvent(event.id)">🗑️ Delete</button>
         </div>
       </div>
+
+      <div class="empty-state glass-card" *ngIf="!eventList || eventList.length === 0">
+        <span class="empty-icon">📅</span>
+        <p>No events scheduled yet.</p>
+      </div>
     </div>
-  </div>
-</div>
+  </ng-container>
+
+  <!-- ══════════════════════════════════════
+       STUDENT DASHBOARD
+  ══════════════════════════════════════ -->
+  <ng-container *ngIf="roles === 'STUDENT'">
+    <div class="section-label">
+      <span class="section-eyebrow">Student Portal</span>
+      <h2 class="section-heading">Your Learning Hub</h2>
+    </div>
+
+    <div class="action-grid action-grid--student">
+      <div class="action-card glass-card card-pop" routerLink="/view-events">
+        <div class="action-icon-wrap icon-blue">📅</div>
+        <div class="action-body">
+          <h3>Browse Events</h3>
+          <p>Discover upcoming workshops, seminars, and educational events.</p>
+        </div>
+        <span class="action-arrow">→</span>
+      </div>
+
+      <div class="action-card glass-card card-pop" routerLink="/register-for-event" style="animation-delay:0.1s">
+        <div class="action-icon-wrap icon-teal">📝</div>
+        <div class="action-body">
+          <h3>Register for Event</h3>
+          <p>Secure your spot for any upcoming event with a single click.</p>
+        </div>
+        <span class="action-arrow">→</span>
+      </div>
+
+      <div class="action-card glass-card card-pop" routerLink="/booking-details" style="animation-delay:0.2s">
+        <div class="action-icon-wrap icon-pink">🎫</div>
+        <div class="action-body">
+          <h3>My Bookings</h3>
+          <p>Track your registrations and view confirmation status in real time.</p>
+        </div>
+        <span class="action-arrow">→</span>
+      </div>
+    </div>
+  </ng-container>
 
 </div>
-</div>
+
+<!-- Chatbot (always present) -->
 <app-chatbot></app-chatbot>

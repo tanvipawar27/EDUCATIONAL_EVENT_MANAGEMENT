@@ -1,38 +1,62 @@
-<div class="page-container">
-  <div class="card">
-    <div class="card-header"><h3>Add Resource</h3></div>
-    <div class="card-body">
-      <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
-        
-        <!-- Resource Type -->
-        <div class="form-group">
-          <label>Resource Type</label>
-          <input type="text" formControlName="resourceType" class="form-control" placeholder="Enter resource type"
-            [class.is-invalid]="itemForm.get('resourceType')?.invalid && itemForm.get('resourceType')?.touched" />
-          <div class="invalid-feedback" *ngIf="itemForm.get('resourceType')?.invalid && itemForm.get('resourceType')?.touched">
-            Resource type is required (min 3 characters).
-          </div>
+<!-- ADD RESOURCE COMPONENT -->
+<div class="form-page-root">
+  <div class="aurora-bg">
+    <div class="aurora-orb aurora-orb-1"></div>
+    <div class="aurora-orb aurora-orb-2"></div>
+    <div class="aurora-orb aurora-orb-3"></div>
+  </div>
+  <div class="light-bg"></div>
+
+  <div class="form-page-inner page-enter">
+    <div class="form-card glass-card card-pop">
+      <!-- Top accent -->
+      <div class="form-card-accent"></div>
+
+      <div class="form-card-header">
+        <div class="form-card-icon">🗂️</div>
+        <div>
+          <h2>Add Resource</h2>
+          <p>Register a new resource to the platform</p>
         </div>
+      </div>
 
-        <!-- Description -->
-        <div class="form-group">
-          <label>Description</label>
-          <textarea formControlName="description" class="form-control" rows="3" placeholder="Enter description"
-            [class.is-invalid]="itemForm.get('description')?.invalid && itemForm.get('description')?.touched"></textarea>
-          <div class="invalid-feedback" *ngIf="itemForm.get('description')?.invalid && itemForm.get('description')?.touched">
-            Description is required (min 10 characters).
+      <div class="form-card-body">
+        <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+
+          <!-- Resource Type -->
+          <div class="form-group">
+            <label>Resource Type</label>
+            <input type="text" formControlName="resourceType" class="form-control"
+                   placeholder="e.g. Projector, Classroom, Laptop"
+                   [class.is-invalid]="itemForm.get('resourceType')?.invalid && itemForm.get('resourceType')?.touched" />
+            <div class="invalid-feedback"
+                 *ngIf="itemForm.get('resourceType')?.invalid && itemForm.get('resourceType')?.touched">
+              Resource type is required (min 3 characters).
+            </div>
           </div>
-        </div>
 
-        <!-- Feedback Messages -->
-        <div class="alert alert-danger" *ngIf="showError">{{ errorMessage }}</div>
-        <div class="alert alert-success" *ngIf="showMessage">{{ responseMessage }}</div>
+          <!-- Description -->
+          <div class="form-group">
+            <label>Description</label>
+            <textarea formControlName="description" class="form-control" rows="4"
+                      placeholder="Describe the resource — capacity, condition, special notes..."
+                      [class.is-invalid]="itemForm.get('description')?.invalid && itemForm.get('description')?.touched"></textarea>
+            <div class="invalid-feedback"
+                 *ngIf="itemForm.get('description')?.invalid && itemForm.get('description')?.touched">
+              Description is required (min 10 characters).
+            </div>
+          </div>
 
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary">
-  Add Resource
-</button>
-      </form>
+          <!-- Alerts -->
+          <div class="alert alert-danger" *ngIf="showError">⚠️ {{ errorMessage }}</div>
+          <div class="alert alert-success" *ngIf="showMessage">✅ {{ responseMessage }}</div>
+
+          <!-- Submit -->
+          <button type="submit" class="btn-primary" style="margin-top:0.5rem">
+            Add Resource →
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
