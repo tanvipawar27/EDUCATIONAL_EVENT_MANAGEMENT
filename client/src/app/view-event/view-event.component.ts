@@ -131,11 +131,12 @@ export class ViewEventComponent implements OnInit {
   }
  
   deleteEvent(eventId: number): void {
-    if (confirm('Are you sure you want to delete this event?')) {
       this.httpService.deleteEvent(eventId).subscribe({
         next: () => {
           this.showMessage = true;
           this.responseMessage = 'Event deleted successfully!';
+          this.router.navigate(['/view-events']);
+          // this.router.navigate([this.route.url])
         },
         error: () => {
           this.showError = true;
@@ -143,7 +144,6 @@ export class ViewEventComponent implements OnInit {
         }
       });
     }
-  }
  
   registerForEvent(eventId: number): void {
     if (this.isRegistered(eventId)) {

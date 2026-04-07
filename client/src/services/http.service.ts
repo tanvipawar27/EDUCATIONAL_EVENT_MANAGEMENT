@@ -188,7 +188,28 @@ getEventById(eventId: any): Observable<any> {
     }
   );
 }
+// ✅ Delete Resource
+deleteResource(resourceId: any): Observable<any> {
+  return this.http.delete(
+    `${this.serverName}/api/institution/resource/${resourceId}`,
+    { headers: this.getHeaders() }
+  );
+}
+  
+sendFeedback(feedback: any) {
+
+  return this.http.post(`${this.serverName}/api/feedback`, feedback);
+
+}
+
+getFeedback(): Observable<any[]> {
+
+    return this.http.get<any[]>(`${this.serverName}/api/feedback`);
+
+  }
+  deleteFeedback(feedbackId:any){}
  
 }
+
  
  

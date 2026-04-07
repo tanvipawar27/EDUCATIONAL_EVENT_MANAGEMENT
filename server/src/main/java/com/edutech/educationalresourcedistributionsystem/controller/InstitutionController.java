@@ -102,6 +102,21 @@ public class InstitutionController {
         return new ResponseEntity<>(eventsWithResources, HttpStatus.OK);
     }
 
+    // ✅ Delete Resource
+@DeleteMapping("/resource/{id}")
+public ResponseEntity<Void> deleteResource(@PathVariable Long id) {
+    logger.info("Request received to delete resource with ID: {}", id);
+    try {
+        resourceService.deleteResource(id);
+        logger.info("Resource with ID {} deleted successfully", id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    } catch (Exception e) {
+        logger.error("Failed to delete resource with ID {}: {}", id, e.getMessage(), e);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+}
+
+
     // ✅ Get Event by ID
 @GetMapping("/event/{id}")
 public ResponseEntity<Event> getEventById(@PathVariable Long id) {

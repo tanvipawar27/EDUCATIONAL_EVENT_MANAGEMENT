@@ -1,0 +1,30 @@
+<div class="page-container" *ngIf="!loading && feedbackList">
+    <div class="card-header text-center mb-4">
+    <h3>Feedback Details</h3>
+  </div>
+  <!-- Feedback Details -->
+  <div class="card" *ngFor="let feedback of feedbackList">
+    
+    <div class="card-body">
+      <p><strong>ID:</strong> {{ feedback.id }}</p>
+      <p><strong>Name:</strong> {{ feedback.name }}</p>
+      <p><strong>Email:</strong> {{ feedback.email }}</p>
+      <p><strong>Message:</strong> {{ feedback.message }}</p>
+    </div>
+
+    <div class="card-footer">
+      <button class="btn btn-secondary btn-sm ml-2" routerLink="/dashboard">Back to Dashboard</button>
+    </div>
+
+    <div class="alert alert-danger mt-3" *ngIf="showError">{{ errorMessage }}</div>
+    <div class="alert alert-success mt-3" *ngIf="showMessage">{{ responseMessage }}</div>
+  </div>
+</div>
+
+<!-- Loading/Error States -->
+<div *ngIf="loading" class="text-center">
+  <p>Loading feedback...</p>
+</div>
+<div *ngIf="errorMessage && !loading" class="alert alert-danger text-center">
+  {{ errorMessage }}
+</div>

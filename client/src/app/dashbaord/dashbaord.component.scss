@@ -214,16 +214,35 @@ $T: 0.4s ease;
 
 .agenda-card {
   background: var(--bg-card);
-  border: 1px solid var(--border-card);
   border-radius: 20px;
-  padding: 1.5rem;
+  padding: 1.4rem 1.5rem;
+  border: 1px solid var(--border-card);
   box-shadow: 0 2px 12px rgba(79,110,247,0.07);
-  animation: cardPop 0.55s $ease-out-expo both;
+  cursor: pointer;
   transition: transform 0.3s $ease-out-expo, box-shadow 0.3s;
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 12px 36px rgba(79,110,247,0.13);
+    box-shadow: 0 14px 40px rgba(79,110,247,0.14);
+  }
+  background: linear-gradient(135deg, #f0f4ff 0%, #faf0ff 100%);
+  border: 1px solid var(--border-card);
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--btn-grad);
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem;
   }
 }
 
@@ -284,7 +303,7 @@ $T: 0.4s ease;
   margin-bottom: 2.5rem;
   animation: cardPop 0.55s $ease-out-expo both;
 }
-
+b
 .form-card-header {
   display: flex;
   align-items: center;

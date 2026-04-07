@@ -31,4 +31,14 @@ public class ResourceService {
         logger.debug("Number of resources fetched: {}", resources.size());
         return resources;
     }
+    public void deleteResource(Long id) {
+    logger.info("Deleting resource with id: {}", id);
+    if (resourceRepository.existsById(id)) {
+        resourceRepository.deleteById(id);
+        logger.debug("Resource with id {} deleted successfully.", id);
+    } else {
+        logger.warn("Resource with id {} not found. Delete operation skipped.", id);
+    }
+}
+
 }

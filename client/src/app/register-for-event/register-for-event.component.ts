@@ -121,8 +121,11 @@ export class RegisterForEventComponent implements OnInit {
       next: (res: any[]) => {
 
         this.eventList = res || [];
-
-        this.filteredEvents = this.eventList;
+        const today:Date=new Date();
+       this.filteredEvents = this.eventList.filter((f: any) => {
+  const eventDate = new Date(f.date); // parse the string into a Date
+  return eventDate >= today;
+});
 
         this.isLoading = false;
 
@@ -210,7 +213,7 @@ export class RegisterForEventComponent implements OnInit {
 
       e.description?.toLowerCase().includes(term) ||
 
-      e.materials?.toLowerCase().includes(term)
+      e.materials?.toLowerCase().includes(term) 
 
     );
 

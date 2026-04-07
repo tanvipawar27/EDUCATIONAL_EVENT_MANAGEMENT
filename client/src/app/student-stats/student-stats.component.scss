@@ -33,6 +33,7 @@
     transform: translateY(-6px);
     box-shadow: 0 14px 36px rgba(79,110,247,0.14);
     &::before { transform: scaleX(1); }
+    cursor: pointer !important;
   }
 }
 

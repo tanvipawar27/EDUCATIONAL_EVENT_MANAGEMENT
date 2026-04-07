@@ -20,6 +20,7 @@ import { ViewAllocationComponent } from './view-allocation/view-allocation.compo
 import { ViewStudentsComponent } from './view-students/view-students.component';
 import { ViewEducatorsComponent } from './view-educators/view-educators.component';
 import { ViewEventComponent } from './view-event/view-event.component';
+import { ViewFeedbackComponent } from './view-feedback/view-feedback.component';
 
 
 const routes: Routes = [
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'view-events', component: ViewEventsComponent },  
   { path: 'view-students', component: ViewStudentsComponent },
   { path: 'view-educators', component: ViewEducatorsComponent },
+  { path: 'view-feedback', component: ViewFeedbackComponent },
   { path: 'booking-details', component: BookingDetailsComponent }, 
   { path: 'register-for-event', component: RegisterForEventComponent },   
   { path: '', redirectTo: '/app-landing', pathMatch: 'full' },

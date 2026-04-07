@@ -68,7 +68,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 // Public endpoints
                // .antMatchers("/api/user/register", "/api/user/login","/api/otp/**").permitAll()
-                  .antMatchers("/api/user/register", "/api/user/login", "/api/otp/**", "/api/chat/**").permitAll()
+.antMatchers("/api/user/register", "/api/user/login", "/api/otp/**", "/api/chat/**","/api/feedback").permitAll()
                 // Institution endpoints
                 .antMatchers("/api/institution/**").hasAnyAuthority("INSTITUTION","STUDENT","EDUCATOR")
                 .antMatchers("/api/institution/events/**").hasAnyAuthority("INSTITUTION","STUDENT","EDUCATOR")

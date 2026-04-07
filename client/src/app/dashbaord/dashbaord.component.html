@@ -11,6 +11,8 @@
 
   <!-- ── WELCOME BANNER ── -->
   <div class="welcome-banner glass-card">
+
+    <!-- check -->
     <div class="welcome-left">
       <div class="welcome-role-tag">
         <span class="role-dot"></span>
@@ -109,6 +111,15 @@
         </div>
         <span class="action-arrow">→</span>
       </div>
+
+      <div class="action-card glass-card card-pop" routerLink="/view-feedback" style="animation-delay:0.56s">
+        <div class="action-icon-wrap icon-teal">👨‍🏫</div>
+        <div class="action-body">
+          <h3>View Feedbacks</h3>
+          <p>View all feedbacks that are given by users.</p>
+        </div>
+        <span class="action-arrow">→</span>
+      </div>
     </div>
   </ng-container>
 
@@ -118,7 +129,7 @@
   <ng-container *ngIf="roles === 'EDUCATOR'">
     <div class="section-label">
       <span class="section-eyebrow">Educator Portal</span>
-      <h2 class="section-heading">Your Event Agenda</h2>
+      <h2 class="section-heading">Upcoming Events...</h2>
     </div>
 
 
@@ -165,7 +176,7 @@
 
     <!-- Events Agenda Grid -->
     <div class="agenda-grid" *ngIf="!isUpdate">
-      <div class="agenda-card glass-card" *ngFor="let event of eventList; let i = index"
+      <div class="agenda-card glass-card" *ngFor="let event of eventList; let i = index" 
            [style.animation-delay]="(i * 0.07) + 's'" [routerLink]="['/view-event',event.id]">
         <div class="agenda-card-top">
           <div class="event-date-chip">{{ event.date | date:'MMM d' }}</div>

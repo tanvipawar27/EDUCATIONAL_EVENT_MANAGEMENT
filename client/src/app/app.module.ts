@@ -23,6 +23,7 @@ import { ViewEducatorsComponent } from './view-educators/view-educators.componen
 import { ViewEventComponent } from './view-event/view-event.component';
 import { ChatbotComponent } from './chat-bot/chatbot.component';
 import { StudentStatsComponent } from './student-stats/student-stats.component';
+import { ViewFeedbackComponent } from './view-feedback/view-feedback.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,8 @@ import { StudentStatsComponent } from './student-stats/student-stats.component';
       ViewEducatorsComponent,
       ViewEventComponent,
       ChatbotComponent,
-      StudentStatsComponent
+      StudentStatsComponent,
+      ViewFeedbackComponent
   ],
   imports: [
     BrowserModule,

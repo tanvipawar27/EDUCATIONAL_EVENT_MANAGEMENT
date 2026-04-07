@@ -85,6 +85,8 @@ export class DashbaordComponent implements OnInit {
   roles: string | null = null;
 
   userName: string | null = null;
+
+  today: Date = new Date();
  
   constructor(
 
@@ -172,7 +174,10 @@ export class DashbaordComponent implements OnInit {
 
       next: (res: any) => {
 
-        this.eventList = res;
+         this.eventList = res.filter((event: any) => {
+      const eventDate = new Date(event.date); // adjust property name if needed
+      return eventDate >= this.today;
+    });
 
         this.showError = false;
 

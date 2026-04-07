@@ -1,6 +1,10 @@
 <div class="page-container">
   <div class="card shadow-sm">
     <div class="card-header bg-primary text-white">
+       <!-- Feedback Messages -->
+        <div class="alert alert-danger" *ngIf="showError">{{ errorMessage }}</div>
+        <div class="alert alert-success" *ngIf="showMessage">{{ responseMessage }}</div>
+
       <h3 class="mb-0">Allocate Resource to Event</h3>
     </div>
     <div class="card-body">
@@ -32,10 +36,7 @@
           </div>
         </div>
 
-        <!-- Feedback Messages -->
-        <div class="alert alert-danger" *ngIf="showError">{{ errorMessage }}</div>
-        <div class="alert alert-success" *ngIf="showMessage">{{ responseMessage }}</div>
-
+       
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary">Allocate Resource</button>
       </form>

@@ -13,6 +13,10 @@
       <div class="form-card-accent"></div>
 
       <div class="form-card-header">
+          <!-- Alerts -->
+          <div class="alert alert-danger" *ngIf="showError">⚠️ {{ errorMessage }}</div>
+          <div class="alert alert-success" *ngIf="showMessage">✅ {{ responseMessage }}</div>
+
         <div class="form-card-icon">🗂️</div>
         <div>
           <h2>Add Resource</h2>
@@ -47,10 +51,7 @@
             </div>
           </div>
 
-          <!-- Alerts -->
-          <div class="alert alert-danger" *ngIf="showError">⚠️ {{ errorMessage }}</div>
-          <div class="alert alert-success" *ngIf="showMessage">✅ {{ responseMessage }}</div>
-
+        
           <!-- Submit -->
           <button type="submit" class="btn-primary" style="margin-top:0.5rem">
             Add Resource →

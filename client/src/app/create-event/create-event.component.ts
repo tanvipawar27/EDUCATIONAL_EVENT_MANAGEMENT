@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
+import { Route, Router } from '@angular/router';
  
 const LIGHT_VARS: Record<string, string> = {
   '--bg': '#fefae8',
@@ -39,7 +40,7 @@ export class CreateEventComponent implements OnInit {
   responseMessage: string = '';
   eventList: any[] = [];
  
-  constructor(private fb: FormBuilder, private httpService: HttpService) {}
+  constructor(private fb: FormBuilder, private httpService: HttpService, private router :Router) {}
  
   ngOnInit(): void {
     // ✅ Apply theme variables globally
@@ -98,6 +99,7 @@ futureDateValidator(control: any) {
         this.responseMessage = '✅ Event created successfully!';
         this.itemForm.reset();
         this.getEvent();
+        this.router.navigate(['/view-events'])
       },
       error: (err: any) => {
         this.showError = true;
