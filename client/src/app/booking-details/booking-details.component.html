@@ -16,15 +16,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let booking of eventList; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ booking.status }}</td>
-            <td>
-              <div><strong>Name:</strong> {{ booking.event?.name }}</div>
-              <div><strong>Description:</strong> {{ booking.event?.description }}</div>
-              <div><strong>Materials:</strong> {{ booking.event?.materials }}</div>
-            </td>
-          </tr>
+         <ng-container *ngFor="let booking of eventList; let i = index">
+  <tr *ngIf="booking?.event?.name && booking?.event?.description && booking?.event?.materials">
+    <td>{{ i + 1 }}</td>
+    <td>{{ booking.status }}</td>
+    <td>
+      <div><strong>Name:</strong> {{ booking.event?.name }}</div>
+      <div><strong>Description:</strong> {{ booking.event?.description }}</div>
+      <div><strong>Materials:</strong> {{ booking.event?.materials }}</div>
+    </td>
+  </tr>
+</ng-container>
+
         </tbody>
       </table>
     </div>
