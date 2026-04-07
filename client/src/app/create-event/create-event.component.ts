@@ -49,7 +49,7 @@ export class CreateEventComponent implements OnInit {
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
       materials: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]],
-      date: ['', [Validators.required]]
+      date: ['', [Validators.required,this.futureDateValidator]]
     });
  
     this.getEvent();
@@ -68,7 +68,19 @@ export class CreateEventComponent implements OnInit {
       error: (err: any) => { console.error(err); }
     });
   }
- 
+  // Custom validator for future date
+futureDateValidator(control: any) {
+  if (!control.value) {
+    return null; // let required validator handle empty case
+  }
+
+  const selectedDate = new Date(control.value);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // normalize to midnight
+
+  return selectedDate >= today ? null : { pastDate: true };
+}
+
   onSubmit() {
     this.showError = false;
     this.showMessage = false;

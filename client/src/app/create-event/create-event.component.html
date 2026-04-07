@@ -60,14 +60,23 @@
             <label>Event Date</label>
             <input type="date" formControlName="date" class="form-control"
                    [class.is-invalid]="date?.invalid && date?.touched" />
-            <div class="invalid-feedback" *ngIf="date?.invalid && date?.touched">
+
+            <!-- Required error -->
+            <div class="invalid-feedback" *ngIf="date?.hasError('required') && date?.touched">
               Event date is required.
+            </div>
+
+            <!-- Future date error -->
+            <div class="invalid-feedback" *ngIf="date?.hasError('pastDate') && date?.touched">
+              Event date must be today or in the future.
             </div>
           </div>
 
+          <!-- Alerts -->
           <div class="alert alert-danger" *ngIf="showError">⚠️ {{ errorMessage }}</div>
           <div class="alert alert-success" *ngIf="showMessage">✅ {{ responseMessage }}</div>
 
+          <!-- Submit -->
           <button type="submit" class="btn-primary" style="margin-top:0.5rem">
             Create Event →
           </button>

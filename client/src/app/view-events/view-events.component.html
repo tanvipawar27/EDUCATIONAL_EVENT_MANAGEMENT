@@ -74,49 +74,6 @@
   </div>
 </div>
 
-
-    <!-- Agenda Grid -->
-<!-- <div class="agenda-grid">
-<div class="agenda-card" *ngFor="let event of filteredEvents">
-<div class="agenda-card-header">
-<h5>{{ event.name }}</h5>
-<span class="agenda-date">{{ event.date | date:'mediumDate' }}</span>
-<span class="badge" [ngClass]="isUpcoming(event.date) ? 'badge-upcoming' : 'badge-completed'">
-            {{ isUpcoming(event.date) ? 'Upcoming' : 'Completed' }}
-</span>
-<span class="badge badge-registered" *ngIf="isRegistered(event.id)">
-            Registered
-</span>
-</div>
-<div class="agenda-card-body">
-<p><strong>Description:</strong> {{ event.description }}</p>
-<p><strong>Utilities:</strong> {{ event.materials }}</p>
- 
-          <div *ngIf="event.resourceAllocations?.length">
-<strong>Study Resources:</strong>
-<div *ngFor="let t of event.resourceAllocations; let i = index">
-<p><strong>Resource No- {{ i+1 }}</strong></p>
-<p><strong>Resource Type:</strong> {{ t.resourceType }}</p>
-<p><strong>Resource Description:</strong> {{ t.description }}</p>
-</div>
-</div>
-</div>
-<div class="agenda-card-footer">
-<ng-container *ngIf="role!=='STUDENT'">
-<button class="btn btn-sm btn-warning" (click)="edit(event)">Edit</button>
-<button class="btn btn-sm btn-danger ml-2" (click)="deleteEvent(event.id)">Delete</button>
-</ng-container>
- 
-          <ng-container *ngIf="role==='STUDENT' && isUpcoming(event.date)">
-<button class="btn btn-sm btn-primary"
-                    (click)="registerForEvent(event.id)"
-                    [disabled]="isRegistered(event.id)">
-              {{ isRegistered(event.id) ? 'Registered' : 'Register' }}
-</button>
-</ng-container>
-</div>
-</div>
-</div> -->
  <div class="agenda-grid">
   <div class="agenda-card"
        *ngFor="let event of filteredEvents"
