@@ -1,22 +1,3 @@
-<!-- <div class="page-container" *ngIf="!loading && event">
-  <div class="card">
-    <div class="card-header">
-      <h3>{{ event.name }}</h3>
-    </div>
-    <div class="card-body">
-      <p><strong>Date:</strong> {{ event.date | date:'mediumDate' }}</p>
-      <p><strong>Description:</strong> {{ event.description }}</p>
-      <p><strong>Materials:</strong> {{ event.materials }}</p>
-    </div>
-  </div>
-</div>
-
-<div *ngIf="loading" class="text-center">
-  <p>Loading event...</p>
-</div>
-<div *ngIf="errorMessage" class="alert alert-danger text-center">
-  {{ errorMessage }}
-</div> -->
 <div class="page-container" *ngIf="!loading && event">
   <!-- Event Details -->
   <div class="card" *ngIf="!isUpdate">
@@ -28,6 +9,14 @@
       <p><strong>Date:</strong> {{ event.date | date:'mediumDate' }}</p>
       <p><strong>Description:</strong> {{ event.description }}</p>
       <p><strong>Utilities:</strong> {{ event.materials }}</p>
+      <br>
+      <br>
+      <p><strong>Resources Allocated:</strong></p>
+      <div class="card-body" *ngFor="let r of event.resourceAllocations, let i=index">
+        <p><strong>Resource No.- {{ i+1}}</strong></p>
+        <p><strong>ResourceType: </strong>{{r.resourceType}}</p>
+        <p><strong>Resource Description:</strong> {{ r.description }}</p>
+      </div>
     </div>
 
     <div class="card-footer">
@@ -39,9 +28,7 @@
 
       <!-- Student actions -->
       <ng-container *ngIf="role === 'STUDENT'">
-        <button class="btn btn-primary btn-sm"
-                (click)="registerForEvent(event.id)"
-                [disabled]="isRegistered(event.id)">
+        <button class="btn btn-primary btn-sm" (click)="registerForEvent(event.id)" [disabled]="isRegistered(event.id)">
           {{ isRegistered(event.id) ? 'Registered' : 'Register' }}
         </button>
       </ng-container>
@@ -50,7 +37,9 @@
     <div class="alert alert-danger mt-3" *ngIf="showError">{{ errorMessage }}</div>
     <div class="alert alert-success mt-3" *ngIf="showMessage">{{ responseMessage }}</div>
 
-    <button class="btn btn-secondary mt-3" routerLink="/view-events">Back to Events</button>
+    <button class="btn btn-secondary mt-3" routerLink="/view-events" *ngIf="role!=='EDUCATOR'">Back to Events</button>
+    <button class="btn btn-secondary mt-3" routerLink="/dashboard" *ngIf="role==='EDUCATOR'">Back to Upcoming
+      Events</button>
   </div>
 
   <!-- Update Form -->
@@ -65,7 +54,7 @@
         <div class="form-group">
           <label>Event Name</label>
           <input type="text" formControlName="name" class="form-control"
-                 [class.is-invalid]="itemForm.get('name')?.invalid && itemForm.get('name')?.touched" />
+            [class.is-invalid]="itemForm.get('name')?.invalid && itemForm.get('name')?.touched" />
           <div class="invalid-feedback" *ngIf="itemForm.get('name')?.invalid && itemForm.get('name')?.touched">
             Name is required.
           </div>
@@ -74,8 +63,9 @@
         <div class="form-group">
           <label>Description</label>
           <textarea formControlName="description" class="form-control" rows="3"
-                    [class.is-invalid]="itemForm.get('description')?.invalid && itemForm.get('description')?.touched"></textarea>
-          <div class="invalid-feedback" *ngIf="itemForm.get('description')?.invalid && itemForm.get('description')?.touched">
+            [class.is-invalid]="itemForm.get('description')?.invalid && itemForm.get('description')?.touched"></textarea>
+          <div class="invalid-feedback"
+            *ngIf="itemForm.get('description')?.invalid && itemForm.get('description')?.touched">
             Description is required.
           </div>
         </div>

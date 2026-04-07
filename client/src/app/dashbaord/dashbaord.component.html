@@ -166,7 +166,7 @@
     <!-- Events Agenda Grid -->
     <div class="agenda-grid" *ngIf="!isUpdate">
       <div class="agenda-card glass-card" *ngFor="let event of eventList; let i = index"
-           [style.animation-delay]="(i * 0.07) + 's'">
+           [style.animation-delay]="(i * 0.07) + 's'" [routerLink]="['/view-event',event.id]">
         <div class="agenda-card-top">
           <div class="event-date-chip">{{ event.date | date:'MMM d' }}</div>
           <h4 class="agenda-event-name">{{ event.name }}</h4>
@@ -175,10 +175,10 @@
           <p><strong>Description:</strong> {{ event.description }}</p>
           <p *ngIf="event.materials"><strong>Materials:</strong> {{ event.materials }}</p>
         </div>
-        <div class="agenda-card-footer">
+        <!-- <div class="agenda-card-footer">
           <button class="btn-warning" (click)="edit(event)">✏️ Edit</button>
-          <button class="btn-danger" (click)="deleteEvent(event.id)">🗑️ Delete</button>
-        </div>
+          <button class="btn-danger" (click)="deleteEvent(event.id)">🗑️ Delete</button> -->
+        <!-- </div> -->
       </div>
 
       <div class="empty-state glass-card" *ngIf="!eventList || eventList.length === 0">

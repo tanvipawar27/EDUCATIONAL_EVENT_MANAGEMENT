@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// import { Router } from 'express';
  
 const LIGHT_VARS: Record<string, string> = {
   '--bg': '#fefae8',
@@ -48,7 +49,8 @@ export class ViewEventComponent implements OnInit {
     private route: ActivatedRoute,
     private httpService: HttpService,
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router:Router
   ) {}
  
   ngOnInit(): void {
@@ -110,7 +112,6 @@ export class ViewEventComponent implements OnInit {
       this.itemForm.markAllAsTouched();
       this.showError = true;
       this.errorMessage = 'Please fill in required fields.';
-      return;
     }
  
     const eventId = this.itemForm.value.id;
@@ -120,6 +121,7 @@ export class ViewEventComponent implements OnInit {
         this.responseMessage = 'Event updated successfully!';
         this.isUpdate = false;
         this.itemForm.reset();
+        this.router.navigate(['/view-event',eventId]);
       },
       error: () => {
         this.showError = true;

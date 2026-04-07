@@ -19,6 +19,7 @@
           <h5 class="card-title text-primary">Resource {{ i + 1 }}</h5>
           <p><strong>Type:</strong> {{ res.resourceType }}</p>
           <p><strong>Description:</strong> {{ res.description }}</p>
+          <button class="btn-danger" (click)="deleteResource(resource.id)">🗑️ Delete </button>
         </div>
       </div>
     </div>

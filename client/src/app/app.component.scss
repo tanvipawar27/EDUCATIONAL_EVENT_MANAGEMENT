@@ -24,14 +24,15 @@ $T            : 0.42s #{$ease-in-out};
   height: 68px;
   display: flex;
   align-items: center;
+  text-align: center;
   justify-content: space-between;
   margin: 14px auto 0;
   width: min(1180px, calc(100% - 24px));
   padding: 0 1.1rem;
 
   /* Light theme forced */
-  background: rgba(255,255,255,0.97);
-  border: 1px solid rgba(79,110,247,0.14);
+  background: rgba(255, 255, 255, 0.97);
+  border: 2px solid rgba(29, 70, 255, 0.14);
   border-radius: 18px;
   backdrop-filter: blur(18px) saturate(1.4);
   -webkit-backdrop-filter: blur(18px) saturate(1.4);
