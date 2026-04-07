@@ -1,16 +1,8 @@
-/* ═══════════════════════════════════════════════════════
-   GLOBAL LIGHT THEME — EduEvent Platform
-   All components inherit these variables.
-   The landing page manages its own dark/light toggle via JS.
-═══════════════════════════════════════════════════════ */
 
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
 
-/* ── Light theme tokens (forced for all non-landing pages) ── */
-:root,
-[data-theme="light"],
-[data-theme="dark"] {
-  /* Override dark vars globally for app pages */
+/* ── Light theme tokens — single source of truth ── */
+:root {
   --bg:             #f5f7fa;
   --bg-2:           #eef1f6;
   --bg-card:        #ffffff;
@@ -298,16 +290,6 @@ label {
   padding: 2rem 1.5rem 3rem;
 }
 
-/* ── Card header generic ── */
-.card-header-light {
-  background: var(--btn-grad);
-  color: #fff;
-  padding: 1.1rem 1.5rem;
-  border-radius: 16px 16px 0 0;
-
-  h3, h4 { margin: 0; font-family: 'Sora', sans-serif; font-weight: 700; }
-}
-
 /* ── Table ── */
 .table {
   width: 100%;
@@ -358,21 +340,6 @@ label {
   letter-spacing: -0.02em;
 }
 
-/* ── Search input ── */
-.search-input {
-  background: var(--bg-card);
-  border: 1.5px solid var(--border);
-  border-radius: 12px;
-  padding: 0.75rem 1.1rem;
-  font-size: 0.875rem;
-  color: var(--text);
-  width: 100%;
-  outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  &::placeholder { color: var(--text-muted); }
-  &:focus { border-color: var(--accent-1); box-shadow: 0 0 0 3px rgba(79,110,247,0.10); }
-}
-
 /* ── Utility ── */
 .mt-3 { margin-top: 1rem; }
 .mb-3 { margin-bottom: 1rem; }
@@ -384,11 +351,13 @@ label {
 .ml-2 { margin-left: 0.5rem; }
 .ml-3 { margin-left: 0.75rem; }
 .h-100 { height: 100%; }
+.mb-0 { margin-bottom: 0; }
 
-/* Bootstrap grid shim (light) */
+/* Bootstrap grid shim */
 .row { display: flex; flex-wrap: wrap; margin: -0.5rem; }
 .col-md-4 { width: 33.333%; padding: 0.5rem; }
-@media (max-width: 768px) { .col-md-4 { width: 100%; } }
+@media (max-width: 768px) { .col-md-4 { width: 50%; } }
+@media (max-width: 480px) { .col-md-4 { width: 100%; } }
 
 /* Table utilities */
 .table-striped tbody tr:nth-child(even) { background: var(--bg-2); }
@@ -396,4 +365,4 @@ label {
 .table-dark th { background: var(--btn-grad); color: #fff; }
 .table-hover tbody tr:hover { background: var(--glow-1); }
 .align-middle td { vertical-align: middle; }
-.mb-0 { margin-bottom: 0; }
+

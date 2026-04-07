@@ -24,6 +24,7 @@
       <h3>{{ event.name }}</h3>
     </div>
     <div class="card-body">
+      <p><strong>Event ID: </strong>{{event.id}}</p>
       <p><strong>Date:</strong> {{ event.date | date:'mediumDate' }}</p>
       <p><strong>Description:</strong> {{ event.description }}</p>
       <p><strong>Utilities:</strong> {{ event.materials }}</p>

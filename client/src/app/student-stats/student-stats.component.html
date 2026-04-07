@@ -10,7 +10,7 @@
 <p>{{ upcomingEvents }}</p>
 </div>
  
-  <div class="stat-card">
+<div class="stat-card" *ngIf="role==='STUDENT'">
 <h3>Registered Events</h3>
 <p>{{ registeredEvents }}</p>
 </div>

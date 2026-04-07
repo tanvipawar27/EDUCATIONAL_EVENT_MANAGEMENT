@@ -1,59 +1,85 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from '../../services/http.service';
-
+ 
+const LIGHT_VARS: Record<string, string> = {
+  '--bg': '#fefae8',
+  '--bg-2': '#fdf4cc',
+  '--bg-card': 'rgba(255,252,230,0.92)',
+  '--bg-glass': 'rgba(255,248,200,0.82)',
+  '--nav-bg': 'rgba(254,250,232,0.94)',
+  '--text': '#1a1a2e',
+  '--text-sub': '#3d3d5c',
+  '--text-muted': '#8a8a9a',
+  '--accent-1': '#b45309',
+  '--accent-2': '#7c3aed',
+  '--accent-3': '#0a7c6e',
+  '--accent-4': '#be123c',
+  '--glow-1': 'rgba(180,83,9,0.10)',
+  '--glow-2': 'rgba(124,58,237,0.08)',
+  '--border': 'rgba(180,83,9,0.16)',
+  '--border-card': 'rgba(180,83,9,0.22)',
+  '--stat-num': '#b45309',
+  '--btn-grad': 'linear-gradient(135deg,#b45309,#7c3aed)',
+  '--footer-bg': '#fdf0a0',
+  '--toggle-track-bg': 'rgba(180,83,9,0.14)',
+};
+ 
 @Component({
   selector: 'app-create-event',
   templateUrl: './create-event.component.html',
   styleUrls: ['./create-event.component.scss']
 })
 export class CreateEventComponent implements OnInit {
-
+ 
   itemForm!: FormGroup;
   showError: boolean = false;
   errorMessage: string = '';
   showMessage: boolean = false;
   responseMessage: string = '';
   eventList: any[] = [];
-
+ 
   constructor(private fb: FormBuilder, private httpService: HttpService) {}
-
+ 
   ngOnInit(): void {
+    // ✅ Apply theme variables globally
+    this.applyTheme(LIGHT_VARS);
+ 
     this.itemForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-      // ✅ Must be at least 3 characters, max 100 (realistic event name length)
-
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
-      // ✅ Must be meaningful, at least 10 chars, max 500
-
       materials: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(200)]],
-      // ✅ Must be at least 3 chars, max 200 (e.g., "Projector, Whiteboard")
-
       date: ['', [Validators.required]]
-      // ✅ Required; you can add a custom validator to ensure future date if needed
     });
-
+ 
     this.getEvent();
   }
-
+ 
+  private applyTheme(vars: Record<string, string>): void {
+    const root = document.documentElement;
+    Object.entries(vars).forEach(([key, value]) => {
+      root.style.setProperty(key, value);
+    });
+  }
+ 
   getEvent() {
     this.httpService.GetAllevents().subscribe({
       next: (res: any) => { this.eventList = res; },
       error: (err: any) => { console.error(err); }
     });
   }
-
+ 
   onSubmit() {
     this.showError = false;
     this.showMessage = false;
-
+ 
     if (this.itemForm.invalid) {
       this.itemForm.markAllAsTouched();
       this.showError = true;
       this.errorMessage = 'Please correct the highlighted errors before submitting.';
       return;
     }
-
+ 
     this.httpService.createEvent(this.itemForm.value).subscribe({
       next: (res: any) => {
         this.showMessage = true;
@@ -68,7 +94,7 @@ export class CreateEventComponent implements OnInit {
       }
     });
   }
-
+ 
   // ✅ Helper getters for template validation
   get name() { return this.itemForm.get('name'); }
   get description() { return this.itemForm.get('description'); }

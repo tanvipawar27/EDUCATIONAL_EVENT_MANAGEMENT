@@ -13,7 +13,12 @@
 <p class="subtitle">
       Fill in your details to create an account and start exploring events.
 </p>
- 
+
+    <!-- Response Message -->
+<div *ngIf="showMessage" class="response-message">
+      {{ responseMessage }}
+</div>
+
     <!-- Registration Form -->
 <form [formGroup]="itemForm" (ngSubmit)="onRegister()" class="register-form">
  
@@ -21,9 +26,9 @@
 <div class="form-group">
 <label for="username">Username</label>
 <input id="username" type="text" formControlName="username" placeholder="Choose a username" />
-<div *ngIf="itemForm.get('username')?.hasError('invalidUsername') && itemForm.get('username')?.touched" class="error-message">
-          Username must be alphanumeric and not only numbers.
-</div>
+<span *ngIf="itemForm.get('username')?.hasError('required')">Username is required.</span>
+    <span *ngIf="itemForm.get('username')?.hasError('minlength')">Username must be at least 2 characters.</span>
+    <span *ngIf="itemForm.get('username')?.hasError('invalidUsername')">Username must be alphanumeric and not only numbers.</span>
 </div>
  
       <!-- Email + Send OTP -->
@@ -31,6 +36,10 @@
 <label for="email">Email</label>
 <div style="display:flex; gap:10px; align-items:center;">
 <input id="email" type="email" formControlName="email" placeholder="Enter your email" />
+<div *ngIf="itemForm.get('email')?.touched && itemForm.get('email')?.invalid" class="error-message">
+    <span *ngIf="itemForm.get('email')?.hasError('required')">Email is required.</span>
+    <span *ngIf="itemForm.get('email')?.hasError('email')">Please enter a valid email address.</span>
+  </div>
 <button 
             type="button" 
             class="button button--secondary" 
@@ -68,12 +77,21 @@
 <div class="form-group">
 <label for="password">Password</label>
 <input id="password" type="password" formControlName="password" placeholder="Enter a strong password" />
+<div *ngIf="itemForm.get('password')?.touched && itemForm.get('password')?.invalid" class="error-message">
+    <span *ngIf="itemForm.get('password')?.hasError('required')">Password is required.</span>
+    <span *ngIf="itemForm.get('password')?.hasError('invalidPassword')">
+      Password must be 8+ chars, include uppercase, lowercase, number, and special character.
+    </span>
+  </div>
 </div>
  
       <!-- Confirm Password -->
 <div class="form-group">
 <label for="confirmPassword">Confirm Password</label>
 <input id="confirmPassword" type="password" formControlName="confirmPassword" placeholder="Re-enter your password" />
+<div *ngIf="itemForm.hasError('passwordMismatch') && itemForm.get('confirmPassword')?.touched" class="error-message">
+    Passwords do not match.
+  </div>
 </div>
  
       <!-- Role -->
@@ -111,10 +129,7 @@
 </div>
 </form>
  
-    <!-- Response Message -->
-<div *ngIf="showMessage" class="response-message">
-      {{ responseMessage }}
-</div>
+
  
     <!-- Footer -->
 <footer class="footer">
