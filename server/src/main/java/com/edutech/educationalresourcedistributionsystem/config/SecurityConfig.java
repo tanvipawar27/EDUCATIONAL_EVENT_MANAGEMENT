@@ -68,20 +68,22 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 // Public endpoints
                // .antMatchers("/api/user/register", "/api/user/login","/api/otp/**").permitAll()
-.antMatchers("/api/user/register", "/api/user/login", "/api/otp/**", "/api/chat/**","/api/feedback").permitAll()
+                .antMatchers("/api/user/register", "/api/user/login", "/api/otp/**", "/api/chat/**","/api/feedback").permitAll()
                 // Institution endpoints
                 .antMatchers("/api/institution/**").hasAnyAuthority("INSTITUTION","STUDENT","EDUCATOR")
                 .antMatchers("/api/institution/events/**").hasAnyAuthority("INSTITUTION","STUDENT","EDUCATOR")
+                
                 .antMatchers("/api/institution/resource/**").hasAnyAuthority("EDUCATOR")
 
                 
                 // Educator endpoints
                 .antMatchers("/api/educator/**").hasAnyAuthority("EDUCATOR","INSTITUTION","STUDENT")
+                         .antMatchers("/api/educator/agenda/**").hasAnyAuthority("STUDENT")
                 
 
-                
+
                 // Student endpoints
-                .antMatchers("/api/student/**").hasAnyAuthority("INSTITUTION","STUDENT","EDUCATOR")
+                .antMatchers("/api/student/**").hasAnyAuthority("INSTITUTION","STUDENT")
                 // Any other request requires authentication
                 .anyRequest().authenticated()
             )

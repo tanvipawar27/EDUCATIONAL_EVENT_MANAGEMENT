@@ -98,7 +98,10 @@ futureDateValidator(control: any) {
         this.responseMessage = '✅ Event created successfully!';
         this.itemForm.reset();
         this.getEvent();
-        this.router.navigate(['/view-events'])
+        setTimeout(()=>{
+           this.router.navigate(['/view-events'])
+        },1000)
+       
       },
       error: (err: any) => {
         this.showError = true;
