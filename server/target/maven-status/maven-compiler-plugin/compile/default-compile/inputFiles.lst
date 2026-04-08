@@ -6,6 +6,7 @@
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/controller/OtpController.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/config/Configurations.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/dto/LoginResponse.java
+/home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/entity/Feedback.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/controller/ChatController.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/service/ChatService.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/repository/EventRegistrationRepository.java
@@ -18,11 +19,14 @@
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/jwt/JwtRequestFilter.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/EducationalResourceDistributionSystemApplication.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/service/ResourceService.java
+/home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/controller/FeedbackController.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/entity/OtpVerification.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/repository/EventRepository.java
+/home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/repository/FeedbackRepository.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/controller/InstitutionController.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/entity/User.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/service/UserService.java
+/home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/service/FeedbackService.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/config/SecurityConfig.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/dto/LoginRequest.java
 /home/coder/app/server/src/main/java/com/edutech/educationalresourcedistributionsystem/entity/Resource.java
