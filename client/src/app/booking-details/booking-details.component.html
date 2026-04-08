@@ -23,7 +23,7 @@
     <td>
       <div><strong>Name:</strong> {{ booking.event?.name }}</div>
       <div><strong>Description:</strong> {{ booking.event?.description }}</div>
-      <div><strong>Materials:</strong> {{ booking.event?.materials }}</div>
+      <div><strong>Date:</strong> {{ booking.event?.date | date:'mediumDate' }}</div>
     </td>
   </tr>
 </ng-container>

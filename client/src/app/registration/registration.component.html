@@ -14,10 +14,7 @@
       Fill in your details to create an account and start exploring events.
 </p>
 
-    <!-- Response Message -->
-<div *ngIf="showMessage" class="response-message">
-      {{ responseMessage }}
-</div>
+   
 
     <!-- Registration Form -->
 <form [formGroup]="itemForm" (ngSubmit)="onRegister()" class="register-form">
@@ -129,7 +126,10 @@
 </div>
 </form>
  
-
+ <!-- Response Message -->
+<div *ngIf="showMessage" class="response-message">
+      {{ responseMessage }}
+</div>
  
     <!-- Footer -->
 <footer class="footer">

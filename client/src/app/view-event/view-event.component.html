@@ -23,7 +23,7 @@
       <!-- Educator/Admin actions -->
       <ng-container *ngIf="role !== 'STUDENT'">
         <button class="btn btn-warning btn-sm" (click)="edit(event)">Edit</button>
-        <button class="btn btn-danger btn-sm ml-2" (click)="deleteEvent(event.id)">Delete</button>
+        <button class="btn btn-danger btn-sm ml-2" (click)="deleteEvent(event.id)"*ngIf="role !== 'EDUCATOR'" >Delete</button>
       </ng-container>
 
       <!-- Student actions -->
