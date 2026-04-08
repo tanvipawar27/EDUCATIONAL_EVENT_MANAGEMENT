@@ -184,7 +184,7 @@ getEventById(eventId: any): Observable<any> {
     message,
     {
       headers: this.getHeaders(),
-      responseType: 'text' // ✅ correct for plain text
+      responseType: 'text'
     }
   );
 }

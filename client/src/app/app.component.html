@@ -60,7 +60,7 @@
   <!-- Right: role badge + logout -->
   <div class="navbar-right">
     <span class="role-badge" *ngIf="roleName">{{ roleName }}</span>
-    <button class="btn-logout" (click)="authService.logout(); router.navigate(['/login'])">
+    <button class="btn-logout" (click)="authService.logout(); router.navigate(['/app-landing'])">
       Logout
     </button>
   </div>
