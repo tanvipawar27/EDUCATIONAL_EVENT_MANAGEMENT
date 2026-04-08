@@ -124,7 +124,7 @@ export class ResourceAllocateComponent implements OnInit {
 
     this.httpService.GetAllResources().subscribe({
 
-      next: (res: any) => { this.resourceList = res; },
+      next: (res: any) => { this.resourceList = res},
 
       error: (err: any) => { console.error(err); }
 

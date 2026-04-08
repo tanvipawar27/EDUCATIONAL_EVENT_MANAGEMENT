@@ -77,15 +77,14 @@ futureDateValidator(control: any) {
 
   const selectedDate = new Date(control.value);
   const today = new Date();
-  today.setHours(0, 0, 0, 0); // normalize to midnight
+  today.setHours(24, 0, 0, 0); // normalize to midnight
 
-  return selectedDate >= today ? null : { pastDate: true };
+  return selectedDate > today ? null : { pastDate: true };
 }
 
   onSubmit() {
     this.showError = false;
     this.showMessage = false;
- 
     if (this.itemForm.invalid) {
       this.itemForm.markAllAsTouched();
       this.showError = true;

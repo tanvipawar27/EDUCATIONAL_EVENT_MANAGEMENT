@@ -18,6 +18,8 @@ public class Resource {
 
     private String description;
 
+    private boolean avilablity;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")
     @JsonBackReference

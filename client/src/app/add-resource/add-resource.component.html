@@ -13,16 +13,15 @@
       <div class="form-card-accent"></div>
 
       <div class="form-card-header">
-          <!-- Alerts -->
-          <div class="alert alert-danger" *ngIf="showError">⚠️ {{ errorMessage }}</div>
-          <div class="alert alert-success" *ngIf="showMessage">✅ {{ responseMessage }}</div>
-
         <div class="form-card-icon">🗂️</div>
         <div>
           <h2>Add Resource</h2>
           <p>Register a new resource to the platform</p>
         </div>
       </div>
+       <!-- Alerts -->
+          <div class="alert alert-danger" *ngIf="showError">⚠️ {{ errorMessage }}</div>
+          <div class="alert alert-success" *ngIf="showMessage">✅ {{ responseMessage }}</div>
 
       <div class="form-card-body">
         <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">

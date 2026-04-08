@@ -27,6 +27,7 @@ $T            : 0.42s #{$ease-in-out};
   text-align: center;
   justify-content: space-between;
   margin: 14px auto 0;
+  margin-bottom: 5px !important;
   width: min(1180px, calc(100% - 24px));
   padding: 0 1.1rem;
 
@@ -49,7 +50,7 @@ $T            : 0.42s #{$ease-in-out};
   background: linear-gradient(135deg, #f0f4ff 0%, #faf0ff 100%);
   border: 1px solid var(--border-card);
   border-radius: 24px;
-  position: relative;
+  // position: relative;
   overflow: hidden;
 
   &::before {
