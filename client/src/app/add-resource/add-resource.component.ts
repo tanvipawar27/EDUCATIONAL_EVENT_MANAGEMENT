@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { HttpService } from '../../services/http.service';
+import { Router } from '@angular/router';
  
 const LIGHT_VARS: Record<string, string> = {
 
@@ -72,7 +73,7 @@ export class AddResourceComponent implements OnInit {
  
   resourceList: any[] = [];
  
-  constructor(private fb: FormBuilder, private httpService: HttpService) {}
+  constructor(private fb: FormBuilder, private httpService: HttpService, private router :Router) {}
  
   ngOnInit(): void {
 
@@ -128,11 +129,15 @@ export class AddResourceComponent implements OnInit {
 
         this.showMessage = true;
 
-        this.responseMessage = '✅ Resource added successfully!';
+        this.responseMessage = 'Resource added successfully!';
 
         this.itemForm.reset();
 
         this.getResources();
+        setTimeout(()=>{
+          this.router.navigate(['./dashboard'])
+        },1000)
+        
 
       },
 

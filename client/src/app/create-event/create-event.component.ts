@@ -95,10 +95,13 @@ futureDateValidator(control: any) {
     this.httpService.createEvent(this.itemForm.value).subscribe({
       next: (res: any) => {
         this.showMessage = true;
-        this.responseMessage = '✅ Event created successfully!';
+        this.responseMessage = ' Event created successfully!';
         this.itemForm.reset();
         this.getEvent();
-        this.router.navigate(['/view-events'])
+        setTimeout(()=>{
+this.router.navigate(['/view-events'])
+        },1000)
+        
       },
       error: (err: any) => {
         this.showError = true;
